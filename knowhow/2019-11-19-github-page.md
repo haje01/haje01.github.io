@@ -1,3 +1,8 @@
+---
+layout: template
+fname: 2019-11-19-github-page
+---
+
 # Jekyll 없이 개인용 Github 페이지 만들기
 
 Jekyll 설치 없이 내 Github 페이지에 개인용 블로그를 만든 기록.
@@ -12,7 +17,7 @@ Jekyll 설치 없이 내 Github 페이지에 개인용 블로그를 만든 기�
 ---
 title: 나의 노트
 layout: template
-filename: index.md
+fname: index.md
 ---
 ```
 6. 저장소를 git으로 로컬에 클론
@@ -70,7 +75,7 @@ filename: index.md
           {% for page in site.pages %}
             {% if page.dir == "/study/" %}
             <p class="view">
-              <a href="https://GITHUB-ID.github.io/study/{{ page.filename }}.html">{{ page.title }}</a>
+              <a href="https://GITHUB-ID.github.io/study/{{ page.fname }}.html">{{ page.title }}</a>
             </p>
             {% endif %}
           {% endfor %}
@@ -93,12 +98,11 @@ filename: index.md
 ```
 8. 이제 필요에 따라 글을 분류할 하위 폴더들을 만들어줌. 예를 들어 공부 노트를 위한 `study` 폴더.
 9. 분류에 맞는 폴더에 Markdown 형식으로 글을 작성하고, `study/2019-11-19-SUBJECT-NAME.md` 식으로 저장
-10. 단, 아래와 같은 Jekyll용 메타 정보가 제일 위에 나옴. (`filename`에 확장자가 없는 것에 주의)
+10. 단, 아래와 같은 Jekyll용 메타 정보가 제일 위에 나옴. (`fname`에는 확장자가 없는 것에 주의)
 ```
 ---
-title: 글 제목
 layout: template
-filename: 2019-11-19-SUBJECT-NAME
+fname: 2019-11-19-SUBJECT-NAME
 ---
 ```
 10.  웹브라우저에서 `GITHUB-ID.github.io`를 방문해 잘 나오는지 확인.
