@@ -1,7 +1,7 @@
 ---
 layout: template
 filename: 2019-11-19-rllib-action-dis.md
-tags: knowhow ray rllib rl
+tags: ray
 ---
 
 # RLlib Models, Preprocessors, and Action Distributions
