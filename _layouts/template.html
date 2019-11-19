@@ -42,8 +42,8 @@
       {% assign ttags = page.tags | join:'|' | append:'|' %}
       {% assign rawtags = rawtags | append:ttags %}
     {% endfor %}
-    **{{ rawtags }}**
     {% assign rawtags = rawtags | split:'|' | sort %}
+    **{{ rawtags }}**
 
     {% assign all_tags = "" %}
     {% for tag in rawtags %}
@@ -52,7 +52,7 @@
           {% assign all_tags = tag | split:'|' %}
         {% endif %}
         {% unless all_tags contains tag %}
-          {% assign all_tags = tags | join:'|' | append:'|' | append:tag | split:'|' %}
+          {% assign all_tags = all_tags | join:'|' | append:'|' | append:tag | split:'|' %}
         {% endunless %}
       {% endif %}
     {% endfor %}
