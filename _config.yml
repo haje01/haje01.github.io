@@ -9,4 +9,3 @@ name                     : "김정주"
 description              : "김정주의 블로그."
 url                      : "https://haje01.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-(뒷부분 생략)
