@@ -1,7 +1,7 @@
 ---
-title: 김정주의 블로그
+title: 김정주의 노트
 layout: template
 filename: index.md
 ---
 
-# 김정주의 블로그
+# 김정주의 노트
