@@ -1,11 +1,11 @@
 theme: jekyll-theme-minimal
-minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "air" # "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
-# Site Settings
-locale                   : "en-US"
-title                    : "My 블로그"
-title_separator          : "-"
-name                     : "김정주"
-description              : "김정주의 블로그."
-url                      : "https://haje01.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
-baseurl                  : "" # the subpath of your site, e.g. "/blog"
+# # Site Settings
+# locale                   : "en-US"
+# title                    : "My 블로그"
+# title_separator          : "-"
+# name                     : "김정주"
+# description              : "김정주의 블로그."
+# url                      : "https://haje01.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+# baseurl                  : "" # the subpath of your site, e.g. "/blog"
