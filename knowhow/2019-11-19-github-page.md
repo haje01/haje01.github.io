@@ -1,5 +1,6 @@
 ---
 layout: template
+title: Jekyll 없이 개인용 Github 페이지 만들기
 filename: 2019-11-19-github-page.md
 tags: git
 ---
