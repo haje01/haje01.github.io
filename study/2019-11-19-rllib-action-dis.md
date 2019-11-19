@@ -1,6 +1,6 @@
 ---
 layout: template
-fname: 2019-11-19-rllib-action-dis.md
+fname: 2019-11-19-rllib-action-dis
 ---
 
 # RLlib Models, Preprocessors, and Action Distributions
