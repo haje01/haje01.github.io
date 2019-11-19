@@ -31,7 +31,7 @@
 
 
         <h3>스터디</h3>
-          {% if page.type == "/study/" %}
+          {% if page.dir == "/study/" %}
             {% for page in site.pages %}
             <p class="view">
               <a href="study/{{ page.filename }}.html">{{page.type}} {{ page.dir }} {{ page.title }}</a>
