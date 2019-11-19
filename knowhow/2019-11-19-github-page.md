@@ -1,6 +1,7 @@
 ---
 layout: template
 filename: 2019-11-19-github-page.md
+tags: knohow github
 ---
 
 # Jekyll 없이 개인용 Github 페이지 만들기
