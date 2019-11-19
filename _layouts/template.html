@@ -31,13 +31,13 @@
 
 
         <h3>스터디</h3>
-          {% if page.dir == "/study/" %}
-            {% for page in site.pages %}
+          {% for page in site.pages %}
+            {% if page.dir == "/study/" %}
             <p class="view">
-              <a href="study/{{ page.filename }}.html">{{page.type}} {{ page.dir }} {{ page.title }}</a>
+              <a href="study/{{ page.filename }}.html">{{ page.title }}</a>
             </p>
-            {% endfor %}
-          {% endif %}
+            {% endif %}
+          {% endfor %}
 
       </header>
       <section>
