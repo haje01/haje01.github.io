@@ -98,14 +98,14 @@ fname: index.md
 ```
 8. 이제 필요에 따라 글을 분류할 하위 폴더들을 만들어줌. 예를 들어 공부 노트를 위한 `study` 폴더.
 9. 분류에 맞는 폴더에 Markdown 형식으로 글을 작성하고, `study/2019-11-19-SUBJECT-NAME.md` 식으로 저장
-10. 단, 아래와 같은 Jekyll용 메타 정보가 제일 위에 나옴. (`fname`에는 확장자가 없는 것에 주의)
+10. 단, 아래와 같은 Jekyll용 메타 정보가 제일 위에 와야함. (`fname`에는 확장자가 없는 것에 주의)
 ```
 ---
 layout: template
 fname: 2019-11-19-SUBJECT-NAME
 ---
 ```
-10.  웹브라우저에서 `GITHUB-ID.github.io`를 방문해 잘 나오는지 확인.
+10. 글을 커밋하고, 웹브라우저에서 `GITHUB-ID.github.io`를 방문해 잘 나오는지 확인.
 
 ## 참고 링크
 * https://phuston.github.io/patrickandfrantonarethebestninjas/howto
