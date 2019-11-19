@@ -44,13 +44,6 @@
     <![endif]-->
   </head>
   <body>
-    <span>[
-        {% for tag in page.tags %}
-          {% capture tag_name %}{{ tag }}{% endcapture %}
-          <a href="/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>
-        {% endfor %}
-      ]</span>
-
     <div class="wrapper">
       <header>
         <h1><a href="https://haje01.github.io/">김정주의 노트</a></h1>
@@ -75,6 +68,13 @@
 
       </header>
       <section>
+
+      <span>[
+          {% for tag in page.tags %}
+            {% capture tag_name %}{{ tag }}{% endcapture %}
+            <a href="/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>
+          {% endfor %}
+        ]</span>
 
 {{ content }}
 
