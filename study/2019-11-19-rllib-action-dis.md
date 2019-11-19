@@ -1,3 +1,8 @@
+---
+layout: template
+fname: 2019-11-19-rllib-action-dis.md
+---
+
 # RLlib Models, Preprocessors, and Action Distributions
 
 ## RLlib의 컴포넌트들 간 데이터 흐름도
