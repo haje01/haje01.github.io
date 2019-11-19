@@ -31,13 +31,11 @@
 
 
         <h3>스터디</h3>
-          {% if page.type == "study" %}
-            {% for page in site.pages %}
-            <p class="view">
-              <a href="{{ page.filename }}.html">{{ page.title }}</a>
-            </p>
-            {% endfor %}
-          {% endif %}
+          {% for page in site.pages %}
+          <p class="view">
+            <a href="study/{{ page.filename }}.html">{{page.type}} {{ page.dir }} {{ page.title }}</a>
+          </p>
+          {% endfor %}
 
       </header>
       <section>
