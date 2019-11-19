@@ -42,6 +42,7 @@
       {% assign ttags = page.tags | join:'|' | append:'|' %}
       {% assign rawtags = rawtags | append:ttags %}
     {% endfor %}
+    **{{ rawtags }}**
     {% assign rawtags = rawtags | split:'|' | sort %}
 
     {% assign site.tags = "" %}
