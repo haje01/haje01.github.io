@@ -24,6 +24,7 @@ fname: index.md
 7. 클론한 폴더 아래 `_layout` 폴더를 만들고, 아래와 같이 `template.html` 파일을 만듦.
 
 ```html
+{% raw %}
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
@@ -82,9 +83,7 @@ fname: index.md
 
       </header>
       <section>
-{% raw %}
 {{ content }}
-{% endraw %}
       </section>
       <footer>
 
@@ -95,6 +94,7 @@ fname: index.md
 
   </body>
 </html>
+{% endraw %}
 ```
 8. 이제 필요에 따라 글을 분류할 하위 폴더들을 만들어줌. 예를 들어 공부 노트를 위한 `study` 폴더.
 9. 분류에 맞는 폴더에 Markdown 형식으로 글을 작성하고, `study/2019-11-19-SUBJECT-NAME.md` 식으로 저장
