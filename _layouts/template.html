@@ -31,17 +31,12 @@
 
         <p></p>
 
-
-
-
-        <p class="view">
           <!-- <a href="https://github.com/haje01">View My GitHub Profile</a> -->
           {% for page in site.pages %}
-            <a href={{ page.filename }}>{{ page.title }}</a>
+          <p class="view">
+            <a href={{ url }}{{ page.filename }}>{{ page.title }}</a>
+          </p>
           {% endfor %}
-        </p>
-
-
 
       </header>
       <section>
