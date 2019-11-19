@@ -5,8 +5,6 @@ filename: 2019-11-19-github-page.md
 tags: git
 ---
 
-# Jekyll 없이 개인용 Github 페이지 만들기
-
 Jekyll 설치 없이 내 Github 페이지에 개인용 블로그를 만든 기록.
 
 1. 먼저 `GITHUB_ID.github.io` 식으로 저장소를 만듦

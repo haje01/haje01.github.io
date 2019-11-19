@@ -5,8 +5,6 @@ filename: 2019-11-19-rllib-action-dis.md
 tags: ray
 ---
 
-# RLlib Models, Preprocessors, and Action Distributions
-
 ## RLlib의 컴포넌트들 간 데이터 흐름도
 ![](2019-11-19-18-23-37.png)
 * 컴포넌트들
