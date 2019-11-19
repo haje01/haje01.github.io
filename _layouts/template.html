@@ -18,7 +18,6 @@
 <!-- End Jekyll SEO tag -->
 
     <link rel="stylesheet" href="/assets/css/style.css?v=01e6290648d6409b0c7f076e8788b0cbc74c3e34">
-    <base href="{{ site.baseurl }}">
     <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
@@ -30,10 +29,9 @@
 
         <h2 id="welcome-to-github-pages">김정주의 블로그</h2>
 
-        <p></p>
 
-          <!-- <a href="https://github.com/haje01">View My GitHub Profile</a> -->
-          {% if page.filename %}
+        <h3>스터디</h3>
+          {% if page.type == "study" %}
             {% for page in site.pages %}
             <p class="view">
               <a href="{{ page.filename }}.html">{{ page.title }}</a>
