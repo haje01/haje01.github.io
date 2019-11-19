@@ -35,7 +35,7 @@
           <!-- <a href="https://github.com/haje01">View My GitHub Profile</a> -->
           {% for page in site.pages %}
           <p class="view">
-            <a href="./{{ page.filename }}">{{ page.title }}</a>
+            <a href="{{ page.filename }}">{{ page.title }}</a>
           </p>
           {% endfor %}
 
