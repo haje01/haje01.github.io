@@ -1,5 +1,5 @@
 ---
-layout: tagpage
+layout: template
 title: "Tag: git"
 tag: git
 ---
