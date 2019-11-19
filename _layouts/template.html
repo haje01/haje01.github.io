@@ -85,8 +85,7 @@
 
       </header>
       <section>
-        --{{ site.tags }}--
-      {% if site.tags != "" %}
+      {% if page.tags != "" %}
       <span>[
           {% for tag in page.tags %}
             {% capture tag_name %}{{ tag }}{% endcapture %}
