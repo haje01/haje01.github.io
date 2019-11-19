@@ -27,15 +27,15 @@ filename: index.md
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>나의 노트 | haje01.github.io</title>
+<title>나의 노트 | GITHUB-ID.github.io</title>
 <meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="나의 노트" />
 <meta property="og:locale" content="en_US" />
-<link rel="canonical" href="https://haje01.github.io/" />
-<meta property="og:url" content="https://haje01.github.io/" />
-<meta property="og:site_name" content="haje01.github.io" />
+<link rel="canonical" href="https://GITHUB-ID.github.io/" />
+<meta property="og:url" content="https://GITHUB-ID.github.io/" />
+<meta property="og:site_name" content="GITHUB-ID.github.io" />
 <script type="application/ld+json">
-{"@type":"WebSite","url":"https://haje01.github.io/","name":"나의 노트","headline":"나의 노트","@context":"http://schema.org"}</script>
+{"@type":"WebSite","url":"https://GITHUB-ID.github.io/","name":"나의 노트","headline":"나의 노트","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <link rel="stylesheet" href="/assets/css/style.css?v=01e6290648d6409b0c7f076e8788b0cbc74c3e34">
@@ -63,14 +63,14 @@ filename: index.md
   <body>
     <div class="wrapper">
       <header>
-        <h1><a href="https://haje01.github.io/">나의 노트</a></h1>
+        <h1><a href="https://GITHUB-ID.github.io/">나의 노트</a></h1>
 
         <!-- 글의 분류 -->
         <h2>스터디</h2>
           {% for page in site.pages %}
             {% if page.dir == "/study/" %}
             <p class="view">
-              <a href="https://haje01.github.io/study/{{ page.filename }}.html">{{ page.title }}</a>
+              <a href="https://GITHUB-ID.github.io/study/{{ page.filename }}.html">{{ page.title }}</a>
             </p>
             {% endif %}
           {% endfor %}

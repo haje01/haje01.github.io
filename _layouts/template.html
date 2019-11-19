@@ -53,6 +53,15 @@
             {% endif %}
           {% endfor %}
 
+          <h2>노하우</h2>
+          {% for page in site.pages %}
+            {% if page.dir == "/knowhow/" %}
+            <p class="view">
+              <a href="https://haje01.github.io/knowhow/{{ page.filename }}.html">{{ page.title }}</a>
+            </p>
+            {% endif %}
+          {% endfor %}
+
       </header>
       <section>
 
