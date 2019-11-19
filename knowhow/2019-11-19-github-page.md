@@ -1,6 +1,6 @@
 ---
 layout: template
-fname: 2019-11-19-github-page
+filename: 2019-11-19-github-page.md
 ---
 
 # Jekyll 없이 개인용 Github 페이지 만들기
