@@ -82,9 +82,9 @@ fname: index.md
 
       </header>
       <section>
-
+{% raw %}
 {{ content }}
-
+{% endraw %}
       </section>
       <footer>
 
