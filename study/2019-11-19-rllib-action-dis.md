@@ -49,7 +49,7 @@ filename: 2019-11-19-rllib-action-dis.md
 ## 커스텀 동작 분포(Custom Action Distributions)
 * 모델과 전처리기처럼 커스텀 동작 분포 클래스를 명시 가능
 * `model`에 동작 분포 클래스의 레퍼런스를 건넴
-* *자동회귀 동작 출력* 구현에 주로 사용
+* **자동회귀 동작 출력** 구현에 주로 사용
 
 ```python
 import ray
@@ -115,7 +115,7 @@ class MyParamActionEnv(gym.Env):
         })
 ```
 
-2. 관측의 `action_mask`와 `avail_actions` 부분을 *해석할 수 있는 커스텀 모델*이 정의 가능. 모델은 네트웍의 출력과 각 동작 임베딩의 내적으로 액션 로짓을 계산. 무효한 동작은 확률을 0으로 스케일링하여 제외(Mask out)될 수 있음.
+2. 관측의 `action_mask`와 `avail_actions` 부분을 **해석할 수 있는 커스텀 모델**이 정의 가능. 모델은 네트웍의 출력과 각 동작 임베딩의 내적으로 액션 로짓을 계산. 무효한 동작은 확률을 0으로 스케일링하여 제외(Mask out)될 수 있음.
 ```python
 class ParametricActionsModel(TFModelV2):
     def __init__(self,
@@ -164,10 +164,10 @@ class ParametricActionsModel(TFModelV2):
 * 다중 요소가 있는 동작 공간(예: `Tuple(a1, a2)`)에서, `a2`가 표집된 `a1`의 값에 조건화되기를 바랄 수 있다.
 	* 즉, `a2_sampled ~ P(a2 | a1_sampled, obs)`
 	* 일반적으로 `a1`과 `a2`는 독립적으로 표집되는데, 정책의 표현력을 감소시킨다.
-* 이를 위해, *자동회귀 패턴을 구현하는 커스텀 모델* 및 *이 모델을 활용하는 커스텀 동작 분포 클래스*가 필요하다.
+* 이를 위해, **자동회귀 패턴을 구현하는 커스텀 모델** 및 **이 모델을 활용하는 커스텀 동작 분포 클래스**가 필요하다.
 * [autoregressive_action_dist.py](https://github.com/ray-project/ray/blob/master/rllib/examples/autoregressive_action_dist.py) 예는 단순 이진 동작 공간에서 구현을 보여줌.
 * 더 복잡한 공간에서는, [MADE](https://arxiv.org/abs/1502.03509) 같은 더 효율적인 알고리즘이 필요.
-* N-파트 동작은 모델의 N 전방 패스가 필요하나, *동작의 로그 확률 계산은 단일 패스에 가능*한 것에 주목
+* N-파트 동작은 모델의 N 전방 패스가 필요하나, **동작의 로그 확률 계산은 단일 패스에 가능**한 것에 주목
 ```python
 class BinaryAutoregressiveOutput(ActionDistribution):
     """동작 분포 P(a1, a2) = P(a1) * P(a2 | a1)"""
