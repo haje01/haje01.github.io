@@ -91,7 +91,7 @@ trainer = ppo.PPOTrainer(env="CartPole-v0", config={
 ### TensorFlow
 * `custom_loss()`를 재정의해 커스텀 TF모델에 지도 손실을 추가
 	* 여기에서 알고리즘의 기존 정책 손실을 받고 자신의 지도 손실을 추가하여 반환
-* 오프라인 데이터에 대한 [Imitation Loss가 추가된 CartPole](file:///Users/haje01/externals/ray/python/ray/rllib/examples/custom_loss.py)예제
+* 오프라인 데이터에 대한 [Imitation Loss가 추가된 CartPole](https://github.com/ray-project/ray/blob/master/rllib/examples/custom_loss.py)예제
 
 ### PyTorch
 * 정책 정의의 손실을 직접 변경 가능
@@ -152,7 +152,7 @@ class ParametricActionsModel(TFModelV2):
         return action_logits + inf_mask, state
 ```
 * 용도에 따라 마스킹 / 임베딩 중 하나만 하거나, 둘 다 할 수도 있다.
-	* [parametric_action_cartpole.py](file:///Users/haje01/externals/ray/python/ray/rllib/examples/parametric_action_cartpole.py)예를 참고
+	* [parametric_action_cartpole.py](https://github.com/ray-project/ray/blob/master/rllib/examples/parametric_action_cartpole.py)예를 참고
 	* 마스킹을 하면 모델 출력에  `tf.float32.min` 값이 나오기에, 모든 알고리즘과 동작 않을 수 있음.
 		* 예로, 알고리즘이 `tf.float32.min` 값을 잘 처리하지 못하면 크래쉬가 발생
 	* 카트폴 예는 DQN(`hiddens=[]` 설정 필요) 과 PPO(이동 평균을 끄고, `vf_share_layers=True`로 설정)및 몇가지 알고리즘과 잘 동작했다.
@@ -165,7 +165,7 @@ class ParametricActionsModel(TFModelV2):
 	* 즉, `a2_sampled ~ P(a2 | a1_sampled, obs)`
 	* 일반적으로 `a1`과 `a2`는 독립적으로 표집되는데, 정책의 표현력을 감소시킨다.
 * 이를 위해, *자동회귀 패턴을 구현하는 커스텀 모델* 및 *이 모델을 활용하는 커스텀 동작 분포 클래스*가 필요하다.
-* [autoregressive_action_dist.py](file:///Users/haje01/externals/ray/python/ray/rllib/examples/autoregressive_action_dist.py) 예는 단순 이진 동작 공간에서 구현을 보여줌.
+* [autoregressive_action_dist.py](https://github.com/ray-project/ray/blob/master/rllib/examples/autoregressive_action_dist.py) 예는 단순 이진 동작 공간에서 구현을 보여줌.
 * 더 복잡한 공간에서는, [MADE](https://arxiv.org/abs/1502.03509) 같은 더 효율적인 알고리즘이 필요.
 * N-파트 동작은 모델의 N 전방 패스가 필요하나, *동작의 로그 확률 계산은 단일 패스에 가능*한 것에 주목
 ```python
