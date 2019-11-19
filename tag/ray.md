@@ -1,5 +1,5 @@
 ---
-layout: template
+layout: tagpage
 title: "Tag: ray"
 tag: ray
 ---

@@ -107,6 +107,8 @@ filename: 2019-11-19-SUBJECT-NAME
 ---
 ```
 10. 글을 커밋하고, 웹브라우저에서 `GITHUB-ID.github.io`를 방문해 잘 나오는지 확인.
+11. 선택적으로 [Long Qian](https://longqian.me/2017/02/09/github-jekyll-tag/)의 글을 참고하여, **태그**를 추가할 수 있다.
 
 ## 참고 링크
 * https://phuston.github.io/patrickandfrantonarethebestninjas/howto
+* https://longqian.me/2017/02/09/github-jekyll-tag/
