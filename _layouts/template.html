@@ -42,13 +42,13 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1><a href="https://haje01.github.io/">김정주의 블로그</a></h1>
+        <h1><a href="https://haje01.github.io/">김정주(haje01)의 블로그</a></h1>
 
         <h2>스터디</h2>
           {% for page in site.pages %}
             {% if page.dir == "/study/" %}
             <p class="view">
-              <a href="study/{{ page.filename }}.html">{{ page.title }}</a>
+              <a href="https://haje01.github.io/study/{{ page.filename }}.html">{{ page.title }}</a>
             </p>
             {% endif %}
           {% endfor %}
