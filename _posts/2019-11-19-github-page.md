@@ -6,6 +6,8 @@ tags: git
 
 Jekyll 설치 없이 내 Github 페이지에 개인용 블로그를 만든 기록.
 
+## 기본 설정
+
 1. 먼저 `GITHUB_ID.github.io` 식으로 저장소를 만듦
 2. 다음 페이지에서 `Settings` 클릭
 3. 다음 페이지의 `GitHub Pages` 섹션에서 `Choose a theme`을 클릭
@@ -127,20 +129,24 @@ filename: index.md
 </html>
 {% endraw %}
 ```
+
 8. 이제 기본 폴더 아래 `_posts` 폴더를 만들고, 거기에 Markdown 형식으로 글을 작성. (예: `_posts/2019-11-19-SUBJECT-NAME.md`)
 9. 단, 아래와 같은 Jekyll용 메타 정보가 제일 위에 와야함.
+
 ```
 ---
 layout: template
 title: SUBJECT-OF-POST
 ---
 ```
+
 10. 글을 커밋하고, 웹브라우저에서 `GITHUB-ID.github.io`를 방문해 잘 나오는지 확인.
 
 ## 태그 이용하기
 포스트별로 하나 이상의 태그를 붙여 관리할 수 있다. 먼저 몇 가지 작업이 필요하다.
 
 1. `_layouts` 폴더 아래에 `tagpage.html` 파일을 아래와 같은 내용으로 작성한다:
+
 ```html
 ---
 layout: template
