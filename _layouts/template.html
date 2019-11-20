@@ -56,16 +56,6 @@
       {% endif %}
     {% endfor %}
 
-    <ul class="tag-cloud">
-      {% for tag in site.tags %}
-        <span style="font-size: {{ tag | last | size | times: 100 | divided_by: site.tags.size | plus: 70  }}%">
-          <a href="#{{ tag | first | slugize }}">
-            {{ tag | first }}
-          </a> &nbsp;&nbsp;
-        </span>
-      {% endfor %}
-    </ul>
-
     <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
@@ -80,6 +70,17 @@
               <a href="{{ post.url }}">{{ post.title }}</a>
             </p>
           {% endfor %}
+
+        <ul class="tag-cloud">
+          {% for tag in site.tags %}
+            <span style="font-size: {{ tag | last | size | times: 100 | divided_by: site.tags.size | plus: 70  }}%">
+              <a href="#{{ tag | first | slugize }}">
+                {{ tag | first }}
+              </a> &nbsp;&nbsp;
+            </span>
+          {% endfor %}
+        </ul>
+
 
       </header>
       <section>
