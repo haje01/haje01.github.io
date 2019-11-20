@@ -33,7 +33,7 @@ tags: ray study
 ### TensorFlow 모델
 * 커스텀 TF모델은 `TFModelV2`를 상속받아야 함.
 	* 기존 `rllib.model.Model`을 대체
-* `value_function`을 재정의해 커스텀 밸류 브랜치를 구현
+* `value_function`을 재정의해 커스텀 밸류 메소드를 구현
 * `custom_loss`를 통해 지도(Supervised) / 자기-지도(Self-Supervised) 손실을 추가
 
 #### 순환(Recurrent) 모델
@@ -215,7 +215,7 @@ class BinaryAutoregressiveOutput(ActionDistribution):
 
 ```python
 class AutoregressiveActionsModel(TFModelV2):
-    """위 코드에서 필요한 `.action_model` 브랜치를 구현."""
+    """위 코드에서 필요한 `.action_model` 메소드를 구현."""
 
     def __init__(self, obs_space, action_space, num_outputs, model_config,
                  name):
