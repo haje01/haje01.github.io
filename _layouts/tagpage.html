@@ -3,9 +3,9 @@ layout: template
 ---
 <div class="post">
 <h1>태그: {{ page.tag }}</h1>
-33{{ site.tags }}33
+33{{ all_tags }}33
 <ul>
-{% for page in site.tags[page.tag] %}
+{% for page in all_tags[page.tag] %}
   <li><a href="{{ page.url }}">{{ page.title }}</a> ({{ page.date | date_to_string }})<br>
     {{ page.description }}
   </li>
