@@ -49,7 +49,7 @@ tags: ray study
 
 ## 커스텀 동작 분포(Custom Action Distributions)
 * 모델과 전처리기처럼 커스텀 동작 분포 클래스를 명시 가능
-* `model`에 동작 분포 클래스의 레퍼런스를 건넴
+* `model`에 동작 분포 클래스의 레퍼런스를 건네어 사용
 * **자동회귀 동작 출력** 구현에 주로 사용
 
 ```python
@@ -61,7 +61,7 @@ from ray.rllib.models.preprocessors import Preprocessor
 class MyActionDist(ActionDistribution):
     @staticmethod
     def required_model_output_shape(action_space, model_config):
-        return 7  # 모델 출력 특성 벡트 크기를 조절
+        return 7  # 모델 출력 특성 벡터 크기를 조절
 
     def __init__(self, inputs, model):
         super(MyActionDist, self).__init__(inputs, model)
