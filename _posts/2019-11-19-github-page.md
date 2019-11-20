@@ -1,27 +1,26 @@
 ---
 layout: template
 title: Jekyll 없이 개인용 Github 페이지 만들기
-tags: git
+tags: knowhow
 ---
 
 Jekyll 설치 없이 내 Github 페이지에 개인용 블로그를 만든 기록.
 
 ## 기본 설정
 
-* 먼저 `GITHUB_ID.github.io` 식으로 저장소를 만듦
-* 다음 페이지에서 `Settings` 클릭
+* 먼저 GitHub에서 `GITHUB_ID.github.io` 식으로 저장소를 만듦
+* 저장소 생성 후 나오는 페이지에서 `Settings` 클릭
 * 다음 페이지의 `GitHub Pages` 섹션에서 `Choose a theme`을 클릭
 * 원하는 테마 선택 후(여기에서는 minimal 테마 기준으로 설명) `Select theme` 클릭
-* 기본 `index.md` 파일의 내용을 아래와 같이 채우고 커밋
+* 기본 `index.md` 파일의 내용을 아래와 같이 채우고 커밋 (기본 페이지가 된다. 필요한 내용 추가 가능)
 
 ```
 ---
 title: 나의 노트
 layout: template
-filename: index.md
 ---
 ```
-* 저장소를 git으로 로컬에 클론
+* 로컬 PC에 저장소를 클론
 * 기본 폴더(클론한 폴더) 아래 `_layout` 폴더를 만들고, 아래와 같이 `template.html` 파일을 만듦.
 
 ```html
