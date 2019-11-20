@@ -72,7 +72,7 @@
         {% endfor %}
 
       <div style="padding: 10px">
-      {% for tag in page.tags %}
+      {% for tag in site.tags %}
         {% capture tag_name %}{{ tag }}{% endcapture %}
         <a href="/tag/{{ tag_name }}"><code class="highlighter-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>
       {% endfor %}
