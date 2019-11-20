@@ -30,17 +30,17 @@ tags: ray study
 	* Atari는 다운스케일 (DeepMind 전처리기 사용)
 	* Tuple & Dict는 펼쳐짐
 
-## TensorFlow 모델
+### TensorFlow 모델
 * 커스텀 TF모델은 `TFModelV2`를 상속받아야 함.
 	* 기존 `rllib.model.Model`을 대체
 * `value_function`을 재정의해 커스텀 밸류 브랜치를 구현
 * `custom_loss`를 통해 지도(Supervised) / 자기-지도(Self-Supervised) 손실을 추가
 
-### 순환(Recurrent) 모델
+#### 순환(Recurrent) 모델
 * `use_lstm` 대신 커스텀 순환 모델 정의 가능
 * `RecurrentTFModelV2`를 상속
 
-## PyTorch 모델
+### PyTorch 모델
 * 같은 식으로 PyTorch 기반 알고리즘들(A2C, PG, QMIX)를 위한한 커스텀 PyTorch 모델을 추가 가능
 * `TorchModelV2` 를 상속
 
