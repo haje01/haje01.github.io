@@ -104,7 +104,6 @@ trainer = ppo.PPOTrainer(env="CartPole-v0", config={
 	* DQN이나 PG 계열 알고리즘에 사용가능
 * 핵심 아이디어는 **동작의 의미는 관측에 완전히 조건화된다**는 것
 
-
 1) 환경은 매 스텝마다 마스크와(또는) 유효한 동작의 임베딩을 관측의 일부로 함께 보내주어야 한다.
 	* 배치가 가능하도록 동작의 수는 1에서 max 까지 변할 수 있다.
 
@@ -119,7 +118,7 @@ class MyParamActionEnv(gym.Env):
         })
 ```
 
-2) 관측의 `action_mask`와 `avail_actions` 부분을 **해석할 수 있는 커스텀 모델**이 정의 가능. 모델은 네트웍의 출력과 각 동작 임베딩의 내적으로 액션 로짓을 계산. 무효한 동작은 확률을 0으로 스케일링하여 제외(Mask out)될 수 있음.
+2) 관측의 `action_mask`와 `avail_actions` 부분을 **해석할 수 있는 커스텀 모델**을 정의. 모델은 네트웍의 출력과 각 동작 임베딩의 내적으로 액션 로짓을 계산. 무효한 동작은 확률을 0으로 스케일링하여 제외(Mask out)될 수 있음.
 ```python
 class ParametricActionsModel(TFModelV2):
     def __init__(self,
