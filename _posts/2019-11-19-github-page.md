@@ -92,16 +92,16 @@ layout: template
       <header>
         <h1><a href="https://haje01.github.io/">김정주의 노트</a></h1>
 
-          {% for post in site.posts %}
-            <p class="view">
-              <a href="{{ post.url }}">{{ post.title }}</a>
-            </p>
-          {% endfor %}
+        {% for post in site.posts %}
+          <p class="view">
+            <a href="{{ post.url }}">{{ post.title }}</a>
+          </p>
+        {% endfor %}
 
       </header>
       <section>
       {% if page.tags and page.title | split:' ' | first != "Tag:" %}
-      <span style="color: purple">[
+      <span style="margin-bottom: 20px; color: purple">[
           {% for tag in page.tags %}
             {% capture tag_name %}{{ tag }}{% endcapture %}
             <a href="/tag/{{ tag_name }}"><code class="highlighter-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>
@@ -118,7 +118,11 @@ layout: template
 
       </section>
       <footer>
-
+        <div style="margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 15px; border-radius: 7px; background-color: #ffddff;">
+          {% for tag in all_tags %}
+            <a href="/tag/{{ tag }}"><code class="highlighter-rouge"><nobr>{{ tag }}</nobr></code>&nbsp;</a>
+          {% endfor %}
+        </div>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
