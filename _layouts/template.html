@@ -45,18 +45,19 @@
     {% assign rawtags = rawtags | split:'|' | sort %}
     **{{ rawtags }}**
 
-    {% assign all_tags = "" %}
+    {% assign site.tags = "" %}
     {% for tag in rawtags %}
       {% if tag != "" %}
-        {% if all_tags == "" %}
-          {% assign all_tags = tag | split:'|' %}
+        {% if tags == "" %}
+          {% assign tags = tag | split:'|' %}
         {% endif %}
-        {% unless all_tags contains tag %}
-          {% assign all_tags = all_tags | join:'|' | append:'|' | append:tag | split:'|' %}
+        {% unless tags contains tag %}
+          {% assign tags = tags | join:'|' | append:'|' | append:tag | split:'|' %}
         {% endunless %}
       {% endif %}
     {% endfor %}
-    11{{ all_tags }}11
+    11{{ tags }}11
+    11{{ site.tags }}11
 
     <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -91,7 +92,8 @@
       <h1>-{{ page.title }}-</h1>
       {% endif %}
 
-      22{{ all_tags }}22
+      22{{ site.tags }}22
+      22{{ tags }}22
       {% if page.tags != "" %}
       <span>[
           {% for tag in page.tags %}
