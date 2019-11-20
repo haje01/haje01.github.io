@@ -83,7 +83,7 @@ trainer = ppo.PPOTrainer(env="CartPole-v0", config={
 })
 ```
 
-* 동작 분포에서 `logp`가 핵심 메소드. [custom_torch_policy.py](https://github.com/ray-project/ray/blob/master/rllib/examples/custom_torch_policy.py)를 참고.
+* 동작 분포에서는 `logp`가 핵심 메소드. [custom_torch_policy.py](https://github.com/ray-project/ray/blob/master/rllib/examples/custom_torch_policy.py)를 참고.
 
 ## 지도 모델 손실(Supervised Model Losses)
 * 모든 RLlib 알고리즘은 커스텀 모델을 통해 지도 손실 활용가능
