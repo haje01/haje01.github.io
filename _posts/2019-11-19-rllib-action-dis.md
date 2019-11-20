@@ -105,6 +105,7 @@ trainer = ppo.PPOTrainer(env="CartPole-v0", config={
 
 1. 환경은 매 스텝마다 마스크와(또는) 유효한 동작 임베딩을 관측의 일부로 함께 보내주어야 한다.
 	* 배치가 가능하도록 동작의 수는 1에서 max 까지 변할 수 있다.
+
 ```python
 class MyParamActionEnv(gym.Env):
     def __init__(self, max_avail_actions):
@@ -116,7 +117,7 @@ class MyParamActionEnv(gym.Env):
         })
 ```
 
-2. 관측의 `action_mask`와 `avail_actions` 부분을 **해석할 수 있는 커스텀 모델**이 정의 가능. 모델은 네트웍의 출력과 각 동작 임베딩의 내적으로 액션 로짓을 계산. 무효한 동작은 확률을 0으로 스케일링하여 제외(Mask out)될 수 있음.
+1. 관측의 `action_mask`와 `avail_actions` 부분을 **해석할 수 있는 커스텀 모델**이 정의 가능. 모델은 네트웍의 출력과 각 동작 임베딩의 내적으로 액션 로짓을 계산. 무효한 동작은 확률을 0으로 스케일링하여 제외(Mask out)될 수 있음.
 ```python
 class ParametricActionsModel(TFModelV2):
     def __init__(self,
@@ -152,6 +153,7 @@ class ParametricActionsModel(TFModelV2):
         inf_mask = tf.maximum(tf.log(action_mask), tf.float32.min)
         return action_logits + inf_mask, state
 ```
+
 * 용도에 따라 마스킹 / 임베딩 중 하나만 하거나, 둘 다 할 수도 있다.
 	* [parametric_action_cartpole.py](https://github.com/ray-project/ray/blob/master/rllib/examples/parametric_action_cartpole.py)예를 참고
 	* 마스킹을 하면 모델 출력에  `tf.float32.min` 값이 나오기에, 모든 알고리즘과 동작 않을 수 있음.
@@ -169,6 +171,7 @@ class ParametricActionsModel(TFModelV2):
 * [autoregressive_action_dist.py](https://github.com/ray-project/ray/blob/master/rllib/examples/autoregressive_action_dist.py) 예는 단순 이진 동작 공간에서 구현을 보여줌.
 * 더 복잡한 공간에서는, [MADE](https://arxiv.org/abs/1502.03509) 같은 더 효율적인 알고리즘이 필요.
 * N-파트 동작은 모델의 N 전방 패스가 필요하나, **동작의 로그 확률 계산은 단일 패스에 가능**한 것에 주목
+
 ```python
 class BinaryAutoregressiveOutput(ActionDistribution):
     """동작 분포 P(a1, a2) = P(a1) * P(a2 | a1)"""
