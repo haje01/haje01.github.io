@@ -65,22 +65,16 @@
       <header>
         <h1><a href="https://haje01.github.io/">김정주의 노트</a></h1>
 
-          {% for post in site.posts %}
-            <p class="view">
-              <a href="{{ post.url }}">{{ post.title }}</a>
-            </p>
-          {% endfor %}
+        {% for post in site.posts %}
+          <p class="view">
+            <a href="{{ post.url }}">{{ post.title }}</a>
+          </p>
+        {% endfor %}
 
-        <ul class="tag-cloud">
-          {% for tag in site.tags %}
-            <span style="font-size: {{ tag | last | size | times: 100 | divided_by: site.tags.size | plus: 70  }}%">
-              <a href="#{{ tag | first | slugize }}">
-                {{ tag | first }}
-              </a> &nbsp;&nbsp;
-            </span>
-          {% endfor %}
-        </ul>
-
+      {% for tag in page.tags %}
+        {% capture tag_name %}{{ tag }}{% endcapture %}
+        <a href="/tag/{{ tag_name }}"><code class="highlighter-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>
+      {% endfor %}
 
       </header>
       <section>
