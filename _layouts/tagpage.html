@@ -4,7 +4,7 @@ layout: template
 <div class="post">
 <ul>
 {% for post in site.tags[page.tag] %}
-  <li><a href="{{ post.url }}">{{ post.title }}</a> ({{ post.date }})<br>
+  <li><a href="{{ post.url }}">{{ post.title }}</a> ({{ post.date | date: "%Y-%m-%d" }})<br>
     {{ post.description }}
   </li>
 {% endfor %}
