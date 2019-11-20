@@ -162,9 +162,9 @@ tag: TAG-NAME
 ---
 ```
 
-## 글의 작성
+## 포스트의 작성
 
-* 이제 기본 폴더 아래 `_posts` 폴더를 만들고, 거기에 Markdown 형식으로 글을 작성한다. (예: `_posts/2019-11-19-SIMPLE-SUBJECT.md`)
+* 이제 기본 폴더 아래 `_posts` 폴더를 만들고, 거기에 Markdown 형식으로 포스트를 작성한다. (예: `_posts/2019-11-19-SIMPLE-SUBJECT.md`)
 * 단, 아래와 같은 Jekyll용 메타 정보가 제일 위에 와야한다.
 
 ```
@@ -175,9 +175,9 @@ tag: TAG-NAME
 ---
 ```
 
-* 글을 커밋하고, 웹브라우저에서 `GITHUB-ID.github.io`를 방문해 잘 나오는지 확인.
+* 지금가지 만든 파일들과 포스트를 커밋하고, 웹브라우저에서 `GITHUB-ID.github.io`를 방문해 잘 나오는지 확인.
 
-정상적으로 동작하면, 각 글의 제목 위에 태그를 볼 수 있으며, 태그명을 누르면 그 태그에 속한 모든 글의 리스트를 볼 수 있다.
+정상적으로 동작하면, 각 포스트의 제목 위에 태그를 볼 수 있으며, 태그명을 누르면 그 태그에 속한 모든 포스트의 리스트를 볼 수 있다.
 
 ## 참고 링크
 * https://phuston.github.io/patrickandfrantonarethebestninjas/howto
