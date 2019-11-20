@@ -136,6 +136,7 @@ filename: index.md
 * `_layouts` 폴더 아래에 `tagpage.html` 파일을 아래와 같은 내용으로 작성한다:
 
 ```html
+{% raw %}
 ---
 layout: template
 ---
@@ -149,6 +150,7 @@ layout: template
 </ul>
 </div>
 <hr>
+{% endraw %}
 ```
 
 * `tag` 폴더를 만들고, 사용할 태그 타입별로 아래와 같은 파일을 `TAG-NAME.md` 식으로 저장하여야 한다.
