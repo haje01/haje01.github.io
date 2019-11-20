@@ -219,7 +219,7 @@ class BinaryAutoregressiveOutput(ActionDistribution):
 
 ```python
 class AutoregressiveActionsModel(TFModelV2):
-    """위 코드에서 필요한 `.action_model` 메소드를 구현."""
+    """위 코드에서 필요한 `.action_model` 브랜치를 구현."""
 
     def __init__(self, obs_space, action_space, num_outputs, model_config,
                  name):
