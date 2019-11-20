@@ -71,13 +71,6 @@
           </p>
         {% endfor %}
 
-      <div style="padding: 10px">
-      {% for tag in site.tags %}
-        {% capture tag_name %}{{ tag }}{% endcapture %}
-        <a href="/tag/{{ tag_name }}"><code class="highlighter-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>
-      {% endfor %}
-      </div>
-
       </header>
       <section>
       {% if page.tags and page.title | split:' ' | first != "Tag:" %}
@@ -98,6 +91,12 @@
 
       </section>
       <footer>
+        <div style="padding: 10px">
+          {% for tag in all_tags %}
+            <a href="/tag/{{ tag }}"><code class="highlighter-rouge"><nobr>{{ tag }}</nobr></code>&nbsp;</a>
+          {% endfor %}
+        </div>
+
 
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
