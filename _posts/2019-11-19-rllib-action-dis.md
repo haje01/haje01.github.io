@@ -143,7 +143,7 @@ class ParametricActionsModel(TFModelV2):
             "obs": input_dict["obs"]["cart"]
         })
 
-        # 모델 출력을 [BATCH, 1, EMBED_SIZE]으로 확장. 유효한 동작 텐서는
+        # 임베딩을 [BATCH, 1, EMBED_SIZE]으로 확장. 유효한 동작 텐서는
         # [BATCH, MAX_ACTIONS, EMBED_SIZE] 형태인 것에 주목.
         intent_vector = tf.expand_dims(action_embed, 1)
 
@@ -151,7 +151,10 @@ class ParametricActionsModel(TFModelV2):
         action_logits = tf.reduce_sum(avail_actions * intent_vector, axis=2)
 
         # 무효한 동작을 제외 (안정성을 위해 tf.float32.min 을 이용)
+        # 가능한 동작 -> 0, 불가능한 동작 -> float32.min 으로 변경
         inf_mask = tf.maximum(tf.log(action_mask), tf.float32.min)
+
+        # 불가능한 동작의 logit은 float32.min에 가깝게 된다.
         return action_logits + inf_mask, state
 ```
 
