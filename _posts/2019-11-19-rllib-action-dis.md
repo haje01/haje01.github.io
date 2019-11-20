@@ -6,7 +6,7 @@ tags: ray
 ---
 
 ## RLlib의 컴포넌트들 간 데이터 흐름도
-![](2019-11-19-18-23-37.png)
+![](2019-11-20-11-18-31.png)
 * 컴포넌트들
 	* Environment - 환경
 	* Preprocessor & Filter - 관측 전처리
@@ -158,7 +158,7 @@ class ParametricActionsModel(TFModelV2):
 	* 카트폴 예는 DQN(`hiddens=[]` 설정 필요) 과 PPO(이동 평균을 끄고, `vf_share_layers=True`로 설정)및 몇가지 알고리즘과 잘 동작했다.
 	* 모든 알고리즘이 모수화된 동작과 잘 동작하지는 않음
 
-![](2019-11-19-18-25-30.png)
+![](2019-11-20-11-19-07.png)
 
 ## 자동회귀 동작 분포(Autoregressive Action Distributions)
 * 다중 요소가 있는 동작 공간(예: `Tuple(a1, a2)`)에서, `a2`가 표집된 `a1`의 값에 조건화되기를 바랄 수 있다.
