@@ -74,7 +74,7 @@
       </header>
       <section>
       {% if page.tags and page.title | split:' ' | first != "Tag:" %}
-      <span style="margin-bottom: 10px; padding: 5px; border-radius: 3px; background-color: #ffeeff;">
+      <span style="margin-bottom: 20px; padding: 4px; border-radius: 4px; background-color: #ffeeff;">
           {% for tag in page.tags %}
             {% capture tag_name %}{{ tag }}{% endcapture %}
             <a href="/tag/{{ tag_name }}"><code class="highlighter-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>
