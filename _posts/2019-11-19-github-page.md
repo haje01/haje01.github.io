@@ -12,11 +12,11 @@ Jekyll 설치 없이 내 Github 페이지에 개인용 블로그를 만든 기�
 * 저장소 생성 후 나오는 페이지에서 `Settings` 클릭
 * 다음 페이지의 `GitHub Pages` 섹션에서 `Choose a theme`을 클릭
 * 원하는 테마 선택 후(여기에서는 minimal 테마 기준으로 설명) `Select theme` 클릭
-* 기본 `index.md` 파일의 내용을 아래와 같이 채우고 커밋 (기본 페이지가 된다. 필요한 내용 추가 가능)
+* 기본 `index.md`에 Jekyll의 메타 정보 내용을 아래와 같이 채우고 커밋 (이것이 시작 페이지가 된다. 필요에 따라 내용을 추가 가능.)
 
 ```
 ---
-title: 나의 노트
+title: 시작 페이지
 layout: template
 ---
 ```
