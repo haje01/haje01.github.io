@@ -165,13 +165,13 @@ tag: TAG-NAME
 
 ## 글의 작성
 
-* 이제 기본 폴더 아래 `_posts` 폴더를 만들고, 거기에 Markdown 형식으로 글을 작성. (예: `_posts/2019-11-19-SUBJECT-NAME.md`)
+* 이제 기본 폴더 아래 `_posts` 폴더를 만들고, 거기에 Markdown 형식으로 글을 작성한다. (예: `_posts/2019-11-19-SIMPLE-SUBJECT.md`)
 * 단, 아래와 같은 Jekyll용 메타 정보가 제일 위에 와야한다.
 
 ```
 ---
 layout: template
-title: SUBJECT-OF-POST
+title: SUBJECT-TITLE
 tag: TAG-NAME
 ---
 ```
