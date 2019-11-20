@@ -74,7 +74,7 @@
       </header>
       <section>
       {% if page.tags and page.title | split:' ' | first != "Tag:" %}
-      <span style="margin-bottom: 10px; border-radius: 3px; background-color: #ffddff;">
+      <span style="margin-bottom: 10px; padding: 5px; border-radius: 3px; background-color: #ffeeff;">
           {% for tag in page.tags %}
             {% capture tag_name %}{{ tag }}{% endcapture %}
             <a href="/tag/{{ tag_name }}"><code class="highlighter-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>
@@ -91,7 +91,7 @@
 
       </section>
       <footer>
-        <div style="margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 15px; border-radius: 7px; background-color: #ffddff;">
+        <div style="margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 15px; border-radius: 7px; background-color: #ffeeff;">
           {% for tag in all_tags %}
             <a href="/tag/{{ tag }}"><code class="highlighter-rouge"><nobr>{{ tag }}</nobr></code>&nbsp;</a>
           {% endfor %}
