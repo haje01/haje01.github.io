@@ -171,7 +171,7 @@ tag: TAG-NAME
 ```
 ---
 layout: template
-title: SUBJECT-TITLE
+title: POST-TITLE
 tag: TAG-NAME
 ---
 ```
