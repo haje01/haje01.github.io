@@ -8,11 +8,11 @@ Jekyll 설치 없이 내 Github 페이지에 개인용 블로그를 만든 기�
 
 ## 기본 설정
 
-1. 먼저 `GITHUB_ID.github.io` 식으로 저장소를 만듦
-2. 다음 페이지에서 `Settings` 클릭
-3. 다음 페이지의 `GitHub Pages` 섹션에서 `Choose a theme`을 클릭
-4. 원하는 테마 선택 후(여기에서는 minimal 테마 기준으로 설명) `Select theme` 클릭
-5. 기본 `index.md` 파일의 내용을 아래와 같이 채우고 커밋
+* 먼저 `GITHUB_ID.github.io` 식으로 저장소를 만듦
+* 다음 페이지에서 `Settings` 클릭
+* 다음 페이지의 `GitHub Pages` 섹션에서 `Choose a theme`을 클릭
+* 원하는 테마 선택 후(여기에서는 minimal 테마 기준으로 설명) `Select theme` 클릭
+* 기본 `index.md` 파일의 내용을 아래와 같이 채우고 커밋
 
 ```
 ---
@@ -21,8 +21,8 @@ layout: template
 filename: index.md
 ---
 ```
-6. 저장소를 git으로 로컬에 클론
-7. 기본 폴더(클론한 폴더) 아래 `_layout` 폴더를 만들고, 아래와 같이 `template.html` 파일을 만듦.
+* 저장소를 git으로 로컬에 클론
+* 기본 폴더(클론한 폴더) 아래 `_layout` 폴더를 만들고, 아래와 같이 `template.html` 파일을 만듦.
 
 ```html
 {% raw %}
@@ -130,8 +130,8 @@ filename: index.md
 {% endraw %}
 ```
 
-8. 이제 기본 폴더 아래 `_posts` 폴더를 만들고, 거기에 Markdown 형식으로 글을 작성. (예: `_posts/2019-11-19-SUBJECT-NAME.md`)
-9. 단, 아래와 같은 Jekyll용 메타 정보가 제일 위에 와야함.
+* 이제 기본 폴더 아래 `_posts` 폴더를 만들고, 거기에 Markdown 형식으로 글을 작성. (예: `_posts/2019-11-19-SUBJECT-NAME.md`)
+* 단, 아래와 같은 Jekyll용 메타 정보가 제일 위에 와야함.
 
 ```
 ---
@@ -140,12 +140,10 @@ title: SUBJECT-OF-POST
 ---
 ```
 
-10. 글을 커밋하고, 웹브라우저에서 `GITHUB-ID.github.io`를 방문해 잘 나오는지 확인.
-
 ## 태그 이용하기
 포스트별로 하나 이상의 태그를 붙여 관리할 수 있다. 먼저 몇 가지 작업이 필요하다.
 
-1. `_layouts` 폴더 아래에 `tagpage.html` 파일을 아래와 같은 내용으로 작성한다:
+* `_layouts` 폴더 아래에 `tagpage.html` 파일을 아래와 같은 내용으로 작성한다:
 
 ```html
 ---
@@ -163,7 +161,7 @@ layout: template
 <hr>
 ```
 
-2. `tag` 폴더를 만들고, 사용할 태그 타입별로 아래와 같은 파일을 `TAG-NAME.md` 식으로 저장하여야 한다.
+* `tag` 폴더를 만들고, 사용할 태그 타입별로 아래와 같은 파일을 `TAG-NAME.md` 식으로 저장하여야 한다.
 
 ```
 ---
@@ -173,7 +171,8 @@ tag: TAG-NAME
 ---
 ```
 
-3. 이제 태그를 붙일 글의 메타 정보에 태그 정보를 추가한다.
+* 이제 태그를 붙일 글의 메타 정보에 태그 정보를 추가한다.
+
 ```
 ---
 layout: template
@@ -182,7 +181,10 @@ tag: TAG-NAME
 ---
 ```
 
-정상 적으로 동작하면, 글의 제목 위에 태그를 볼 수 있으며, 태그명을 누르면 그 태그에 속한 모든 글의 리스트를 볼 수 있다.
+
+* 글을 커밋하고, 웹브라우저에서 `GITHUB-ID.github.io`를 방문해 잘 나오는지 확인.
+
+정상적으로 동작하면, 글의 제목 위에 태그를 볼 수 있으며, 태그명을 누르면 그 태그에 속한 모든 글의 리스트를 볼 수 있다.
 
 ## 참고 링크
 * https://phuston.github.io/patrickandfrantonarethebestninjas/howto
