@@ -184,5 +184,5 @@ tag: TAG-NAME
 정상적으로 동작하면, 각 포스트의 제목 위에 태그를 볼 수 있으며, 태그명을 누르면 그 태그에 속한 모든 포스트의 리스트를 볼 수 있다.
 
 ## 참고 링크
-* https://phuston.github.io/patrickandfrantonarethebestninjas/howto
-* https://longqian.me/2017/02/09/github-jekyll-tag/
+* <https://phuston.github.io/patrickandfrantonarethebestninjas/howto>
+* <https://longqian.me/2017/02/09/github-jekyll-tag/>
