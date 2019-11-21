@@ -281,5 +281,4 @@ class AutoregressiveActionsModel(TFModelV2):
 ```
 
 ## 참고
-* <https://ray.readthedocs.io/en/latest/rllib-models.html#autoregressive-action-distributions
->
+* <https://ray.readthedocs.io/en/latest/rllib-models.html#autoregressive-action-distributions>
