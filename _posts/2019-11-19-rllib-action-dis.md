@@ -280,6 +280,6 @@ class AutoregressiveActionsModel(TFModelV2):
         self.register_variables(self.action_model.variables)
 ```
 
-## 참고 링크
+## 참고
 * <https://ray.readthedocs.io/en/latest/rllib-models.html#autoregressive-action-distributions
 >
