@@ -1,0 +1,22 @@
+#!/bin/bash
+
+echo "Post Slug: "
+read slug
+echo "Post Tags: "
+read tags
+
+pslug=${slug// /-}   # convert spaces in slug to hyphens
+plc=`echo "$pslug" | tr '[:upper:]' '[:lower:]'`   # convert slug to lowercase
+pdate=`date +%Y-%m-%d` 	# create date as Year-Month-Date
+filename=~/works/haje01.github.io/_posts/$pdate-$plc.md 	# location to create the new file as year-month-day-slug.md
+touch $filename 	# create the new blank post
+
+echo "---
+layout: post
+title: $slug
+description: $desc
+date: $pdate
+tags: [$tags]
+---" > $filename 	# fill out YAML Front Matter and insert into our new file
+
+code $filename
