@@ -1,5 +1,5 @@
 ---
-layout: template
+layout: post
 title: Jekyll 없이 개인용 Github 페이지 만들기
 tags: knowhow
 ---
@@ -17,11 +17,11 @@ Jekyll 설치 없이 내 Github 페이지에 개인용 블로그를 만든 기�
 ```
 ---
 title: 시작 페이지
-layout: template
+layout: post
 ---
 ```
 * 로컬 PC에 저장소를 클론
-* 기본 폴더(클론한 폴더) 아래 `_layout` 폴더를 만들고, 아래와 같이 `template.html` 파일을 만듦.
+* 기본 폴더(클론한 폴더) 아래 `_layout` 폴더를 만들고, 아래와 같이 `post.html` 파일을 만듦.
 
 ```html
 {% raw %}
@@ -141,7 +141,7 @@ layout: template
 ```html
 {% raw %}
 ---
-layout: template
+layout: post
 ---
 <div class="post">
 <ul>
@@ -173,7 +173,7 @@ tag: TAG-NAME
 
 ```
 ---
-layout: template
+layout: post
 title: POST-TITLE
 tag: TAG-NAME
 ---

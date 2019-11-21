@@ -1,7 +1,7 @@
 ---
-layout: template
+layout: post
 title: RLlib Models, Preprocessors, and Action Distributions
-tags: ray study
+tags: [ray, study]
 ---
 
 ## RLlib의 컴포넌트들 간 데이터 흐름도
