@@ -104,7 +104,7 @@ layout: post
       <span style="margin-bottom: 20px; color: purple">[
           {% for tag in page.tags %}
             {% capture tag_name %}{{ tag }}{% endcapture %}
-            <a href="/tag/{{ tag_name }}"><code class="highlighter-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>
+            <a href="/tag/{{ tag_name }}"><nobr>{{ tag_name }}</nobr>&nbsp;</a>
           {% endfor %}
         ]</span>
       {% endif %}
@@ -120,7 +120,7 @@ layout: post
       <footer>
         <div style="margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 15px; border-radius: 7px; background-color: #ffddff;">
           {% for tag in all_tags %}
-            <a href="/tag/{{ tag }}"><code class="highlighter-rouge"><nobr>{{ tag }}</nobr></code>&nbsp;</a>
+            <a href="/tag/{{ tag }}"><nobr>{{ tag }}</nobr>&nbsp;</a>
           {% endfor %}
         </div>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
