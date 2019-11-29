@@ -109,6 +109,9 @@ drwxr-xr-x  2 haje01  staff    64B 11 28 15:01 worker
 # 기본 이미지
 FROM daskdev/dask
 
+# host의 hostname을 얻기 위해
+RUN apt-get install -y curl
+
 # 시작 스크립트를 컨테이너에 복사
 COPY scheduler/start.sh ./
 
@@ -125,10 +128,10 @@ CMD ["sh","start.sh"]
 ```sh
 #!/bin/bash
 
-# 스케쥴러의 호스트명을 EFS에 파일로 기록
-hostname=$(hostname)
-echo "Setting scheduler hostname to $hostname"
-hostname > /data/.scheduler
+# 인스턴스 메타데이터에서 스케쥴러의 호스트명을 얻어 EFS에 파일로 기록
+HOST_HOSTNAME=$(curl http://169.254.169.254/latest/meta-data/hostname)
+echo "Setting scheduler hostname to $HOST_HOSTNAME"
+echo $HOST_HOSTNAME > /data/.scheduler
 
 # 스케쥴러 시작
 echo "Starting Dask Scheduler..."
@@ -296,7 +299,7 @@ ECS를 통해 생성된 VM들에는 `ECS 컨테이너 에이전트`라는 프로
 
   * `사용자 지정 TCP` 유형 `TCP` 프로토콜 `22` 포트범위 `내 IP` 소스 - SSH 접속용
   * `사용자 지정 TCP` 유형 `TCP` 프로토콜 `8888` 포트범위 `내 IP` 소스 - Jupyter 노트북용
-    * `사용자 지정 TCP` 유형 `TCP` 프로토콜 `8787-8789` 포트범위 `내 IP` 소스 - Dask 진단용
+    * `사용자 지정 TCP` 유형 `TCP` 프로토콜 `8786-8789` 포트범위 `내 IP` 소스 - Dask 스케쥴러 및 진단용
   * `모든 TCP` 유형 `TCP` 프로토콜 - Dask 워커용
 
 마지막의 `모든 TCP` 유형은 클러스터 내부 워커들간 통신을 위한 것으로, `CIDR, IP 또는 보안 그룹`을 클릭한 후 `EC2`를 입력해 나오는 `dask-cluster` 관련 보안 그룹을 선택하면 된다.
@@ -398,12 +401,12 @@ echo ECS_BACKEND_HOST= >> /etc/ecs/ecs.config
   * 로그를 어떻게 수집할 것인가?
   * 기타 환경 변수 등
 * `작업(Task)`
-  * 작업은 직접 실행시 생긴다.
+  * 작업은 작업 정의를 실행할 때 생긴다.
   * (하나 또는 그 이상의)컨테이너를 띄우고, 정지 또는 종료되었을 때 자동으로 교체되지 않는다.
   * 작업의 직접 실행은 CRON 등을 통해 짧은 일을 시킬 때 사용된다.
 * `서비스(Service)`
-  * 서비스는 과제들이 항상 실행되는 것을 보장한다.
-  * 만약 에러나 EC2 인스턴스의 문제로 작업의 컨테이너가 종료되면, 서비스는 그 과제를 교체한다.
+  * 서비스는 작업들이 항상 실행되는 것을 보장한다.
+  * 만약 에러나 EC2 인스턴스의 문제로 작업의 컨테이너가 종료되면, 서비스는 그 작업을 교체한다.
   * 클러스터를 만드는 이유는 CPU나 메모리, 네트웍 측면에서 서비스에 충분한 리소스를 공급하기 위함이다.
   * 서비스는 작업 정의를 참고해 작업을 생성하는 책임을 진다.
   * 서비스는 웹서버처럼 오랫동안 동작하는 어플리케이션을 위한 것이다.
@@ -464,7 +467,7 @@ ECS 대쉬보드 왼쪽 메뉴의 `작업 정의`를 누르고, `새 작업 정�
 
 ![](/assets/2019-11-28-17-35-07.png)
 
-그 EC2 ID를 눌러 나오는 인스턴스 정보 화면에서, 진단 대쉬보드 접속을 위해 `퍼블릭 DNS(IPv4)` 값을 복사해둔다.
+그 EC2 ID를 눌러 나오는 인스턴스 정보 화면에서, 진단 대쉬보드 접속을 위해 `퍼블릭 DNS` 값을 기록해둔다.
 
 #### 워커 작업 정의 및 서비스 생성
 
@@ -483,6 +486,34 @@ ECS 대쉬보드 왼쪽 메뉴의 `작업 정의`를 누르고, `새 작업 정�
 
 ## 클러스터에 접속
 
+모든 것이 제대로 진행되었다면, 클러스터에 접속할 수 있다. 우선 앞에서 기록해둔 스케쥴러의 퍼블릭 DNS(혹은 IP)를 이용해 아래와 같이 `8787` 포트로 접속해 Dask 진단 페이지를 살펴보자.
+
+    http://[Dask 스케쥴러 DNS]:8787
+
+![](../assets/2019-11-29-14-35-04.png)
+
+이제 Jupyter 노트북에 접속을 해보자. 그런데 Jupyter 노트북 접속에는 토큰이 필요하다. 이것은 노트북 시작시 표준 출력에서 확인할 수 있는데, 우리의 경우 노트북 작업 화면의 `Logs` 탭에서 확인할 수 있다.
+
+![](../assets/2019-11-29-14-44-24.png)
+
+여기에서 `token=` 이후의 토큰값을 기록해둔다. ECS 대쉬보드에서 스케쥴러와 같은 식으로 `dask-notebook` 작업의 퍼블릭 DNS를 찾은 뒤 아래와 같이 `8888` 포트로 접속해보자.
+
+    http://[Dask 노트북 DNS]:8888
+
+이후 `Password or token` 에 앞에서 기록해둔 토큰 값을 넣어주면 된다.
+
+![](../assets/2019-11-29-14-46-17.png)
+
+Jupyter 노트북에서 Dask 대쉬보드를 보기 위해서는 아래와 같은 형식의 URL을
+
+    http://[Dask 스케쥴러 DNS]:8787
+
+Jupyter 노트북의 Dask 탭에 기입해주면된다. 접속에 성공하면 각종 버튼이 오랜지 색으로 변하면 사용이 가능해진다.
+
+![](../assets/2019-11-29-15-11-43.png)
+
+
 ## 참조
 
 * <https://stackoverflow.com/questions/42960678/what-is-the-difference-between-a-task-and-a-service-in-aws-ecs>
+* <https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/ec2-instance-metadata.html>
