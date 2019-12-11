@@ -183,6 +183,8 @@ tag: TAG-NAME
 
 정상적으로 동작하면, 각 포스트의 제목 위에 태그를 볼 수 있으며, 태그명을 누르면 그 태그에 속한 모든 포스트의 리스트를 볼 수 있다.
 
+추가적으로 [Google에서 검색되도록 설정](http://jinyongjeong.github.io/2017/01/13/blog_make_searched/)하거나 [구글 Analytics 붙이기](https://jybaek.github.io/dev/2016/07/04/use-google-analytics/)를 하면 더 좋을 것이다.
+
 ## 참고
 * <https://phuston.github.io/patrickandfrantonarethebestninjas/howto>
 * <https://longqian.me/2017/02/09/github-jekyll-tag/>
