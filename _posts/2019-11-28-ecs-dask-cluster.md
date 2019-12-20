@@ -7,7 +7,7 @@ tags: [knowhow, dask, aws]
 
 ## 소개
 
-Dask를 이용하면 대용량 데이터를 굳이 Spark을 사용하지 않고, 더 파이썬스럽게 처리할 수 있다. 일반적인 데이터에서는 로컬 PC에서 Dask 클러스터를
+Dask를 이용하면 대용량 데이터를 굳이 Spark을 사용하지 않고, 더 파이썬답게 처리할 수 있다. 일반적인 데이터에서는 로컬 PC에서 Dask 클러스터를
 띄우는 것으로도 충분한 도움을 받을 수 있으나, 대용량 데이터나 특성을 다루기에는 부족할 수 있다.
 
 나는 비용 최적화를 위해, 다음과 같은 작업 방식을 가정하겠다:
@@ -15,10 +15,10 @@ Dask를 이용하면 대용량 데이터를 굳이 Spark을 사용하지 않고,
 * 일반적으로 로컬 PC에서 Jupyter 노트북과 Dask 클러스터를 띄워 작업하다가,
 * 많은 데이터를 다루거나 특성 발굴이 필요한 경우, 사용하는 노트북 환경 그대로 클라우드에 Dask 클러스터를 띄워 처리능력을 강화한다.
 
-위와 같은 설정에서, 로컬 PC에서 사용하는 환경과 클러스터의 환경이 같도록 하기 위해 도커를 사용하는 것이 바람직하겠다:
+위와 같은 설정에서, 로컬 PC에서 사용하는 환경과 클러스터의 환경이 같도록 위해 도커를 사용하는 것이 바람직하겠다:
 
-* 사용하는 Jupyter 노트북 환경을 도커 이미지로 만들고, 로컬 PC 작업시에도 이것을 이용한다.
-* 대용량 데이터 처리시 클라우드에 이 도커 이미지로 클러스터를 구성하여 작업을 수행한다.
+* 사용하는 Jupyter 노트북 환경을 도커 이미지로 만들고, 로컬 PC 작업 시에도 이것을 이용한다.
+* 대용량 데이터 처리 시 클라우드에 이 도커 이미지로 클러스터를 구성하여 작업을 수행한다.
 
 Dask 클러스터는 Kubernetes나 Yarn을 활용해서도 만들수 있는데, 여기서는 [AWS ECS(Elastic Container Service)](https://aws.amazon.com/ko/ecs/)를 사용하겠다. ECS를 사용하는 이유는 비교적 설정이 간단하며, 고정 클러스터 비용이 들지 않는다는 점 때문이다.
 
@@ -33,13 +33,13 @@ Dask 클러스터는 Kubernetes나 Yarn을 활용해서도 만들수 있는데, 
 
 ## 도커 이미지 저장소 준비
 
-다음과 같은 세 가지 도커 이미지를 만들고 저장소에 올려야한다.
+다음과 같은 세 가지 도커 이미지를 만들고 저장소에 올려야 한다.
 
 * Dask 스케쥴러 이미지
 * Dask 워커 이미지
 * 분석 노트북 이미지
 
-저장소는 AWS ECR을 이용하겠다. 다음처럼 도커 클라이언트를 ECR에 인증받아 둔다.
+저장소(=리포지토리)는 AWS ECR을 이용하겠다. 다음처럼 도커 클라이언트를 ECR에 인증받아 둔다.
 
     $(aws ecr get-login --no-include-email --region ap-northeast-2)
 
@@ -341,7 +341,7 @@ ECS 클러스터 생성시 만들어진 시작 구성이 하나 있다. 이것�
 
 * 이름을 `EC2ContainerService-dask-cluster-EFS`로 바꾼다.
 * IAM 역할을 `ecsInstanceRole`로 선택
-* `고급 세부 정보`를 눌러 `User data` 란에 아래 텍스트의 `[EFS DNS 이름]`을 보사해둔 것으로 바꾸고, `[ECS 클러스터 이름]`을 `dask-cluster`로 바꾸어 기재한다.
+* `고급 세부 정보`를 눌러 `User data` 란에 아래 텍스트의 `[EFS DNS 이름]`을 복사해둔 것으로 바꾸고, `[ECS 클러스터 이름]`을 `dask-cluster`로 바꾸어 기재한다.
 
 ```
 Content-Type: multipart/mixed; boundary="==BOUNDARY=="
@@ -527,6 +527,6 @@ Jupyter 노트북의 Dask 탭에 기입해주면된다. 접속에 성공하면 �
 
 
 ## 참조
-
+* <https://livebook.manning.com/book/data-science-at-scale-with-python-and-dask/chapter-11/1>
 * <https://stackoverflow.com/questions/42960678/what-is-the-difference-between-a-task-and-a-service-in-aws-ecs>
 * <https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/ec2-instance-metadata.html>
