@@ -71,4 +71,4 @@ tags: [paper,study,draft]
 
 ![식 2](/assets/2019-12-28-23-25-13.png)
 
-`rfeat` 함수의 일부 예는 `min`, `max` 및 `count`입니다. 다른 `rfeat` 함수는 $x^l_{:,j|e^k=i}$에 대한 확률 밀도 함수에 적용될 수 있는 함수를 포함합니다.
+`rfeat` 함수의 일부 예는 `min`, `max` 및 `count`입니다. 다른 `rfeat` 함수는 $x^l_{:,j \vert e^k=i}$에 대한 확률 밀도 함수에 적용될 수 있는 함수를 포함합니다.
