@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Deep Feature Synthesis: Towards Automating Data Science Endeavers"
+title: "심층 특성 합성: 데이터 과학 노력의 자동화를 위하여"
 description: 
 date: 2019-12-27
 tags: [paper,study,draft]
 ---
 
-원문: [Deep Feature Synthesis: Towards Automating Data Science Endeavers](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=10&cad=rja&uact=8&ved=2ahUKEwiA9ZqgztXmAhUDE4gKHYhrCDgQFjAJegQIBBAC&url=http%3A%2F%2Fwww.jmaxkanter.com%2Fstatic%2Fpapers%2FDSAA_DSM_2015.pdf&usg=AOvVaw1DpTqBAt1xvpH8gmQzuhBB)
+원문: [Deep Feature Synthesis: Towards Automating Data Science Endeavors](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=10&cad=rja&uact=8&ved=2ahUKEwiA9ZqgztXmAhUDE4gKHYhrCDgQFjAJegQIBBAC&url=http%3A%2F%2Fwww.jmaxkanter.com%2Fstatic%2Fpapers%2FDSAA_DSM_2015.pdf&usg=AOvVaw1DpTqBAt1xvpH8gmQzuhBB)
 
 의도:
 - 좋은 논문을 알리기 위해 핵심 내용 중심으로 번역한 것이다.
@@ -65,7 +65,7 @@ tags: [paper,study,draft]
 
 역방향 : 역방향 관계는 $E^k$의 인스턴스 $i$에서 순방향 관계를 갖는 $E^l$의 모든 인스턴스 $m = \{1...M\}$ 로의 관계입니다. 위와 같은 예에서 *Customers* 엔터티는 *Orders*와 역방향 관계가 있습니다. 즉, 많은 주문이 동일한 고객을 가리킬 수 있습니다.
 
-직접 특성 (`dfeat`) : 직접 기능은 *순방향* 관계에 적용됩니다. 이들에서, 관련 엔티티 $i \in E^k$의 특성은 $m \in E^l$에 대한 특성으로 직접 변형된다.
+직접 특성 (`dfeat`) : 직접 기능은 *순방향* 관계에 적용됩니다. 이들에서, 관련 엔티티 $i \in E^k$의 특성은 $m \in E^l$에 대한 특성으로 직접 변형됩니다.
 
 관계형 특성 (`rfeat`) : 관계형 특성은 *역방향* 관계에 적용됩니다. 그것들은 $x^l_{:,j|e^k=i}$에 수학 함수를 적용하여 엔터티 $E^k$의 인스턴스 $i$에 대해 유도됩니다. 이것은 관련 엔티티 $E^l$의 특성 $j$에 대한 값의 모음이며, $E^k$의 식별자가 $e^k = i$ 인 엔티티 $E^l$의 특성 $j$의 모든 값을 추출하여 결합됩니다.
 
