@@ -99,7 +99,7 @@ tags: [paper,study,draft]
 
 먼저, $O(m)$ 엔티티에 대한 `rfeat` 유형 특성을 합성합니다. 만약 우리가 $O(r)$ `rfeat` 함수가 있다고 가정한다면, 우리는 총 $O(r \cdot z_{i-1} \cdot m)$ 부가 특성을 위해 각각의 $m$ 엔티티에 대한 $O(r \cdot z_{i-1})$ 특성을 역방향 관계로 합성합니다. 다음으로, 순방향 관계에서 엔티티의 모든 특성에 대해 하나의 `dfeat` 특성을 작성합니다. 이것은 $O (z_{i-1} \cdot n)$ 기능을 추가한다는 의미입니다. 마지막으로, 우리는 $j$ 개의 오리지널 특징과 새로 합성된 $O (z_{i-1} \cdot (r \cdot m + n))$ 특성을 사용하여 `efeat` 특성을 만들어야 합니다. 우리는 $O(e)$ `efeat` 함수가 있다고 가정합니다. 따라서 추가 $O (e \cdot j + e (z_{i-1} \cdot (r \cdot m + n)))$ `efeat` 기능을 합성합니다.
 
-모든 `rfeat`, `dfeat` 및 `efeat` 기능을 결합하면 $z_i = O(z_{ i-1} \cdot (r \cdot m + n) (e + 1) + e \cdot j)$임을 알 수 있습니다. $z0$에서는 `efeat` 특성만 계산할 수 있으므로 $z_0 = O (e \cdot j)$입니다. $p = (r \cdot m + n) (e + 1)$ 이고 $q = e \cdot j$이라고 하면, 대체하여 다음을 얻는다.
+모든 `rfeat`, `dfeat` 및 `efeat` 기능을 결합하면 $z_i = O(z_{ i-1} \cdot (r \cdot m + n) (e + 1) + e \cdot j)$임을 알 수 있습니다. $z0$에서는 `efeat` 특성만 계산할 수 있으므로 $z_0 = O (e \cdot j)$입니다. $p = (r \cdot m + n) (e + 1)$ 이고 $q = e \cdot j$이라고 하면, 대체하여 다음을 얻습니다.
 
 ![](/assets/2019-12-29-22-04-40.png)
 
