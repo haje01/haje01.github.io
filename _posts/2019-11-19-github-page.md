@@ -46,21 +46,15 @@ layout: post
 
     <link rel="stylesheet" href="/assets/css/style.css?v=01e6290648d6409b0c7f076e8788b0cbc74c3e34">
 
-    <!-- MathJax 설정 -->
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        extensions: ["tex2jax.js"],
-        jax: ["input/TeX", "output/HTML-CSS"],
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-          processEscapes: true
-        },
-        "HTML-CSS": { availableFonts: ["TeX"] }
-      });
-    </script>
-    <script type="text/javascript" async
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    <!-- KATEX 설정 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script>
+      renderMathInElement(document.body,{delimiters: [
+                {left: "$$", right: "$$", display: true},
+              {left: "$", right: "$", display: false}
+    ]});
+    
     </script>
 
     <!-- 태그 수집 -->
@@ -133,6 +127,14 @@ layout: post
 {% endraw %}
 ```
 
+참고로, KALEX 수식을 이용하기 위해서 `_config.yml` 에서 아래와 같이 설정해 준다.
+
+```yml
+markdown: kramdown
+kramdown:
+    math_engine: nil
+```
+
 ## 태그 이용하기
 포스트별로 하나 이상의 태그를 붙여 관리할 수 있다. 먼저 몇 가지 작업이 필요하다.
 
@@ -188,3 +190,4 @@ tag: TAG-NAME
 ## 참고
 * <https://phuston.github.io/patrickandfrantonarethebestninjas/howto>
 * <https://longqian.me/2017/02/09/github-jekyll-tag/>
+* <https://github.com/KaTeX/KaTeX/issues/712>
