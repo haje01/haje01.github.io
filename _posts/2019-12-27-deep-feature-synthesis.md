@@ -3,7 +3,7 @@ layout: post
 title: "심층 피처 합성: 데이터 과학 노력의 자동화를 위하여"
 description: 
 date: 2019-12-27
-tags: [paper,study,draft]
+tags: [paper,study,automl,draft]
 ---
 
 원문: [Deep Feature Synthesis : Towards Automating Data Science Endeavors](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=10&cad=rja&uact=8&ved=2ahUKEwiA9ZqgztXmAhUDE4gKHYhrCDgQFjAJegQIBBAC&url=http%3A%2F%2Fwww.jmaxkanter.com%2Fstatic%2Fpapers%2FDSAA_DSM_2015.pdf&usg=AOvVaw1DpTqBAt1xvpH8gmQzuhBB)
