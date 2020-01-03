@@ -11,7 +11,7 @@ tags: [paper,study,automl]
 
 ### 소감
 
-최근 AutoML이 화두로 떠오르고 있지만, 초모수 최적화 (Hyper-parameter Optimization)나 전이 학습 (Transfer Learning), 그리고 신경망 구성 검색(Neural Architecture Search) 등의 최신 분야 중심으로 연구가 진행되고 있습니다. 2015 년에 발표된 이 논문은 시간이 좀 지나긴 했지만, 전통적인 기계 학습에서 꼭 필요한 피처 엔지니어링 (Feature Engineering)을 자동화할 수 있는 아이디어를 제시합니다. 또한 저자들은 이 아이디어를 [Featuretools](https://www.featuretools.com) 라는 파이썬 프레임웍으로도 제공하고 있습니다. 논문에서 제안하듯, 보조적으로만 활용하더라도 데이터 과학자의 문제풀이 시간을 꽤 단축시켜 주는 좋은 방법이 될 것으로 기대합니다.
+최근 AutoML이 화두로 떠오르고 있지만, 초모수 최적화 (Hyper-parameter Optimization)나 전이 학습 (Transfer Learning), 그리고 신경망 구성 검색(Neural Architecture Search) 등의 최신 분야 중심으로 연구가 진행되고 있습니다. 2015 년에 발표된 이 논문은 시간이 좀 지나긴 했지만, 전통적인 기계 학습에서 꼭 필요한 피처 엔지니어링 (Feature Engineering)을 자동화할 수 있는 아이디어를 제시합니다. 또한 저자들은 이 아이디어를 [Featuretools](https://www.featuretools.com) 라는 파이썬 프레임웍 구현해 제공하고 있습니다. 논문에서 제안하듯, 보조적으로만 활용하더라도 데이터 과학자의 문제풀이 시간을 단축시켜 주는 좋은 방법이 될 것으로 기대합니다. 참고로, 이 연구에서 초모수 최적화에 사용된 코퓰라(Copula Process) 프로세스는 상당히 어렵지만 흥미로운 이론인 것 같습니다. 여유가 되면 관련 글을 포스팅하도록 하겠습니다.
 
 ### 주의
 
