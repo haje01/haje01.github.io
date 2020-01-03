@@ -5,12 +5,13 @@
     {% assign maxHeader = 5 %}
 
     {% for node in nodes %}
-        {% capture my_toc %}{{ my_toc }}{{ node }}{% endcapture %}
         {% if node == "" %}
             {% continue %}
         {% endif %}
 
         {% assign headerLevel = node | replace: '"', '' | slice: 0, 1 | times: 1 %}
+
+        {% capture my_toc %}{{ headerLevel }}{{ node }}{% endcapture %}
 
         {% if headerLevel < minHeader or headerLevel > maxHeader %}
             {% continue %}
