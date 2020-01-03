@@ -9,7 +9,7 @@
             {% continue %}
         {% endif %}
 
-        {% asign headerLevel = node | replace: '"', '' | slice: 0, 1 | times 1 %}
+        {% assign headerLevel = node | replace: '"', '' | slice: 0, 1 | times 1 %}
 
         {% if headerLevel < minHeader or headerLevel > maxHeader %}
             {% continue %}
