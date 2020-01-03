@@ -169,14 +169,8 @@ layout: post
         {% capture _hAttrToStrip %}{{ _workspace[0] | split: '>' | first }}>{% endcapture %}
         {% assign header = _workspace[0] | replace: _hAttrToStrip, '' %}
 
-        {% assign space = '' %}
-
-        {% for i in (1..indentAmount) %}
-            {% assign space = space | prepend: '    ' %}
-        {% endfor %}
-
         {% capture my_toc %}{{ my_toc }}
-        <a href="#{{ html_id }}" style="margin-left: {{indentAmount}}em;">{{ header }}</a><br/>
+        <a href="#{{ html_id }}" style="margin-left: {{ indentAmount | minus: 1 }}em;">{{ header }}</a><br/>
         {% endcapture %}
 
     {% endfor %}
