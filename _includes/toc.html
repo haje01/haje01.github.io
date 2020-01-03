@@ -1,6 +1,8 @@
 {% capture tocWorkspace %}
     {% capture my_toc %}{% endcapture %}
     {% assign nodes = include.html %}
+    {% assign minHeader = 1 %}
+    {% assign maxHeader = 5 %}
 
     {% for node in nodes %}
         {% if node == """ %}
@@ -8,6 +10,11 @@
         {% endif %}
 
         {% asign headerLevel = node | replace: '"', '' | slice: 0, 1 | times 1 %}
+
+        {% if headerLevel < minHeader or headerLevel > maxHeader %}
+            {% continue %}
+        {% endif %}
+
         {% assign indentAmount = headerLevel %}
         {% assign _workspace = node | split: '</h' %}
         {% assign _idWorkspace = _workspace[0] | split: 'id="' %}
@@ -17,13 +24,11 @@
         {% capture _hAttrToStrip %}{{ _workspace[0] | split: '>' | first }}>{% endcapture %}
         {% assign header = _workspace[0] | replace: _hAttrToStrip, '' %}
 
+        {% assign space = '' %}
         {% for i in (1..indentAmount) %}
             {% assign space = space | prepend: '    ' %}
         {% endfor %}
 
-        {% capture heading_body %}
-            {{ header }}
-        {% endcapture %}
         {% capture my_toc %}{{ my_toc }}
             {{ space }} - [{{ header | replace: "|", "\|" }}](#{{ html_id }})
         {% endcapture %}
