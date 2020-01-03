@@ -26,9 +26,11 @@
 
         {% assign space = '' %}
 
-        {% for i in (1..indentAmount) %}
-            {% assign space = space | prepend: '    ' %}
-        {% endfor %}
+        {% if indentAmount > 1 %}
+            {% for i in (1..indentAmount) %}
+                {% assign space = space | prepend: '    ' %}
+            {% endfor %}
+        {% endif %}
 
         {% capture my_toc %}{{ my_toc }}
         <a href="#{{ html_id }}" style="margin-left: {{indentAmount}}em;">{{ header }}</a><br/>
