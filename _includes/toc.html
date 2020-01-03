@@ -30,8 +30,8 @@
         {% endfor %}
 
         {% capture my_toc %}{{ my_toc }}
-            {{ space }} - [{{ header | replace: "|", "\|" }}](#{{ html_id }})
+        {{ space }} - [{{ header | replace: "|", "\|" }}](#{{ html_id }})
         {% endcapture %}
 
     {% endfor %}
-{% endcapture %}{% assign tocWorkspace = '' %}{% markdown %}{{ my_toc | markdownify | strip }}
+{% endcapture %}{% assign tocWorkspace = '' %}{{ my_toc }}
