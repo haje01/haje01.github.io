@@ -1,0 +1,33 @@
+{% capture tocWorkspace %}
+    {% capture my_toc %}{% endcapture %}
+    {% assign nodes = include.html %}
+
+    {% for node in nodes %}
+        {% if node == " %"}
+            {% continue %}
+        {% endif %}
+
+        {% asign headerLevel = node | replace: '"', '' | slice: 0, 1 | times 1 %}
+        {% assign indentAmount = headerLevel %}
+        {% assign _workspace = node | split: '</h' %}
+        {% assign _idWorkspace = _workspace[0] | split: 'id="' %}
+        {% assign _idWorkspace = _idWorkspace[1] | split: '"' %}
+        {% assign html_id = _idWorkspace[0] %}
+
+        {% capture _hAttrToStrip %}{{ _workspace[0] | split: '>' | first }}>{% endcapture %}
+        {% assign header = _workspace[0] | replace: _hAttrToStrip, '' %}
+
+        {% for i in (1..indentAmount) %}
+            {% assign space = space | prepend: '    ' %}
+        {% endfor %}
+
+        {% capture heading_body %}
+            {{ header }}
+        {% endcapture %}
+        {% capture my_toc %}{{ my_toc }}
+            {{ space }} - [{{ header | replace: "|", "\|" }}](#{{ html_id }})
+        {% endcapture %}
+        {% endfor %}
+
+    {% endofr %}
+{% endcapture %}{% assign tocWorkspace = ''%}{{ my_toc | markdownify | strip}}

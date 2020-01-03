@@ -72,13 +72,14 @@
       <header>
         <h1><a href="https://haje01.github.io/">haje01의 노트</a></h1>
 
+        {% include toc.html html=content %}
+
         {% for post in site.posts %}
           <p class="view">
             <a href="{{ post.url }}">{{ post.title }}</a>
           </p>
         {% endfor %}
 
-        {:toc}
       </header>
       <section>
       {% if page.tags and page.title | split:' ' | first != "Tag:" %}
