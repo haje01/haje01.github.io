@@ -25,13 +25,14 @@
         {% assign header = _workspace[0] | replace: _hAttrToStrip, '' %}
 
         {% assign space = '' %}
+
         {% for i in (1..indentAmount) %}
             {% assign space = space | prepend: '    ' %}
         {% endfor %}
 
         {% capture my_toc %}{{ my_toc }}
-        {{ space }} - [{{ header | replace: "|", "\|" }}](#{{ html_id }})
+        <a href="#{{ html id }}" style="text-indent: {{indentAmount}}em;">{{ header }}</a>
         {% endcapture %}
 
     {% endfor %}
-{% endcapture %}{% assign tocWorkspace = '' %}{{ my_toc | markdownify }}
+{% endcapture %}{% assign tocWorkspace = '' %}{{ my_toc }}
