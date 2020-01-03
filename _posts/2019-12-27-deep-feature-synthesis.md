@@ -3,14 +3,14 @@ layout: post
 title: "심층 피처 합성: 데이터 과학 노력의 자동화를 위하여"
 description:
 date: 2019-12-27
-tags: [paper,study,automl,draft]
+tags: [paper,study,automl]
 ---
 
 원문: [Deep Feature Synthesis : Towards Automating Data Science Endeavors](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=10&cad=rja&uact=8&ved=2ahUKEwiA9ZqgztXmAhUDE4gKHYhrCDgQFjAJegQIBBAC&url=http%3A%2F%2Fwww.jmaxkanter.com%2Fstatic%2Fpapers%2FDSAA_DSM_2015.pdf&usg=AOvVaw1DpTqBAt1xvpH8gmQzuhBB)
 
 ### 소감
 
-최근 AutoML이 화두로 떠오르고 있지만, 초모수 최적화(Hyper-parameter Optimization)나 전이 학습(Transfer Learning), 그리고 신경망 구성 검색(Neural Architecture Search) 등의 최신 분야 중심으로 연구가 진행되고 있습니다. 2015년에 발표된 이 논문은 시간이 좀 지나긴 했지만, 전통적인 기계 학습에서 꼭 필요한 피처 엔지니어링(Feature Engineering)을 자동화할 수 있는 아이디어를 제시합니다. 또한 저자들은 이 아이디어를 [Featuretools](https://www.featuretools.com) 라는 파이썬 프레임웍으로도 제공하고 있습니다. 논문에서 제안하듯, 보조적으로만 활용하더라도 데이터 과학자의 문제풀이 시간을 꽤 단축시켜 주는 좋은 방법이 될 것으로 기대합니다.
+최근 AutoML이 화두로 떠오르고 있지만, 초모수 최적화(Hyper-parameter Optimization)나 전이 학습(Transfer Learning), 그리고 신경망 구성 검색(Neural Architecture Search) 등의 최신 분야 중심으로 연구가 진행되고 있습니다. 2015 년에 발표된 이 논문은 시간이 좀 지나긴 했지만, 전통적인 기계 학습에서 꼭 필요한 피처 엔지니어링(Feature Engineering)을 자동화할 수 있는 아이디어를 제시합니다. 또한 저자들은 이 아이디어를 [Featuretools](https://www.featuretools.com) 라는 파이썬 프레임웍으로도 제공하고 있습니다. 논문에서 제안하듯, 보조적으로만 활용하더라도 데이터 과학자의 문제풀이 시간을 꽤 단축시켜 주는 좋은 방법이 될 것으로 기대합니다.
 
 ### 주의
 
