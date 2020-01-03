@@ -26,14 +26,12 @@
 
         {% assign space = '' %}
         {% for i in (1..indentAmount) %}
-            {% assign space = space | prepend: "&nbsp;" %}
+            {% assign space = space | prepend: '    ' %}
         {% endfor %}
 
         {% capture my_toc %}{{ my_toc }}
-            <span style="white-space: pre-line">
-                <a href="#{{ html_id }}">{{ space }} {{header}}</a>
-            </span>
+            {{ space }} - [{{ header | replace: "|", "\|" }}](#{{ html_id }})
         {% endcapture %}
 
     {% endfor %}
-{% endcapture %}{% assign tocWorkspace = '' %}{{ my_toc }}
+{% endcapture %}{% assign tocWorkspace = '' %}{% markdown %}{{ my_toc }}{% endmarkdown %}
