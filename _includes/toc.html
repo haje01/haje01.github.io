@@ -1,6 +1,6 @@
 {% capture tocWorkspace %}
     {% capture my_toc %}{% endcapture %}
-    {% assign nodes = include.html %}
+    {% assign nodes = include.html | split: '<h' %}
     {% assign minHeader = 1 %}
     {% assign maxHeader = 5 %}
 
