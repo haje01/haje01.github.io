@@ -95,8 +95,15 @@ layout: post
         {% for post in site.posts %}
           <p class="view">
             <a href="{{ post.url }}">{{ post.title }}</a>
+            {% if page.title == post.title %}
+              <div style="margin-top: -10px; margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 15px; border-radius: 7px; background-color: #ffeeff;">
+                {% include toc.html html=content %}
+              </div>
+            {% endif %}
           </p>
         {% endfor %}
+
+      </header>
 
       </header>
       <section>
@@ -131,6 +138,49 @@ layout: post
   </body>
 </html>
 {% endraw %}
+```
+
+* 기본 폴더 아래 `_include` 폴더를 만들고, 아래와 같이 `toc.html` 파일을 만듦.
+
+```html
+{% capture tocWorkspace %}
+    {% capture my_toc %}{% endcapture %}
+    {% assign nodes = include.html | split: '<h' %}
+    {% assign minHeader = 1 %}
+    {% assign maxHeader = 5 %}
+
+    {% for node in nodes %}
+        {% if node == "" %}
+            {% continue %}
+        {% endif %}
+
+        {% assign headerLevel = node | replace: '"', '' | slice: 0, 1 | times: 1 %}
+
+        {% if headerLevel < minHeader or headerLevel > maxHeader %}
+            {% continue %}
+        {% endif %}
+
+        {% assign indentAmount = headerLevel %}
+        {% assign _workspace = node | split: '</h' %}
+        {% assign _idWorkspace = _workspace[0] | split: 'id="' %}
+        {% assign _idWorkspace = _idWorkspace[1] | split: '"' %}
+        {% assign html_id = _idWorkspace[0] %}
+
+        {% capture _hAttrToStrip %}{{ _workspace[0] | split: '>' | first }}>{% endcapture %}
+        {% assign header = _workspace[0] | replace: _hAttrToStrip, '' %}
+
+        {% assign space = '' %}
+
+        {% for i in (1..indentAmount) %}
+            {% assign space = space | prepend: '    ' %}
+        {% endfor %}
+
+        {% capture my_toc %}{{ my_toc }}
+        <a href="#{{ html_id }}" style="margin-left: {{indentAmount}}em;">{{ header }}</a><br/>
+        {% endcapture %}
+
+    {% endfor %}
+{% endcapture %}{% assign tocWorkspace = '' %}{{ my_toc }}
 ```
 
 ## 태그 이용하기
