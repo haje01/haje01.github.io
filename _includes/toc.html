@@ -27,7 +27,6 @@
         {% capture my_toc %}{{ my_toc }}
             {{ space }} - [{{ header | replace: "|", "\|" }}](#{{ html_id }})
         {% endcapture %}
-        {% endfor %}
 
     {% endfor %}
 {% endcapture %}{% assign tocWorkspace = ''%}{{ my_toc | markdownify | strip}}
