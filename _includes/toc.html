@@ -5,6 +5,7 @@
     {% assign maxHeader = 5 %}
 
     {% for node in nodes %}
+        {% capture my_toc %}{{ my_toc }}{{ node }}{% endcapture %}
         {% if node == "" %}
             {% continue %}
         {% endif %}
