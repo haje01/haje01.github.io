@@ -143,6 +143,7 @@ layout: post
 * 목차를 위해 기본 폴더 아래 `_include` 폴더를 만들고, 아래와 같이 `toc.html` 파일을 만듦.
 
 ```html
+{% raw %}
 {% capture tocWorkspace %}
     {% capture my_toc %}{% endcapture %}
     {% assign nodes = include.html | split: '<h' %}
@@ -181,6 +182,7 @@ layout: post
 
     {% endfor %}
 {% endcapture %}{% assign tocWorkspace = '' %}{{ my_toc }}
+{% endraw %}
 ```
 
 ## 태그 이용하기
