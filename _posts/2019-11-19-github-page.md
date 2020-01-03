@@ -105,7 +105,6 @@ layout: post
 
       </header>
 
-      </header>
       <section>
       {% if page.tags and page.title | split:' ' | first != "Tag:" %}
       <span style="margin-bottom: 20px; color: purple">[
