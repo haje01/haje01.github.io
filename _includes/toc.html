@@ -5,15 +5,6 @@
     {% assign maxHeader = 5 %}
 
     {% for node in nodes %}
-        {% if node == "" %}
-            {% continue %}
-        {% endif %}
-
-        {% assign headerLevel = node | replace: '"', '' | slice: 0, 1 | times 1 %}
-
-        {% if headerLevel < minHeader or headerLevel > maxHeader %}
-            {% continue %}
-        {% endif %}
 
     {% endfor %}
 {% endcapture %}{% assign tocWorkspace = '' %}{{ my_toc | markdownify | strip }}
