@@ -6,7 +6,8 @@ date: 2019-12-27
 tags: [paper,study,automl]
 ---
 
-원문: [Deep Feature Synthesis : Towards Automating Data Science Endeavors](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=10&cad=rja&uact=8&ved=2ahUKEwiA9ZqgztXmAhUDE4gKHYhrCDgQFjAJegQIBBAC&url=http%3A%2F%2Fwww.jmaxkanter.com%2Fstatic%2Fpapers%2FDSAA_DSM_2015.pdf&usg=AOvVaw1DpTqBAt1xvpH8gmQzuhBB)
+원문: [Deep Feature Synthesis : Towards Automating Data Science Endeavors](https://www.jmaxkanter.com/static/papers/DSAA_DSM_2015.pdf)
+
 
 ### 소감
 
@@ -19,6 +20,19 @@ tags: [paper,study,automl]
 - 번역에 누락이나 오류가 있을 수 있으니, 정확한 내용은 꼭 원문을 참고하시기 바랍니다.
 
 ---
+
+- [I. 소개](#i-%ec%86%8c%ea%b0%9c)
+- [II. 심층 피처 합성](#ii-%ec%8b%ac%ec%b8%b5-%ed%94%bc%ec%b2%98-%ed%95%a9%ec%84%b1)
+  - [A. 프로토타입 문제와 동기](#a-%ed%94%84%eb%a1%9c%ed%86%a0%ed%83%80%ec%9e%85-%eb%ac%b8%ec%a0%9c%ec%99%80-%eb%8f%99%ea%b8%b0)
+  - [B. 피처 합성 추상화](#b-%ed%94%bc%ec%b2%98-%ed%95%a9%ec%84%b1-%ec%b6%94%ec%83%81%ed%99%94)
+  - [C. 심층 피처 합성 알고리즘](#c-%ec%8b%ac%ec%b8%b5-%ed%94%bc%ec%b2%98-%ed%95%a9%ec%84%b1-%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98)
+  - [D. 피처 수의 증가](#d-%ed%94%bc%ec%b2%98-%ec%88%98%ec%9d%98-%ec%a6%9d%ea%b0%80)
+- [III. 심층 피처 합성: 구현](#iii-%ec%8b%ac%ec%b8%b5-%ed%94%bc%ec%b2%98-%ed%95%a9%ec%84%b1-%ea%b5%ac%ed%98%84)
+- [IV. 예측 기계 학습 경로](#iv-%ec%98%88%ec%b8%a1-%ea%b8%b0%ea%b3%84-%ed%95%99%ec%8a%b5-%ea%b2%bd%eb%a1%9c)
+  - [재사용 가능한 기계 학습 경로](#%ec%9e%ac%ec%82%ac%ec%9a%a9-%ea%b0%80%eb%8a%a5%ed%95%9c-%ea%b8%b0%ea%b3%84-%ed%95%99%ec%8a%b5-%ea%b2%bd%eb%a1%9c)
+- [V. 가우시안 코풀라 프로세스를 이용한 베이지안 모수 최적화](#v-%ea%b0%80%ec%9a%b0%ec%8b%9c%ec%95%88-%ec%bd%94%ed%92%80%eb%9d%bc-%ed%94%84%eb%a1%9c%ec%84%b8%ec%8a%a4%eb%a5%bc-%ec%9d%b4%ec%9a%a9%ed%95%9c-%eb%b2%a0%ec%9d%b4%ec%a7%80%ec%95%88-%eb%aa%a8%ec%88%98-%ec%b5%9c%ec%a0%81%ed%99%94)
+- [VI. 실험 결과](#vi-%ec%8b%a4%ed%97%98-%ea%b2%b0%ea%b3%bc)
+- [VII. 논의](#vii-%eb%85%bc%ec%9d%98)
 
 > 초록 - 본 논문에서는 원시 데이터에서 예측 모델을 자동으로 도출할 수 있는 데이터 과학을 개발합니다. 이 자동화를 달성하기 위해 먼저 관계형 데이터 세트의 피처를 자동으로 생성하기 위한 *심층 피처 합성(Deep Feature Synthesis)* 알고리즘을 제안하고 개발합니다. 알고리즘은 데이터의 기본 필드에 대한 관계를 따른 다음, 해당 경로를 따라 수학적 함수를 순차적으로 적용하여 최종 피처를 만듭니다. 두 번째로, 일반화 가능한 기계 학습 파이프 라인을 구현하고 새로운 가우시안 코풀라 프로세스 기반 접근 방식을 사용하여 튜닝합니다. 우리는 906 개의 다른 데이터 과학 팀이 참여한 3 개의 데이터 과학 경진 대회에 데이터 과학 머신(Data Science Machine)을 참여 시켰습니다. 우리의 접근 방식은 이 대회에서 615 개 팀을 능가했습니다. 3 번의 대회 중 2 번은 대다수의 경쟁자를 이겼으며, 3 번은 최고 경쟁자 점수의 94 %를 달성했습니다. 최선의 경우, 우리는 진행중인 대회에서 전체 팀의 85.6 %를 이기고 최고 제출 점수의 95.7 %를 달성했습니다.
 
