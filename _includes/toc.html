@@ -3,7 +3,7 @@
     {% assign nodes = include.html %}
 
     {% for node in nodes %}
-        {% if node == " %"}
+        {% if node == """ %}
             {% continue %}
         {% endif %}
 
