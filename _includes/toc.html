@@ -34,4 +34,4 @@
         {% endcapture %}
 
     {% endfor %}
-{% endcapture %}{% assign tocWorkspace = '' %}{% markdown %}{{ my_toc }}{% endmarkdown %}
+{% endcapture %}{% assign tocWorkspace = '' %}{% markdown %}{{ my_toc | markdownify | strip }}
