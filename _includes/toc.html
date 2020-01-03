@@ -11,8 +11,6 @@
 
         {% assign headerLevel = node | replace: '"', '' | slice: 0, 1 | times: 1 %}
 
-        {% capture my_toc %}{{ my_toc }}{{ node | slice: 0, 10 }}{% endcapture %}
-
         {% if headerLevel < minHeader or headerLevel > maxHeader %}
             {% continue %}
         {% endif %}
@@ -31,6 +29,9 @@
             {% assign space = space | prepend: '    ' %}
         {% endfor %}
 
+        {% capture my_toc %}{{ my_toc }}
+            {{ space }} - [{{ header | replace: "|", "\|" }}](#{{ html_id }})
+        {% endcapture %}
 
     {% endfor %}
-{% endcapture %}{% assign tocWorkspace = '' %}{{ my_toc }}
+{% endcapture %}{% assign tocWorkspace = '' %}{{ my_toc | markdownify | strip }}
