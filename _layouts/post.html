@@ -78,6 +78,8 @@
           </p>
         {% endfor %}
 
+        {% include toc.html html=content %}
+
       </header>
       <section>
       {% if page.tags and page.title | split:' ' | first != "Tag:" %}
