@@ -95,9 +95,8 @@ layout: post
         {% for post in site.posts %}
           <p class="view">
             <a href="{{ post.url }}">{{ post.title }}</a>
-            <!-- 현재 페이지의 ToC 표시 -->
             {% if page.title == post.title %}
-              <div style="margin-top: -10px; margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 15px; border-radius: 7px; background-color: #ffeeff;">
+              <div style="margin-top: -10px; margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 5px; border-radius: 7px; background-color: #ffeeff;">
                 {% include toc.html html=content %}
               </div>
             {% endif %}
