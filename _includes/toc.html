@@ -26,11 +26,11 @@
 
         {% assign space = '' %}
         {% for i in (1..indentAmount) %}
-            {% assign space = space | prepend: '    ' %}
+            {% assign space = space | prepend: "&nbsp;" %}
         {% endfor %}
 
         {% capture my_toc %}{{ my_toc }}
-            {{ space }} - [{{ header | replace: "|", "\|" }}](#{{ html_id }})
+            <a href="#{{ html_id }}">{{ space }} {{header}}</a>
         {% endcapture %}
 
     {% endfor %}
