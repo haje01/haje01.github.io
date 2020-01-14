@@ -9,7 +9,13 @@ tags: [paper,automl,study,draft]
 원문 : [Evaluation of a Tree-based Pipeline Optimization Tool for Automating Data Science](https://arxiv.org/abs/1603.06212) (2016년)
 
 ### 나의 생각
-
+* 이 논문은 파이썬 파이썬 패키지 [TPOT (Tre-based Pipeline Optimization Tool)](https://github.com/EpistasisLab/tpot) 의 기반 논문이다.
+* TPOT 와 유사한 *auto-sklearn* 이 있으나 몇 가지 차이점이 있다
+  * TPOT은 진화 알고리즘을, *auto-sklearn* 은 베이지안을 사용한다
+  * [TPOT은 회귀에, *auto-sklearn* 은 분류에 강하다](https://medium.com/georgian-impact-blog/choosing-the-best-automl-framework-4f2a90cb1826) 는 보고도 있다
+* 나는 TPOT 쪽의 손을 들어주고 싶은데, 가장 큰 이유는 [Dask](https://dask.org) 클러스터를 이용한 대용량 처리가 가능하기 때문이다.
+* 앞서 자동화된 피처 합성을 해주는 [Featuretools](https://www.featuretools.com) 의 기반 논문 [심층 피처 합성 (Deep Feature Synthesis)](https://haje01.github.io/2019/12/27/deep-feature-synthesis.html) 을 번역하여 소개하였다
+* Featuretools 로 생성된 피처를 이용해, TPOT 에서 최적의 모델을 발견하는 식으로 사용하면 좋을 듯 하다.
 
 ### 주의
 - 이 글은 논문의 핵심만 간추린 요약본이다.
