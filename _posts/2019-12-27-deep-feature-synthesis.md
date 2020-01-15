@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "심층 피처 합성: 데이터 과학 노력의 자동화를 위하여"
+title: "[논문 번역] 심층 피처 합성: 데이터 과학 노력의 자동화를 위하여"
 description:
 date: 2019-12-27
 tags: [paper,study,automl]
