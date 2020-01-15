@@ -66,7 +66,7 @@ tags: [paper,automl,study]
 
 ### 파이프라인 연산자
 
-TPOT 에 구현된 네 가지 파이프라인 *연산자 (Operator)* 를 소개. 모든 연산자는 [scikit-learn](https://scikit-learn.org/stable/) 을 사용해 구현
+TPOT 에 구현된 네 가지 *파이프라인 연산자 (Pipeline Operator)* 를 소개. 모든 연산자는 [scikit-learn](https://scikit-learn.org/stable/) 을 사용해 구현
 
 * 전처리기 (Preprocessors) : `StandardScaler`, `RobustScaler`, `PolynomialFeatures`
 
