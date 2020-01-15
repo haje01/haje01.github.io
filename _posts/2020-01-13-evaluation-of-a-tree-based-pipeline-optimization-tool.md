@@ -13,7 +13,7 @@ tags: [paper,automl,study,draft]
   * TPOT은 진화 알고리즘을, *auto-sklearn* 은 베이지안을 사용합니다.
   * [TPOT은 회귀에, *auto-sklearn* 은 분류에 강하다](https://medium.com/georgian-impact-blog/choosing-the-best-automl-framework-4f2a90cb1826) 는 보고도 있습니다.
 
-저는 개인적으로 TPOT 쪽의 손을 들어주고 싶은데, 가장 큰 이유는 [Dask](https://dask.org) 클러스터를 이용한 대량의 처리가 가능하기 때문입니다. 앞서, 자동화된 피처 합성을 해주는 [Featuretools](https://www.featuretools.com) 의 기반 논문인 [심층 피처 합성 (Deep Feature Synthesis)](https://haje01.github.io/2019/12/27/deep-feature-synthesis.html) 을 번역하여 소개하였는데요, Featuretools 로 생성된 피처를 이용해 TPOT 에서 최적의 파이프라인을 구축하는 식으로 사용하면 좋을 듯 합니다.
+저는 개인적으로 TPOT 쪽의 손을 들어주고 싶은데, 가장 큰 이유는 *[Dask](https://dask.org) 클러스터를 이용한 대량의 처리가 가능* 하기 때문입니다. 앞서, 자동화된 피처 합성을 해주는 [Featuretools](https://www.featuretools.com) 의 기반 논문인 [심층 피처 합성 (Deep Feature Synthesis)](https://haje01.github.io/2019/12/27/deep-feature-synthesis.html) 을 번역하여 소개하였는데요, Featuretools 로 생성된 피처를 이용해 TPOT 에서 최적의 파이프라인을 구축하는 식으로 사용하면 좋을 듯 합니다.
 
 ### 주의
 - 이 글은 논문의 핵심만 간추린 요약본입니다.
