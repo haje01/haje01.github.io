@@ -45,7 +45,7 @@ tags: [paper,automl,study]
 >
 > 을 수행한다. 파이프 라인에서 회색 영역이 TPOT 에 의해 자동화되는 파이프 라인의 단계를 나타낸다.
 
-진화 알고리즘 (Evolutionary Algorithms)* 은 다양한 문제 풀이에서 인간을 능가해 왔다.
+*진화 알고리즘 (Evolutionary Algorithms)* 은 다양한 문제 풀이에서 인간을 능가해 왔다.
 
 * 진화 알고리즘을 통한 머신러닝 파이프라인 설계 자동화가 가능할까?
 * 우리 연구는 진화 알고리즘에 기반한 *트리 기반 파이프라인 최적화 툴 (Tree-based Pipeline Optimization Tool, TPOT)* 에 관한 것
