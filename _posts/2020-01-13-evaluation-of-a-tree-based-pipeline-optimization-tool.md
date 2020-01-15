@@ -13,7 +13,7 @@ tags: [paper,automl,study,draft]
   * TPOT은 진화 알고리즘을, *auto-sklearn* 은 베이지안을 사용합니다.
   * [TPOT은 회귀에, *auto-sklearn* 은 분류에 강하다](https://medium.com/georgian-impact-blog/choosing-the-best-automl-framework-4f2a90cb1826) 는 보고도 있습니다.
 
-저는 개인적으로 TPOT 쪽의 손을 들어주고 싶은데, 가장 큰 이유는 *[Dask](https://dask.org) 클러스터를 이용한 대량의 처리가 가능* 하기 때문입니다. 앞서, 자동화된 피처 합성을 해주는 [Featuretools](https://www.featuretools.com) 의 기반 논문인 [심층 피처 합성 (Deep Feature Synthesis)](https://haje01.github.io/2019/12/27/deep-feature-synthesis.html) 을 번역하여 소개하였는데요, Featuretools 로 생성된 피처를 이용해 TPOT 에서 최적의 파이프라인을 구축하는 식으로 사용하면 좋을 듯 합니다.
+저는 개인적으로 TPOT 쪽의 손을 들어주고 싶은데, 가장 큰 이유는 *[Dask](https://dask.org) 클러스터를 이용한 대량의 처리가 가능* 하기 때문입니다. 앞서, 자동화된 피처 합성을 해주는 [Featuretools](https://www.featuretools.com) 의 논문인 [심층 피처 합성 (Deep Feature Synthesis)](https://haje01.github.io/2019/12/27/deep-feature-synthesis.html) 을 소개하였는데요, Featuretools 로 생성된 피처를 이용해 TPOT 에서 최적의 파이프라인을 구축하는 식으로 사용하면 좋을 듯 합니다.
 
 ### 주의
 - 이 글은 논문의 핵심만 간추린 요약본입니다.
@@ -30,19 +30,19 @@ tags: [paper,automl,study,draft]
 
 > 그림 1 : 일반적인 지도학습 머신러닝 프로세스의 묘사.
 >
-> 데이터 모델을 찾기 전 :
+> 데이터의 모델을 찾기 전 :
 > - 초기 탐색적 분석 : 누락되거나 레이블이 잘못 지정된 데이터 찾기 등을 통해 데이터를 준비
 > - 데이터 정리 (Data Cleaning) : 문제가 있는 기록을 수정하거나 제거
 > - 피처 전처리 (Feature Preprocessing) : 피처 정규화 등
 > - 피처 선택 (Feature Selectino) : 모델링에 유용하지 않은 피쳐를 제거
 > - 피처 구축 (Feature Construction) : 기존 데이터에서 새 피처를 만듦
 >
-> 등의 방법으로 모델링에보다 적합한 방식으로 데이터를 한다. 그 후,
+> 등의 방법으로 데이터를 모델링에 보다 적합한 형식으로 변형한다. 그 후:
 > - 모델 선택 (Model Selection) - 데이터에 맞는 머신러닝 모델을 선택
 > - 모수 최적화 (Parameter Optimization) : 모델이 데이터에서 가장 정확한 분류를 수행할 수 있도록 모델 모수를 선택
 > - 모델 유효성 검증 (Model Validation) : 제외된 홀드 아웃 데이터 셋에서 모델의 성능을 테스트하여, 모델 예측이 수정되지 않은 데이터 셋에 일반화되도록 검증
 >
-> 파이프 라인의 초기 단계에서 회색 영역이 TPOT 에 의해 자동화되는 파이프 라인의 단계를 나타낸다.
+> 을 수행한다. 파이프 라인의 초기 단계에서 회색 영역이 TPOT 에 의해 자동화되는 파이프 라인의 단계를 나타낸다.
 
 * *진화 알고리즘 (Evolutionary Algorithms)* 은 다양한 문제 풀이에서 인간을 능가
   * **진화 알고리즘을 통한 머신러닝 파이프라인 설계 자동화가 가능할까?**
