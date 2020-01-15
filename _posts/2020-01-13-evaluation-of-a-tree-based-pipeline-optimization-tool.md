@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[논문 요약] 자동화된 데이터 과학을 위한 트리기반 파이프라인 최적화 툴의 평가"
+title: 자동화된 데이터 과학을 위한 트리기반 파이프라인 최적화 툴의 평가
 description:
 date: 2020-01-13
 tags: [paper,automl,study]
