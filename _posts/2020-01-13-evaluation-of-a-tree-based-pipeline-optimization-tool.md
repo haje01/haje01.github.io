@@ -11,7 +11,7 @@ tags: [paper,automl,study]
 ### 나의 생각
 이 논문은 파이썬 패키지 [TPOT (Tre-based Pipeline Optimization Tool)](https://github.com/EpistasisLab/tpot) 의 기반 논문입니다. TPOT 은 자동화된 모델 선택과 모수 최적화 등을 해주는 AutoML 파이프라인 툴이라고 할 수 있습니다. 유사한 패키지로 [auto-sklearn](https://automl.github.io/auto-sklearn/master/) 이 있으나, 몇 가지 차이점이 있습니다:
   * TPOT은 진화 알고리즘을, *auto-sklearn* 은 베이지안을 사용합니다.
-  * [TPOT은 회귀에, *auto-sklearn* 은 분류에 강하다](https://medium.com/georgian-impact-blog/choosing-the-best-automl-framework-4f2a90cb1826) 는 보고도 있습니다.
+  * [TPOT은 회귀에, *auto-sklearn* 은 분류에 강하다](https://medium.com/georgian-impact-blog/choosing-the-best-automl-framework-4f2a90cb1826) 는 보고가 있습니다.
 
 저는 개인적으로 TPOT 쪽의 손을 들어주고 싶은데, 가장 큰 이유는 *[Dask](https://dask.org) 클러스터를 이용한 대량의 처리가 가능* 하기 때문입니다. 앞서, 자동화된 피처 합성을 해주는 [Featuretools](https://www.featuretools.com) 의 논문인 [심층 피처 합성 (Deep Feature Synthesis)](https://haje01.github.io/2019/12/27/deep-feature-synthesis.html) 을 소개하였는데요, Featuretools 로 생성된 피처를 이용해 TPOT 에서 최적의 파이프라인을 구축하는 식으로 사용하면 좋을 듯 합니다.
 
