@@ -103,7 +103,7 @@ TPOT 에 구현된 네 가지 *파이프라인 연산자 (Pipeline Operator)* �
 
 ![표 1](/assets/2020-01-13-17-31-14.png)
 
-* TPOT 파이프라인의 평가는 분류 정확도 (Accuracy)로
+* TPOT 파이프라인의 평가는 분류 정확도 (Accuracy) 로
 * *TPOT-Pareto* 는 [파레토 최적화](https://ko.wikipedia.org/wiki/파레토_최적)를 사용하는 변종
   * 최종 정확도와 파이프라인의 복잡도를 동시에 최적화 (예 : 연산자의 수)
 * GP 는 진화의 세대마다 파이프라인을 조금씩 수정
@@ -174,7 +174,7 @@ TPOT 의 분류 성능을 다양한 컨트롤과 비교
 
 * TPOT 은 대부분 데이터 셋에서 RF 수준의 정확도를 달성.
   * 특히 *Hill-Valley* 와 *car-evaluation* 에서 높은 정확도를 얻음.
-* *TPOT-Pareto* 는 모든 30 가지 분야에서 100 % 정확도를 달성해, TPOT 을 능가
+* *TPOT-Pareto* 는 모든 30 가지 분야에서 100% 정확도를 달성해, TPOT 을 능가
 * GAMETES 와 비슷하게 *TPOT-Random* 은 유도된 TPOT 과 비슷한 성능
 * 그러나, 임의 파이프라인 생성은 불필요하게 복잡한 파이프라인 때문에 유도된 검색보다 훨씬 느림
   * *Hill-Valley* 와 *spambase* 를 120 시간 내에 마치지 못함
