@@ -9,7 +9,7 @@ tags: [paper,automl,study]
 원문 : [Evaluation of a Tree-based Pipeline Optimization Tool for Automating Data Science](https://arxiv.org/abs/1603.06212) (2016년)
 
 ### 나의 생각
-이 논문은 파이썬 패키지 [TPOT (Tre-based Pipeline Optimization Tool)](https://github.com/EpistasisLab/tpot) 의 기반 논문입니다. TPOT 은 자동화된 모델 선택과 모수 최적화 등을 해주는 AutoML 파이프라인 툴이라고 할 수 있습니다. 유사한 패키지로 [auto-sklearn](https://automl.github.io/auto-sklearn/master/) 이 있으나, 몇 가지 차이점이 있습니다:
+이 논문은 파이썬 패키지 [TPOT (Tree-based Pipeline Optimization Tool)](https://github.com/EpistasisLab/tpot) 의 기반 논문입니다. TPOT 은 자동화된 모델 선택과 모수 최적화 등을 해주는 AutoML 파이프라인 툴이라고 할 수 있습니다. 유사한 패키지로 [auto-sklearn](https://automl.github.io/auto-sklearn/master/) 이 있으나, 몇 가지 차이점이 있습니다:
   * TPOT은 진화 알고리즘을, *auto-sklearn* 은 베이지안을 사용합니다.
   * [TPOT은 회귀에, *auto-sklearn* 은 분류에 강하다](https://medium.com/georgian-impact-blog/choosing-the-best-automl-framework-4f2a90cb1826) 는 보고가 있습니다.
 
