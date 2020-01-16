@@ -116,7 +116,7 @@ TPOT 에 구현된 네 가지 *파이프라인 연산자 (Pipeline Operator)* �
 
 ### UCI 벤치마크 데이터 셋
 
-* 잘 알려진 [UC-Irvine Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php) 의 9 가지 지도학습 데이터 셋으로 TPOT 을 평가.
+* 잘 알려진 [UC-Irvine Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php) 의 9 가지 지도학습 데이터 셋으로 TPOT 을 평가
 * 다양한 영역에서 TPOT 의 성능을 보여주기 위한 것
     * *Hill-Valley* : 지형 데이터에서 언덕과 계곡을 예측
     * *breast-cancder-wisconsin* : 유방암 여부를 예측
