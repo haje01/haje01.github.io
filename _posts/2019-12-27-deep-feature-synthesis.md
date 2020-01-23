@@ -4,6 +4,7 @@ title: "심층 피처 합성: 데이터 과학 노력의 자동화를 위하여"
 description:
 date: 2019-12-27
 tags: [paper,study,automl]
+image: 2019-12-27-19-33-32.png
 ---
 
 원문: [Deep Feature Synthesis : Towards Automating Data Science Endeavors](https://www.jmaxkanter.com/static/papers/DSAA_DSM_2015.pdf) (2015 년)
@@ -11,7 +12,9 @@ tags: [paper,study,automl]
 
 ### 나의 생각
 
-최근 AutoML이 화두로 떠오르고 있지만, 초모수 최적화 (Hyper-parameter Optimization)나 전이 학습 (Transfer Learning), 그리고 신경망 구성 검색(Neural Architecture Search) 등의 최신 분야 중심으로 연구가 진행되고 있습니다. 2015 년에 발표된 이 논문은 시간이 좀 지나긴 했지만, 전통적인 기계 학습에서 꼭 필요한 피처 엔지니어링 (Feature Engineering)을 자동화할 수 있는 아이디어를 제시합니다. 또한 저자들은 이 아이디어를 [Featuretools](https://www.featuretools.com) 라는 파이썬 프레임웍으로 구현해 제공하고 있습니다. 논문에서 제안하듯, 보조적으로만 활용하더라도 데이터 과학자의 문제풀이 시간을 단축시켜 주는 좋은 방법이 될 것으로 기대합니다. 이 연구에서 초모수 최적화에 사용된 코퓰라(Copula) 프로세스는 본문의 내용만으로는 이해하기 어려워, 따로 살펴보아야 할 것 같습니다.
+최근 AutoML이 화두로 떠오르고 있지만, 초모수 최적화 (Hyper-parameter Optimization)나 전이 학습 (Transfer Learning), 그리고 신경망 구성 검색(Neural Architecture Search) 등의 최신 분야 중심으로 연구가 진행되고 있습니다. 2015 년에 발표된 이 논문은 시간이 좀 지나긴 했지만, 전통적인 기계 학습에서 꼭 필요한 피처 엔지니어링 (Feature Engineering)을 자동화할 수 있는 아이디어를 제시합니다.
+
+또한 저자들은 이 아이디어를 [Featuretools](https://www.featuretools.com) 라는 파이썬 프레임웍으로 구현해 제공하고 있습니다. 논문에서 제안하듯, 보조적으로만 활용하더라도 데이터 과학자의 문제풀이 시간을 단축시켜 주는 좋은 방법이 될 것으로 기대합니다. 이 연구에서 초모수 최적화에 사용된 코퓰라(Copula) 프로세스는 본문의 내용만으로는 이해하기 어려워, 따로 살펴보아야 할 것 같습니다.
 
 ### 주의
 

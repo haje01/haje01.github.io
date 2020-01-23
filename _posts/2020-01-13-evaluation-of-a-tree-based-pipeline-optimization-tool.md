@@ -104,7 +104,7 @@ TPOT 에 구현된 네 가지 *파이프라인 연산자 (Pipeline Operator)* �
 ![표 1](/assets/2020-01-13-17-31-14.png)
 
 * TPOT 파이프라인의 평가는 분류 정확도 (Accuracy) 로
-* *TPOT-Pareto* 는 [파레토 최적화](https://ko.wikipedia.org/wiki/파레토_최적)를 사용하는 변종
+* *TPOT-Pareto* 는 [파레토 최적화](https://ko.wikipedia.org/wiki/파레토_최적) 를 사용하는 변종
   * 최종 정확도와 파이프라인의 복잡도를 동시에 최적화 (예 : 연산자의 수)
 * GP 는 진화의 세대마다 파이프라인을 조금씩 수정
   * 최종적으로 가장 우수한 파이프라인을 선택

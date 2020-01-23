@@ -8,11 +8,14 @@
     <!-- Begin Jekyll SEO tag v2.5.0 -->
     <title>haje01의 노트 | haje01.github.io</title>
     <meta name="generator" content="Jekyll v3.8.5" />
-    <meta property="og:title" content="haje01의 노트" />
+    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}haje01의 노트{% endif %}" />
     <meta property="og:locale" content="ko_KR" />
     <link rel="canonical" href="https://haje01.github.io/" />
     <meta property="og:url" content="https://haje01.github.io/" />
     <meta property="og:site_name" content="haje01.github.io" />
+    {% if page.image %}
+    <meta property="og:image" content="{{ site.url }}/assets/{{ page.image }}">
+    {% endif %}
     <script type="application/ld+json">
     {"@type":"WebSite","url":"https://haje01.github.io/","name":"haje01의 노트","headline":"haje01의 노트","@context":"http://schema.org"}</script>
     <!-- End Jekyll SEO tag -->
