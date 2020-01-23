@@ -18,6 +18,7 @@ Jekyll 설치 없이 내 Github 페이지에 개인용 블로그를 만든 기�
 ---
 title: 시작 페이지
 layout: post
+start: true
 ---
 ```
 * 로컬 PC에 저장소를 클론
@@ -32,17 +33,21 @@ layout: post
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>나의 노트 | GITHUB-ID.github.io</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="나의 노트" />
-<meta property="og:locale" content="en_US" />
-<link rel="canonical" href="https://GITHUB-ID.github.io/" />
-<meta property="og:url" content="https://GITHUB-ID.github.io/" />
-<meta property="og:site_name" content="GITHUB-ID.github.io" />
-<script type="application/ld+json">
-{"@type":"WebSite","url":"https://GITHUB-ID.github.io/","name":"나의 노트","headline":"나의 노트","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
+    <!-- Begin Jekyll SEO tag v2.5.0 -->
+    <title>haje01의 노트 | haje01.github.io</title>
+    <meta name="generator" content="Jekyll v3.8.5" />
+    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}haje01의 노트{% endif %}" />
+    <meta property="og:locale" content="ko_KR" />
+    <link rel="canonical" href="https://haje01.github.io/" />
+    <meta property="og:url" content="https://haje01.github.io/" />
+    <meta property="og:site_name" content="haje01.github.io" />
+    <meta property="og:description" content="{% if page.description %} {{ page.description }} {% else %} {{ site.description }} {% endif %}" />
+    {% if page.image %}
+    <meta property="og:image" content="{{ site.url }}/assets/{{ page.image }}">
+    {% endif %}
+    <script type="application/ld+json">
+    {"@type":"WebSite","url":"https://haje01.github.io/","name":"haje01의 노트","headline":"haje01의 노트","@context":"http://schema.org"}</script>
+    <!-- End Jekyll SEO tag -->
 
     <link rel="stylesheet" href="/assets/css/style.css?v=01e6290648d6409b0c7f076e8788b0cbc74c3e34">
 
@@ -61,6 +66,16 @@ layout: post
     </script>
     <script type="text/javascript" async
     src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154456831-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154456831-1');
     </script>
 
     <!-- 태그 수집 -->
@@ -83,31 +98,29 @@ layout: post
       {% endif %}
     {% endfor %}
 
-    <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <![endif]-->
   </head>
   <body>
     <div class="wrapper">
       <header>
-        <h1><a href="https://GITHUB-ID.github.io/">나의 노트</a></h1>
+        <h1><a href="https://haje01.github.io/">haje01의 노트</a></h1>
 
-        {% for post in site.posts %}
-          <p class="view">
-            <a href="{{ post.url }}">{{ post.title }}</a>
-            {% if page.title == post.title %}
-              <div style="margin-top: -10px; margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 5px; border-radius: 7px; background-color: #ffeeff;">
-                {% include toc.html html=content %}
-              </div>
-            {% endif %}
-          </p>
-        {% endfor %}
-
+        {% if page.start or page.tag %}
+          <div style="margin-top: -10px; margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 10px; border-radius: 7px; background-color: #eeffee;">
+            {% for tag in all_tags %}
+              <a href="/tag/{{ tag }}"><nobr>{{ tag }}</nobr>&nbsp;</a>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p>{{ page.title }} - 목차</p>
+          <div style="margin-top: -10px; margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 10px; border-radius: 7px; background-color: #ffeeff;">
+            {% include toc.html html=content %}
+          </div>
+        {% endif %}
       </header>
 
       <section>
       {% if page.tags and page.title | split:' ' | first != "Tag:" %}
-      <span style="margin-bottom: 20px; color: purple">[
+        <span style="margin-bottom: 20px; color: purple">[
           {% for tag in page.tags %}
             {% capture tag_name %}{{ tag }}{% endcapture %}
             <a href="/tag/{{ tag_name }}"><nobr>{{ tag_name }}</nobr>&nbsp;</a>
@@ -115,20 +128,22 @@ layout: post
         ]</span>
       {% endif %}
 
-
       {% if page.title %}
       <h1>{{ page.title }}</h1>
       {% endif %}
 
-      {{ content }}
+      {% if page.start %}
+        {% for post in site.posts %}
+        <p class="view">
+          <a href="{{ post.url }}">{{ post.title }}</a>
+        </p>
+        {% endfor %}
+      {% else %}
+        {{ content }}
+      {% endif %}
 
       </section>
       <footer>
-        <div style="margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 15px; border-radius: 7px; background-color: #ffddff;">
-          {% for tag in all_tags %}
-            <a href="/tag/{{ tag }}"><nobr>{{ tag }}</nobr>&nbsp;</a>
-          {% endfor %}
-        </div>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
