@@ -13,6 +13,7 @@
     <link rel="canonical" href="https://haje01.github.io/" />
     <meta property="og:url" content="https://haje01.github.io/" />
     <meta property="og:site_name" content="haje01.github.io" />
+    <meta property="og:description" content="{% if page.description %} {{ page.description }} {% else %} {{ site.description }} {% endif %}" />
     {% if page.image %}
     <meta property="og:image" content="{{ site.url }}/assets/{{ page.image }}">
     {% endif %}
@@ -75,7 +76,7 @@
       <header>
         <h1><a href="https://haje01.github.io/">haje01의 노트</a></h1>
 
-        {% if page.start %}
+        {% if page.start or page.tag %}
           {% for post in site.posts %}
           <p class="view">
             <a href="{{ post.url }}">{{ post.title }}</a>
