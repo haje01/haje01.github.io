@@ -75,8 +75,8 @@
       <header>
         <h1><a href="https://haje01.github.io/">haje01의 노트</a></h1>
 
-        {% if page.title %}
-          <h3>'{{ page.title }}' 의 목차</h3>
+        {% if page.title and unless start %}
+          <h3>목차 : '{{ page.title }}'</h3>
           <div style="margin-top: -10px; margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 10px; border-radius: 7px; background-color: #ffeeff;">
             {% include toc.html html=content %}
           </div>
