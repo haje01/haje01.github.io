@@ -4,6 +4,7 @@ title: 자동화된 데이터 과학을 위한 트리기반 파이프라인 최�
 description:
 date: 2020-01-13
 tags: [paper,automl,study]
+image: 2020-01-13-13-58-12.png
 ---
 
 원문 : [Evaluation of a Tree-based Pipeline Optimization Tool for Automating Data Science](https://arxiv.org/abs/1603.06212) (2016년)
