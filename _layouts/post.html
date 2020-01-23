@@ -76,12 +76,13 @@
       <header>
         <h1><a href="https://haje01.github.io/">haje01의 노트</a></h1>
 
-        {% if page.start or page.tag %}
+        {% if page.start %}
           {% for post in site.posts %}
           <p class="view">
             <a href="{{ post.url }}">{{ post.title }}</a>
           </p>
           {% endfor %}
+        {% elseif page.tag %}
         {% else %}
           <h3>{{ page.title }} - 목차</h3>
           <div style="margin-top: -10px; margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 10px; border-radius: 7px; background-color: #ffeeff;">
