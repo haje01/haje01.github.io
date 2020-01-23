@@ -82,7 +82,7 @@
           </p>
           {% endfor %}
         {% else %}
-          <h3>목차 : '{{ page.title }}'</h3>
+          <h3>{{ page.title }} - 목차</h3>
           <div style="margin-top: -10px; margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 10px; border-radius: 7px; background-color: #ffeeff;">
             {% include toc.html html=content %}
           </div>
