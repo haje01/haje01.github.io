@@ -109,7 +109,7 @@ start: true
         <h1><a href="https://haje01.github.io/">haje01의 노트</a></h1>
 
         {% if page.start or page.tag %}
-          <p>태그</p>
+          <p>태그 모음</p>
           <div style="margin-top: -10px; margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 10px; border-radius: 7px; background-color: #eeffee;">
             {% for tag in all_tags %}
               <a href="/tag/{{ tag }}"><nobr>{{ tag }}</nobr>&nbsp;</a>
