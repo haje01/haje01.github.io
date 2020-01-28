@@ -37,6 +37,8 @@ start: true
     <title>haje01의 노트 | haje01.github.io</title>
     <meta name="generator" content="Jekyll v3.8.5" />
     <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}haje01의 노트{% endif %}" />
+    <meta name="twitter:creator" content="@haje01">
+    <meta property="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}haje01의 노트{% endif %}" />
     <meta property="og:locale" content="ko_KR" />
     <link rel="canonical" href="https://haje01.github.io/" />
     <meta property="og:url" content="https://haje01.github.io/" />
@@ -44,6 +46,8 @@ start: true
     <meta property="og:description" content="{% if page.description %} {{ page.description }} {% else %} {{ site.description }} {% endif %}" />
     {% if page.image %}
     <meta property="og:image" content="{{ site.url }}/assets/{{ page.image }}">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="{{ site.url }}/assets/{{ page.image }}">
     {% endif %}
     <script type="application/ld+json">
     {"@type":"WebSite","url":"https://haje01.github.io/","name":"haje01의 노트","headline":"haje01의 노트","@context":"http://schema.org"}</script>
@@ -105,6 +109,7 @@ start: true
         <h1><a href="https://haje01.github.io/">haje01의 노트</a></h1>
 
         {% if page.start or page.tag %}
+          <p>태그</p>
           <div style="margin-top: -10px; margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 10px; border-radius: 7px; background-color: #eeffee;">
             {% for tag in all_tags %}
               <a href="/tag/{{ tag }}"><nobr>{{ tag }}</nobr>&nbsp;</a>
@@ -143,14 +148,12 @@ start: true
       {% endif %}
 
       </section>
-      <footer>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
     </div>
     <script src="/assets/js/scale.fix.js"></script>
 
   </body>
 </html>
+
 {% endraw %}
 ```
 
