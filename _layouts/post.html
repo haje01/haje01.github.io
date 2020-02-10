@@ -95,7 +95,7 @@
         {% endif %}
       </header>
 
-      <section {%if page.tags contains "draft" %} style="background-image: url('assets/draft.png'); background-repeat: repeat;"{% endif %}>
+      <section {%if page.tags contains "draft" %} style="background-image: url('/assets/draft.png'); background-repeat: repeat;"{% endif %}>
       {% if page.tags and page.title | split:' ' | first != "Tag:" %}
         <span style="margin-bottom: 20px; color: purple">[
           {% for tag in page.tags %}
