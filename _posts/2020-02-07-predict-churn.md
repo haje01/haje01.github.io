@@ -1,12 +1,10 @@
 ---
 layout: post
-title: predict-churn
+title: 이탈 예측을 어떻게 할 것인가?
 description:
 date: 2020-02-07
 tags: [idea, draft]
 ---
-
-# 이탈 예측을 어떻게 할 것인가?
 
 예전에 게임 유저 이탈 예측을 시도해 보았는데, 성과가 썩 좋지는 않았다. 이번에 아래의 사항을 고려하여 다시 시도해보려 한다.
 
