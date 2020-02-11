@@ -102,6 +102,11 @@ start: true
       {% endif %}
     {% endfor %}
 
+    <style>
+.draft {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><text x='40' y='100' font-style='bold' font-size='80px' font-family='Arial' fill='#eee' transform='rotate(-40 250 90)'>DRAFT</text></svg>") ;
+}
+    </style>
   </head>
   <body>
     <div class="wrapper">
@@ -123,7 +128,7 @@ start: true
         {% endif %}
       </header>
 
-      <section>
+      <section {%if page.tags contains "draft" %} class="draft"{% endif %}>
       {% if page.tags and page.title | split:' ' | first != "Tag:" %}
         <span style="margin-bottom: 20px; color: purple">[
           {% for tag in page.tags %}
@@ -153,7 +158,6 @@ start: true
 
   </body>
 </html>
-
 {% endraw %}
 ```
 
