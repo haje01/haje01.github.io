@@ -240,7 +240,7 @@ $$ w_s = \lceil e_d \times s \rceil ; s \in \mathbb R, 0 \lt s \leq 1 $$
   * 윈도우 스텝 w_s = 5
   * 군집 b
 
-![수집 과정](/assets/2020-03-18-17-24-11.png)
+![수집 과정](/assets/2020-03-18-17-32-40.png)
 
 ### 초모수의 선택
 
