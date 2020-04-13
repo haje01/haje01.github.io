@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 스네이크메이크 ( Snakemake ) 튜토리얼
+title: 스네이크메이크 (Snakemake) 튜토리얼
 description:
 date: 2020-04-02
 tags: [knowhow, draft]
@@ -257,7 +257,6 @@ rule all:
     input:
         "temp/wc_all.png"
 
-
 rule count:
     input:
         "data/{filename}.txt"
@@ -266,7 +265,6 @@ rule count:
     shell:
         "wc -w {input} > {output}"
 
-
 rule concat:
     input:
         expand('temp/wc_{filename}.txt', filename=FILENAMES)
@@ -274,7 +272,6 @@ rule concat:
         "temp/wc_all.csv"
     script:
         "concat.py"
-
 
 rule plot:
     input:
@@ -401,7 +398,6 @@ rule all:
     input:
         "temp/wc_all.png"
 
-
 rule count:
     input:
         "data/{filename}.txt"
@@ -410,7 +406,6 @@ rule count:
     shell:
         "wc -w {input} > {output}"
 
-
 rule concat:
     input:
         expand('temp/wc_{filename}.txt', filename=FILENAMES)
@@ -418,7 +413,6 @@ rule concat:
         "temp/wc_all.csv"
     script:
         "main.py"  # <-- 스크립트 파일명 변경
-
 
 rule plot:
     input:
@@ -517,7 +511,6 @@ rule count:
     shell:
         "wc -w {input} > {output}"
 
-
 rule concat:
     input:
         expand('temp/{{year}}{{month}}{{day}}/wc_{filename}.txt', filename=FILENAMES)
@@ -525,7 +518,6 @@ rule concat:
         "temp/{year}{month}{day}/wc_all.csv"
     script:
         "main.py"
-
 
 rule plot:
     input:
@@ -541,7 +533,6 @@ rule plot:
 ```python
 FILENAMES = ['A', 'B', 'C']
 
-
 rule count:
     input:
         "data/{year}{month}{day}/{filename}.txt"
@@ -550,7 +541,6 @@ rule count:
     shell:
         "wc -w {input} > {output}"
 
-
 rule concat:
     input:
         expand('temp/{{year}}{{month}}{{day}}/wc_{filename}.txt', filename=FILENAMES)
@@ -558,7 +548,6 @@ rule concat:
         "temp/{year,\d{4}}{month,\d{2}}{day,\d{2}}/wc_all.csv"
     script:
         "main.py"
-
 
 rule plot:
     input:
@@ -569,76 +558,24 @@ rule plot:
         "main.py"
 ```
 
+> 와일드카드의 패턴을 정규식으로 제한하는 것은 `output` 에서만 사용할 수 있다. 생각해보면 당연한 것인데, 출력 와일드카드가 정해지면 입력은 그것을 그대로 가져다 쓰면 되기 때문이다.
+
 ## TODO
-### 입출력
 
-- 입력 출력 개념
-- 와일드카드를 이용하면 다수 파일을 다룰 수 있음
-- 와일드카드에 정규식을 줄 수 있음
-- 와일드카드는 정규식은 출력에서만 유효
-- 하나 이상인 경우 끝에 ,
-
-## 처리 구현
-
-### 쉘 명령
-
-- Snakemake 인자 사용
-- {input[0]}, {output[0]}
-
-### 내부 스크립트
-
-- run 으로 선언
-- Snakemake 인자 사용
-- input, output 변수는 자동으로 만들어 짐
-- params를 이용하면 와일드카드 등을
-
-### 외부 스크립트
-
-- script 로 선언
-- Snakemake 인자 사용
-- snakemake.input[0], snakemake.output[0]
-- snakemake.wildcards
-- snakemake.rule -> 하나의 파이썬 파일에 다양한 규칙을 위한 구현을 할 수 있음
-
-## 실행
-
-- 로그
-- 메시지
-
-### 병렬 처리
-
-- --cores
-- threads
-
-### Jupyter 노트북 실행하기
-
-## 기타
-
-### DAG 그려보기
-
-```
-snakemake --cores 1 wzdat-seoul/temp/ftlake/mo2/20191120.parquet --dag | dot -Tpng -o dag.png
-```
-
-### S3에서 파일 입출력
-
-- s3에 있는 파일을 읽거나, 빌드 결과를 s3에 올릴 수 있음
-- 빌드 타겟은 `s3` 없이 로컬 파일명 형태로 지정해야 함
--
-
-### 서브 워크플로우 참조
-
-### 임시 파일 활용
-
-
-### 빌드 결과물 모두 지우기
-
-```
-$ snakemake --delete-all-output
-```
-
-### 강제로 모든 규칙을 다 실행하기
-
-### 빌드 과정 모니터링
-
-## 실습
+* 입/출력이 하나 이상인 경우 끝에 ,
+* 입/출력이 많은경우 리스트가 아닌 사전식으로
+* `params` 설명
+* 빌드 중 로그, 메시지 출력
+* 병렬처리 추가 설명 (`threads`)
+* Jupyter 노트북 실행하기
+* DAG 그려보기
+    * `snakemake --cores 1 wzdat-seoul/temp/ftlake/mo2/20191120.parquet --dag | dot -Tpng -o dag.png`
+* S3에서 파일 입출력
+  * s3에 있는 파일을 읽거나, 빌드 결과를 s3에 올릴 수 있음
+  * 빌드 타겟은 `s3` 없이 로컬 파일명 형태로 지정해야 함
+* 서브 워크플로우 참조
+* 임시 파일 활용
+* 빌드 결과물 모두 지우기
+    * `$ snakemake --delete-all-output`
+* 강제로 모든 규칙을 다 실행하기
+* 빌드 과정 모니터링
