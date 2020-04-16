@@ -133,15 +133,15 @@ rule count:
 Snakemake 의 실행은 `Snakefile` 이 있는 디렉토리에서 다음과 같이 한다.
 
 ```
-$ snakemake --cores 1 [빌드 타겟]
+$ snakemake -j [숫자] [빌드 타겟]
 ```
 
-`--cores` 는 최대 몇 개의 CPU 코어를 활용할 것인지 명시하는 것이다. 사용하는 컴퓨터에 적합한 범위에서 코어 수를 많이 주면, DAG에 따라 의존성이 없는 규칙들은 병렬 실행하여 처리속도를 빠르게 할 수 있다. 이 글에서는 호환성을 위해 1 을 기본으로 하겠다. 빌드 타겟은 Snakemake 를 실행하여 얻고자 하는 최종 타겟 파일을 지정한다.
+`-j` 옵션은 `--jobs` 또는 `--cores` 의 단축형으로 숫자 인자를 받는다. 그것은 Snakemake 빌드에서 최대 몇 개의 CPU 코어를 활용할 것인지 명시하는 것이다. 숫자를 생략하면 가용한 최대 코어를 이용한다. 많은 코어를 사용하면 DAG 에 따라 의존성이 없는 규칙들은 병렬로 처리하여 속도를 빠르게 할 수 있다. 이 글에서는 최대 값을 이용하겠다. 빌드 타겟은 Snakemake 를 실행하여 얻고자 하는 최종 타겟 파일을 지정한다.
 
 예제를 위해 다음과 같이 실행해보자:
 
 ```
-$ snakemake --cores 1 temp/wc_A.txt
+$ snakemake -j temp/wc_A.txt
 ```
 
 위 명령은 `temp/wc_A.txt` 를 타겟으로 빌드하라는 것인데, 이를 위해서는 출력이 `temp/wc_A.txt` 에 매칭되는 규칙이 필요하다. 여기서 그 규칙은 `count` 이다. 그 규칙에서 출력이 매칭되면서 와일드카드의 `{filename}` 은 `A` 로 배정되며, 이에 의해 입력은 `data/A.txt` 로 결정된다. 실행은 쉘명령어 `wc -w` 입력 파일의 단어수를 세고, 결과를 `temp/wc_A.txt` 파일로 저장한다. 잘 수행되었으면 다음과 같이 결과를 확인해보자:
@@ -220,7 +220,7 @@ Snakemake 를 통해서 실행되는 파이썬 스크립트에는 `snakemake` �
 이제 다음처럼 실행하면:
 
 ```
-$ snakemake --cores 1 temp/wc_all.csv
+$ snakemake -j temp/wc_all.csv
 ```
 
 `A.txt`, `B.txt`, `C.txt` 세 파일의 단어 수가 하나의 `.csv` 파일에 저장된다.
@@ -263,7 +263,7 @@ fig.savefig(snakemake.output[0])
 이제 다음처럼 실행하면 멋진(?) 그래프가 만들어진다.
 
 ```
-$ snakemake --cores 1 temp/wc_all.png
+$ snakemake -j temp/wc_all.png
 ```
 
 ![단어 그래프](/assets/2020-04-08-14-27-30.png)
@@ -281,7 +281,7 @@ rule all:
 이제 타겟 파일없이 실행하면 자동으로 `all` 규칙이 선택되고, 그것의 입력인 `temp/wc_all.png` 를 타겟으로 빌드하게 된다.
 
 ```
-$ snakemake --cores 1
+$ snakemake -j
 ```
 
 지금까지 작업한 전체 `Snakefile` 의 내용은 아래와 같을 것이다.
@@ -323,7 +323,7 @@ rule plot:
 아래의 명령으로 지금까지 구성한 워크플로우 파일의 DAG 를 시각화할 수 있다.
 
 ```
-$ snakemake --cores 1 temp/wc_all.png --dag | dot -Tpng -o dag.png
+$ snakemake -j temp/wc_all.png --dag | dot -Tpng -o dag.png
 ```
 
 ![DAG 시각화](/assets/2020-04-16-13-43-54.png)
@@ -348,13 +348,7 @@ $ snakemake --cores 1 temp/wc_all.png --dag | dot -Tpng -o dag.png
 
 예를 들어 앞의 `plot` 규칙에서, 좀 더 미려한 그래프를 그리기 위해서 코드를 여러번 수정해야 한다면, (Jupyter 노트북처럼 인터랙티브한 환경이 아니라면) 매번 Python 을 실행하여 결과를 확인해야 한다. 이 과정에서 앞에서 실행했던 `count` 나 `concat` 이 불필요하게 실행될 수 있다. 물론, 코드를 수정하여 각 단계에서 중간 결과를 저장하고, 중간 결과가 있는 경우 그 것을 이용하도록 할 수도 있겠으나, 아무래도 번거롭고 코드가 지저분해지게 된다. Snakemake 를 사용하면 앞 단계 규칙의 결과인 `temp/wc_all.csv`가 있으면 그래프 그리는 코드만 실행하면 되기에 효율적이다.
 
-또한, 의존 관계가 없는 규칙들의 경우 병렬로 처리될 수 있기에 수행속도가 빨라질 수 있다. 앞의 예에서 각 텍스트 파일의 단어 수를 세는 것은 서로 독립적인 작업이기에, (데이터의 크기가 크면) 다음과 같이 코어수를 늘려 동시에 실행하면 처리 속도가 빨라질 것이다.
-
-```
-snakemake --cores 3
-```
-
-### 의존성 심화
+### 두 가지 의존성
 
 지금까지 막연하게 의존성을 이야기했으나, 사실 Snakemake 에서 다루는 의존성은 크게 두 가지로 나누어 설명할 수 있다. 그것은 **데이터 의존성** 과 **워크플로우 의존성** 이다 (이 두 용어는 내가 설명의 편의를 위해 도입한 것이다) .
 
@@ -402,7 +396,7 @@ with open(snakemake.output[0], 'wt') as f:
 Snakemake 를 다시 실행해보면, 코드가 바뀌었음에도 빌드할 것이 없다고 나온다.
 
 ```
-$ snakemake --cores 1
+$ snakemake -j
 
 Building DAG of jobs...
 Nothing to be done.
@@ -424,7 +418,7 @@ temp/wc_all.csv
 워크플로우 내 코드 변화를 명시적으로 검사하고, 필요한 타겟만 빌드를 해주기 위해서는 아래와 같이 명령하면 된다.
 
 ```
-snakemake --cores 1 -R `snakemake --list-code-changes`
+snakemake -j -R `snakemake --list-code-changes`
 ```
 
 > `-R` 옵션은 `--forcerun` 의 줄인 표현으로, 해당 타겟을 강제적으로 빌드하는 옵션이다.
@@ -546,7 +540,7 @@ data/
         C.txt
 ```
 
-2020년 4월 3일의 결과물을 `snakemake --cores 1 temp/20200403.png` 명령으로 얻으려면 `Snakefile` 의 입력은 `year`, `month`, `day` 의 세 가지  와일드카드를 이용해 다음과 같이 기술될 수 있을 것이다.
+2020년 4월 3일의 결과물을 `snakemake -j temp/20200403.png` 명령으로 얻으려면 `Snakefile` 의 입력은 `year`, `month`, `day` 의 세 가지  와일드카드를 이용해 다음과 같이 기술될 수 있을 것이다.
 
 ```python
 FILENAMES = ['A', 'B', 'C']
@@ -610,7 +604,7 @@ rule plot:
 
 ### S3에서 파일 입출력
 
-클라우드 스토리지 서비스인 AWS S3 를 규칙의 입출력 대상으로 이용할 수 있다. 앞의 예제를 다음처럼 S3를 이용하도록 한다.
+클라우드 스토리지 서비스인 AWS S3 를 입출력 대상으로 이용할 수 있다. 앞의 예제를 다음처럼 S3를 이용하도록 한다.
 
 * 디렉토리에 단어수를 셀 텍스트 파일은 `s3://my-bucket/data/` 아래에 있음
 * 중간 산출물은 로컬의 `temp/` 디렉토리에 출력
@@ -673,7 +667,7 @@ S3 입출력의 경우 사용한 로컬 본은 더 이상 의존하는 규칙이
 `--forceall` 줄여서 `-F` 옵션으로 유/무효 여부에 관계없이 모든 규칙을 실행할 수 있다.
 
 ```
-$ snakemake --cores 1 -F
+$ snakemake -j -F
 ```
 
 ### 빌드 결과물 모두 지우기
@@ -681,7 +675,7 @@ $ snakemake --cores 1 -F
 예제처럼 하나의 디렉토리에 중간 결과물과 최종 타겟이 모두 저장되는 경우는 디렉토리 자체를 지우면 되나, 산출물 디렉토리를 몇 개로 구분해서 사용하는 경우에는 번거로울 수 있다. 이때는 아래 명령으로 모든 출력을 제거할 수 있다.
 
 ```
-$ snakemake --cores 1 --delete-all-output
+$ snakemake -j --delete-all-output
 ```
 
 ### 입/출력이 많은 경우
