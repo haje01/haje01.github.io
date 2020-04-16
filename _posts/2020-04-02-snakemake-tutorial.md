@@ -136,7 +136,7 @@ Snakemake 의 실행은 `Snakefile` 이 있는 디렉토리에서 다음과 같�
 $ snakemake --cores 1 [빌드 타겟]
 ```
 
-`--cores` 는 몇 개의 CPU 코어를 활용할 것인지 명시하는 것이다. 사용하는 컴퓨터에 적합한 범위에서 코어 수를 많이 주면, DAG에 따라 의존성이 없는 규칙들은 병렬 실행하여 처리속도를 빠르게 할 수 있다. 이 글에서는 호환성을 위해 1 을 기본으로 하겠다. 빌드 타겟은 Snakemake 를 실행하여 얻고자 하는 최종 타겟 파일을 지정한다.
+`--cores` 는 최대 몇 개의 CPU 코어를 활용할 것인지 명시하는 것이다. 사용하는 컴퓨터에 적합한 범위에서 코어 수를 많이 주면, DAG에 따라 의존성이 없는 규칙들은 병렬 실행하여 처리속도를 빠르게 할 수 있다. 이 글에서는 호환성을 위해 1 을 기본으로 하겠다. 빌드 타겟은 Snakemake 를 실행하여 얻고자 하는 최종 타겟 파일을 지정한다.
 
 예제를 위해 다음과 같이 실행해보자:
 
@@ -177,7 +177,7 @@ rule concat:
 "temp/wc_A.txt", "temp/wc_B.txt", "temp/wc_C.txt",
 ```
 
-> 주의할 점은 `expand` 의 인자 내 `{filename}` 은 와일드카드가 아니고, 매개변수 리스트의 각 항목이 대입되는 위치라는 점이다. `expand` 인자에서 와일드카드를 쓰려면 이중 중괄호 {%raw%}`{{ }}`{%endraw%} 를 사용해야 한다.
+> 주의할 것은 `expand` 의 인자 내 `{filename}` 은 와일드카드가 아니고, 매개변수 리스트의 각 항목이 대입되는 위치라는 점이다. `expand` 인자에서 와일드카드를 쓰려면 이중 중괄호 {%raw%}`{{ }}`{%endraw%} 를 사용해야 한다.
 
 `Snakefile` 은 기본적으로 파이썬 파일이기에, 다음과 같이 `FILENAMES` 상수를 정의해 이용할 수도 있다.
 ```python
@@ -200,7 +200,7 @@ import re
 import pandas as pd
 
 # wc -w 결과 파싱용 정규식
-PTRN = re.compile(r'\s+(\d+)\sdata/(.*)$')
+PTRN = re.compile(r'\s+(\d+)\s[^\s]+([^\s\/]+.txt)')
 
 # 출력용 csv 파일 오픈
 with open(snakemake.output[0], 'wt') as f:
@@ -288,7 +288,6 @@ $ snakemake --cores 1
 
 ```python
 FILENAMES = ['A', 'B', 'C']
-
 
 rule all:
     input:
@@ -388,10 +387,10 @@ Snakemake 를 다시 호출하면, 변경된 `data/A.txt` 에 대해서만 `coun
 import re
 import pandas as pd
 
-PTRN = re.compile(r'\s+(\d+)\sdata/(.*)$')
+PTRN = re.compile(r'\s+(\d+)\s[^\s]+([^\s\/]+.txt)')
 
 # 코드 갱신을 위한 주석
-with open('temp/wc_all.csv', 'wt') as f:
+with open(snakemake.output[0], 'wt') as f:
     f.write('fname, count\n')
     for fn in snakemake.input:
         line = open(fn, 'rt').read()
@@ -427,6 +426,8 @@ temp/wc_all.csv
 ```
 snakemake --cores 1 -R `snakemake --list-code-changes`
 ```
+
+> `-R` 옵션은 `--forcerun` 의 줄인 표현으로, 해당 타겟을 강제적으로 빌드하는 옵션이다.
 
 워크플로우 내 입력 및 매개변수 변화에 대해서도 위와 같은 방식으로 대응할 수 있다.
 
@@ -474,7 +475,7 @@ rule plot:
 import re
 import pandas as pd
 
-PTRN = re.compile(r'\s+(\d+)\sdata/(.*)$')
+PTRN = re.compile(r'\s+(\d+)\s[^\s]+([^\s\/]+.txt)')
 
 
 def concat():
@@ -500,7 +501,7 @@ if __name__ == '__main__':
 
 Snakemake 를 통해 실행되는 경우 활성화되는 `snakemake` 인스턴스의 `rule` 속성에 현재 실행되는 규칙의 이름이 온다는 것을 이용하였다.
 
-### 특정 폴더내 모든 파일을 입력으로 하기
+### 특정 디렉토리내 모든 파일을 입력으로 하기
 
 앞의 예에서는 어떤 입력파일 들이 있는지 알고 있다고 전제했다. `A`, `B`, `C` 가 그것이었다. 만약 확장자는 같지만 임의 파일명으로 여러 파일이 있다면 어떻게 해야할까? 파이썬의 `glob` 모듈 은 패턴에 매칭되는 파일들을 찾아주는데, Snakemake 가 제공하는 `glob_wildcards` 도 비슷한 역할을 한다.
 
@@ -550,7 +551,6 @@ data/
 ```python
 FILENAMES = ['A', 'B', 'C']
 
-
 rule count:
     input:
         "data/{year}{month}{day}/{filename}.txt"
@@ -576,7 +576,7 @@ rule plot:
         "main.py"
 ```
 
-그러나 Snakemake 는 `year` 가 4 자리, `month` 가 2 자리, `day` 가 2 자리인 것을 모르기 때문에, 잘못된 와일드카드 배정으로 인한 오류나 `RecursionError` 가 발생할 수도 있다. 따라서, 안전한 방법은 {% raw %}`{{와일드카드_이름, 정규식}}`{% endraw %} 형식으로 와일드카드의 패턴을 제약하는 것이다. 다음과 같이 할 수 있다.
+그러나 Snakemake 는 `year` 가 4 자리, `month` 가 2 자리, `day` 가 2 자리인 것을 모르기 때문에, 잘못된 와일드카드 배정으로 인한 오류나 `RecursionError` 가 발생할 수도 있다. 따라서, 안전한 방법은 {%raw%}`{{와일드카드_이름, 정규식}}`{%endraw%} 형식으로 와일드카드의 패턴을 제약하는 것이다. 다음과 같이 할 수 있다.
 
 ```python
 FILENAMES = ['A', 'B', 'C']
@@ -606,21 +606,106 @@ rule plot:
         "main.py"
 ```
 
-각 규칙의 출력에서 정규식으로 와일드카드의 값을 제약하고 있다. 와일드카드의 패턴을 제한하는 것은 `output` 에서만 사용할 수 있는데, 출력 와일드카드가 정해지면 입력은 그것을 그대로 가져다 쓰기 때문이다.
+각 규칙의 출력에서 정규식으로 와일드카드의 값을 제약하고 있다. 와일드카드의 패턴을 제한하는 것은 `output` 에서만 사용할 수 있는데, 출력 와일드카드가 정해지면 입력은 그것을 그대로 쓰기 때문이다.
+
+### S3에서 파일 입출력
+
+클라우드 스토리지 서비스인 AWS S3 를 규칙의 입출력 대상으로 이용할 수 있다. 앞의 예제를 다음처럼 S3를 이용하도록 한다.
+
+* 디렉토리에 단어수를 셀 텍스트 파일은 `s3://my-bucket/data/` 아래에 있음
+* 중간 산출물은 로컬의 `temp/` 디렉토리에 출력
+* 최종 타겟은 `s3://my-bucket/result/wc_all.png` 로 저장
+
+이를 위해 Snakemake 에서 제공하는 `S3RemoteProvider` 를 사용 다음과 같이 수정한다.
+
+```python
+from snakemake.remote.S3 import RemoteProvider as S3RemoteProvider
+S3 = S3RemoteProvider(keep_local=True)
+
+FILENAMES = ['A', 'B', 'C']
+
+rule all:
+    input:
+        S3.remote("my-bucket/temp/wc_all.png")
+
+rule count:
+    input:
+        S3.remote("my-bucket/data/{filename}.txt")
+    output:
+        "temp/wc_{filename}.txt"
+    shell:
+        "wc -w {input} > {output}"
+
+rule concat:
+    input:
+        expand('temp/wc_{filename}.txt', filename=FILENAMES)
+    output:
+        "temp/wc_all.csv"
+    script:
+        "concat.py"
+
+rule plot:
+    input:
+        "temp/wc_all.csv"
+    output:
+        S3.remote("my-bucket/temp/wc_all.png")
+    script:
+        "plot.py"
+```
+
+`S3RemoteProvider` 를 사용하면 다음과 같은 방식으로 S3 에 입출력을 할 수 있게 된다:
+
+* 입력 파일이 S3 에 있는 경우, 먼저 Snakemake 가 동명의 로컬 디렉토리에 내려받은 뒤 스크립트는 그 파일을 이용.
+* 출력 파일이 S3 에 있는 경우, 먼저 스크립트가 동명의 로컬 디렉토리에 출력한 뒤 Snakemake 가 그 파일을 S3 로 업로드 한다.
+
+S3 입출력의 경우 사용한 로컬 본은 더 이상 의존하는 규칙이 없으면 지우는 것이 기본이나, `S3RemoteProvier` 생성시 `keep_local=True` 으로 하면 지우지 않는다.
+
+> 위의 예는 AWS CLI 툴의 설치 및 설정이 된 것을 가정하고 있다. 만약 그렇지 않다면, `S3 = S3RemoteProvider(access_key_id="MYACCESSKEY", secret_access_key="MYSECRET")` 식으로 AWS 계정 정보를 넣어 주어야 한다.
+
+> 다음처럼 `S3RemoteProvider` 를 통해서도 `expand` 를 수행할 수 있다.
+>
+> `S3.remote(expand("my-backet/data/{filename}.txt", filename=FILENAMES))`
+
+## 기타 소소한 팁들
+
+### 강제로 모든 규칙 실행하기
+
+`--forceall` 줄여서 `-F` 옵션으로 유/무효 여부에 관계없이 모든 규칙을 실행할 수 있다.
+
+```
+$ snakemake --cores 1 -F
+```
+
+### 빌드 결과물 모두 지우기
+
+예제처럼 하나의 디렉토리에 중간 결과물과 최종 타겟이 모두 저장되는 경우는 디렉토리 자체를 지우면 되나, 산출물 디렉토리를 몇 개로 구분해서 사용하는 경우에는 번거로울 수 있다. 이때는 아래 명령으로 모든 출력을 제거할 수 있다.
+
+```
+$ snakemake --cores 1 --delete-all-output
+```
+
+### 입/출력이 많은 경우
+
+복수의 입출력 파일을 사용하는 경우 리스트 형식으로 나열하고 인덱스로 참조할 수 있으나, 좀 혼란스러울 수 있다. 이때는 `키 = 값` 형태로 입/출력을 기술하면 편하다.
+
+```
+rule RULE_NAME:
+    input:
+        foo_in="foo.txt"
+        boo_in="boo.txt"
+    output:
+        foo_out="wc_foo.txt"
+        boo_out="wc_boo.txt"
+```
+
+스크립트에서 입/출력을 참조할 때는 `snakemake.input.foo_in` 또는 `snakemake.output.foo_out` 처럼 사용한다.
 
 ## TODO
 
-* 입/출력이 많은경우 리스트가 아닌 사전식으로
 * `params` 설명
 * 빌드 중 로그, 메시지 출력
 * 병렬처리 추가 설명 (`threads`)
 * Jupyter 노트북 실행하기
-* S3에서 파일 입출력
-  * s3에 있는 파일을 읽거나, 빌드 결과를 s3에 올릴 수 있음
-  * 빌드 타겟은 `s3` 없이 로컬 파일명 형태로 지정해야 함
 * 서브 워크플로우 참조
 * 임시 파일 활용
-* 빌드 결과물 모두 지우기
-    * `$ snakemake --delete-all-output`
-* 강제로 모든 규칙을 다 실행하기
 * 빌드 과정 모니터링
