@@ -41,7 +41,7 @@ Snakemake 는 GNU Make 처럼 `Snakemake` 라는 워커플로우 파일에 데�
 
 이렇게 하면 데이터 의존 관계를 파악하기 쉽고, 코드는 재활용성이 높아지는 효과가 기대된다.
 
-[Snakemake 공식 문서](https://snakemake.readthedocs.io) 를 참고하면 Snakemake 의 강력한 기능들을 알 수 있다. 그런데 한 가지 아쉬운 점은, Snakemake의 개발자가 Bio Informatics 쪽을 전문으로 하고 있어서, 관련 예제가 바이오 쪽의 툴과 데이터를 이용하고 있다는 점이다. 아무래도 그 분야에 익숙하지 않은 사람들에게는 생소하기 때문에, 이 글에서는 가급적 일반적인 예로 설명하려 한다.
+[Snakemake 공식 문서](https://snakemake.readthedocs.io) 를 참고하면 Snakemake 의 강력한 기능들을 알 수 있다. 그런데 아쉬운 점은, Snakemake의 개발자가 Bio Informatics 쪽을 전문으로 하고 있어서, 관련 예제가 바이오 쪽의 툴과 데이터를 이용하고 있다는 점이다. 아무래도 그 분야에 익숙하지 않은 사람들에게는 생소하기 때문에, 이 글에서는 가급적 일반적인 예로 설명하려 한다.
 
 ## 빠르게 시작하기
 
@@ -327,7 +327,7 @@ rule plot:
 $ snakemake --cores 1 temp/wc_all.png --dag | dot -Tpng -o dag.png
 ```
 
-![DAG 시각화](/assets/2020-04-16-13-22-46.png)
+![DAG 시각화](/assets/2020-04-16-13-43-54.png)
 
 ## 심화
 
