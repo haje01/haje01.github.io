@@ -506,13 +506,13 @@ Snakemake 를 통해 실행되는 경우 활성화되는 `snakemake` 인스턴�
 
 아래의  코드를,
 
-```
+```python
 FILENAMES = ['A', 'B', 'C']
 ```
 
 다름처럼 수정해도 같다.
 
-```
+```python
 FILENAMES, = glob_wildcards('temp/wc_{filename}.txt')
 ```
 
@@ -576,7 +576,7 @@ rule plot:
         "main.py"
 ```
 
-그러나 Snakemake 는 `year` 가 4 자리, `month` 가 2 자리, `day` 가 2 자리인 것을 모르기 때문에, 잘못된 와일드카드 배정으로 인한 오류나, `RecursionError` 가 발생할 수도 있다. 따라서, 안전한 방법은 `{{와일드카드_이름, 정규식}}` 형식으로 와일드카드의 패턴을 제약하는 것이다. 다음과 같이 할 수 있다.
+그러나 Snakemake 는 `year` 가 4 자리, `month` 가 2 자리, `day` 가 2 자리인 것을 모르기 때문에, 잘못된 와일드카드 배정으로 인한 오류나 `RecursionError` 가 발생할 수도 있다. 따라서, 안전한 방법은 {% raw %}`{{와일드카드_이름, 정규식}}` {% endraw %} 형식으로 와일드카드의 패턴을 제약하는 것이다. 다음과 같이 할 수 있다.
 
 ```python
 FILENAMES = ['A', 'B', 'C']
