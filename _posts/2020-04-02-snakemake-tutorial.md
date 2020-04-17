@@ -6,7 +6,7 @@ date: 2020-04-02
 tags: [knowhow, draft]
 ---
 
-이 글에서는 파이썬용 워크플로우 관리 시스템인 Snakemake (스네이크메이크) 에 대해 살펴보겠다. Snakemake 버전 5.14 와 유닉스 계열 (Linux/macOS) OS 관점에서 설명하지만, 경로 구분자 등 몇몇 차이를 고려하면 윈도우에서도 적용에 무리가 없을 것이다.
+이 글에서는 파이썬용 워크플로우 관리 시스템인 Snakemake (스네이크메이크) 에 대해 실습을 통해 알아보겠다. Snakemake 버전 5.14 와 유닉스 계열 (Linux/macOS) OS 관점에서 설명하지만, 경로 구분자 등 몇몇 차이를 고려하면 윈도우에서도 적용에 무리가 없을 것이다.
 
 ## 워크플로우 관리가 필요한 이유
 
@@ -45,7 +45,15 @@ Snakemake 는 GNU Make 처럼 `Snakemake` 라는 워커플로우 파일에 데�
 
 ## 빠르게 시작하기
 
-간단한 데이터 처리 예롤 살펴보며 Snakemake의 기본 개념을 확인해 보자. 이 예제는 각 파일에 들어있는 단어의 수를 세고, 그것을 그래프로 만드는 것을 목표로 한다.
+간단한 데이터 처리 예롤 살펴보며 Snakemake의 기본 개념을 확인해 보자. 먼저 아래와 같이 Snakemake 를 설치하자.
+
+```
+$ pip install snakemake
+```
+
+> Snakemake 는 파이썬 3.5 이상 버전을 필요로 한다. Python2 와 Python3를 함께 사용 중이라면 `pip3` 로 설치해야 할 것이다.
+
+설명할 예제는 각 파일에 들어있는 단어의 수를 세고, 그것을 그래프로 만드는 것을 목표로 한다.
 
 현재 디렉토리가 다음과 같이 구성되어 있다고 하자:
 
@@ -93,11 +101,11 @@ rule RULE_NAME:
     run, script, shell 중 택일:
 ```
 
-* `rule` 다음에는 규칙의 이름이 온다.
-* `input` 다음에는 규칙의 입력이 되는 파일 이름이나 패턴, 또는 스크립트가 온다. 하나 이상인 경우 `,` 를 사용하여 구분한다.
-* `output` 다음에는 규칙의 출력이 되는 파일 이름이나 패턴, 또는 스크립트가 온다. 하나 이상인 경우 `,` 를 사용하여 구분한다.
+* `rule` 에는 규칙의 이름이 온다.
+* `input` 에는 규칙의 입력이 되는 하나 이상의 파일 경로나, 코드 또는 함수가 온다. 경로가 하나 이상인 경우 `,` 를 사용하여 구분한다.
+* `output` 에는 규칙의 출력이 되는 하나 이상의 파일 경로가 온다. 하나 이상인 경우 `,` 를 사용하여 구분한다.
 * 실행 파트에는 다음과 같은 키워드가 온다
-  * `shell` - 실행할 쉘스크립트를 기술
+  * `shell` - 실행할 쉘 명령을 기술
   * `run` - 파이썬 스크립트를 직접 기술
   * `script` - 외부 파이썬 스크립트 파일명을 지정
 
@@ -115,7 +123,7 @@ rule count:
     output:
         "temp/wc_{filename}.txt
     shell:
-        "wc -w {input}
+        "wc -w {input} > {output}
 ```
 
 > `wc -w` 는 파일에서 단어를 세는 Unix 계열 쉘 명령어다. 예를 들면 다음과 같다.
@@ -126,7 +134,7 @@ rule count:
 > ```
 > `B.txt` 에 다섯 단어가 있음을 알 수 있다.
 
-위 예는 `count` 라는 규칙을 정의한다. `data/` 디렉토리 아래의 `[파일명].txt` 에 매치되는 모든 파일을 입력으로 하여 `shell` 에 명기된 명령을 수행한 후, 그 결과를 `temp/wc_[파일명].txt` 파일로 저장한다는 뜻이다.
+위 예는 `count` 라는 규칙을 정의한다. `data/` 디렉토리 아래의 `[파일명].txt` 에 매치되는 모든 파일을 입력으로 하여 `shell` 에 명기된 명령을 수행한 후, 그 결과를 `temp/wc_[파일명].txt` 파일에 출력한다는 뜻이다.
 
 입력 및 출력에서 `{filename}` 부분은 **와일드카드** 로 불리는데, 패턴이 매칭되는 모든 파일에서 대체되는 변수이다.
 
@@ -240,6 +248,7 @@ C.txt, 2
 
 ```python
 rule plot:
+    """그래프 그리기."""
     input:
         "temp/wc_all.csv"
     output:
@@ -273,8 +282,9 @@ $ snakemake -j temp/wc_all.png
 
 Snakemake 를 호출할 때마다 매번 타겟 파일을 지정하는 것은 번거롭다. Snakemake 는 타겟 파일이 없으면 첫 번째 규칙을 실행한다. 다음과 같은 규칙을 `Snakefile` 의 첫 규칙으로 추가해 기본 규칙으로 동작하게 하자.
 
-```
+```python
 rule all:
+    """기본 규칙."""
     input: "temp/wc_all.png"
 ```
 
@@ -290,10 +300,12 @@ $ snakemake -j
 FILENAMES = ['A', 'B', 'C']
 
 rule all:
+    """기본 규칙."""
     input:
         "temp/wc_all.png"
 
 rule count:
+    """파일내 단어수 세기."""
     input:
         "data/{filename}.txt"
     output:
@@ -302,6 +314,7 @@ rule count:
         "wc -w {input} > {output}"
 
 rule concat:
+    """개별 단어수 파일을 병합."""
     input:
         expand('temp/wc_{filename}.txt', filename=FILENAMES)
     output:
@@ -310,6 +323,7 @@ rule concat:
         "concat.py"
 
 rule plot:
+    """그래프 그리기."""
     input:
         "temp/wc_all.csv"
     output:
@@ -370,7 +384,7 @@ Snakemake 를 다시 호출하면, 변경된 `data/A.txt` 에 대해서만 `coun
 
 * 규칙의 입력 변경 - `input` 의 내용이 바뀌면 무효화
   * `snakemake --list-input-changes` 로 영향 받는 출력물을 확인 가능
-* 규칙의 패러미터 변경 - `params` 의 내용이 바뀌면 무효화
+* 규칙의 패러미터 변경 - 이후 설명할 `params` 의 내용이 바뀌면 무효화
   * `snakemake --list-params-change` 로 영향 받는 출력물을 확인 가능
 * 규칙의 스크립트 변경 - `run`, `shell`, `script` 같은 시행 파트의 내용이 바뀌면 무효화
   * `snakemake --list-code-changes` 로 영향 받는 출력물을 확인 가능
@@ -421,10 +435,72 @@ temp/wc_all.csv
 snakemake -j -R `snakemake --list-code-changes`
 ```
 
-> `-R` 옵션은 `--forcerun` 의 줄인 표현으로, 해당 타겟을 강제적으로 빌드하는 옵션이다.
+> `-R` 옵션은 `--forcerun` 의 단축형으로, 해당 타겟을 강제적으로 빌드하는 옵션이다.
 
 워크플로우 내 입력 및 매개변수 변화에 대해서도 위와 같은 방식으로 대응할 수 있다.
 
+### 입출력이 많은 경우
+
+복수의 입출력 파일을 사용하는 경우 리스트 형식으로 나열하고 인덱스로 참조할 수 있으나, 좀 혼란스러울 수 있다. 이때는 `키 = 값` 형태로 입출력을 기술하면 편하다.
+
+```
+rule RULE_NAME:
+    input:
+        foo_in="foo.txt"
+        boo_in="boo.txt"
+    output:
+        foo_out="wc_foo.txt"
+        boo_out="wc_boo.txt"
+```
+
+스크립트에서 입출력을 참조할 때는 `snakemake.input.foo_in` 또는 `snakemake.output.foo_out` 처럼 사용한다.
+
+### 규칙에 매개변수 이용하기
+
+입출력 외에 규칙에서 실행 파트로 전달하고 싶은 값이 있을 때 `params` 를 이용할 수 있다. `input` 처럼 하나 이상의 값이나, 코드 또는 함수가 올 수 있다. 아래는 와일드카드를 사용하는 예로, 처리된 파일 이름을 표준 출력에 표시한다.
+
+
+```python
+rule count:
+    """파일내 단어수 세기."""
+    input:
+        S3.remote("wzdat-seoul/data/{filename}.txt")
+    params:
+        fname="{filename}"
+    output:
+        "temp/wc_{filename}.txt"
+    shell:
+        "wc -w {input} > {output} && echo 'Done {params.fname}'"
+```
+
+위의 경우 쉘 명령에서는 `params.fname`, 스크립트에서는 `snakemake.params.fname` 으로 규칙의 매개변수를 참조할 수 있다. 실행하면 단어수를 센 다음 아래처럼 출력된다.
+
+```
+Done A
+```
+
+아래는 매개변수에 람다 함수를 이용하는 경우이다.
+
+```python
+rule count:
+    """파일내 단어수 세기."""
+    input:
+        S3.remote("wzdat-seoul/data/{filename}.txt")
+    params:
+        fname=lambda wildcards, output: "{} - {}".format(wildcards, output)
+    output:
+        "temp/wc_{filename}.txt"
+    shell:
+        "wc -w {input} > {output} && echo 'Done {params.fname}'"
+```
+
+람다 함수의 인자로 와일드카드와 출력이 들어오기에, 필요한 경우 이를 이용해 매개변수를 구성할 수 있다. 이 경우 출력은 다음과 같다.
+
+```
+Done A - temp/wc_A.txt
+```
+
+람다 함수의 인자로 와일드카드와 출력이 들어오기에, 필요한 경우 이를 이용해 매개변수를 구성할 수 있다.
 
 ### 스크립트 파일 합치기
 
@@ -493,7 +569,7 @@ if __name__ == '__main__':
     globals()[snakemake.rule]()  # <-- 현재 규칙에 맞는 함수 호출
 ```
 
-Snakemake 를 통해 실행되는 경우 활성화되는 `snakemake` 인스턴스의 `rule` 속성에 현재 실행되는 규칙의 이름이 온다는 것을 이용하였다.
+파이썬 파일이 Snakemake 를 통해 호출되는 경우 `snakemake.rule` 에 현재 규칙의 이름이 온다는 것을 이용하였다.
 
 ### 특정 디렉토리내 모든 파일을 입력으로 하기
 
@@ -660,6 +736,45 @@ S3 입출력의 경우 사용한 로컬 본은 더 이상 의존하는 규칙이
 >
 > `S3.remote(expand("my-backet/data/{filename}.txt", filename=FILENAMES))`
 
+
+## Jupyter 노트북 실행하기
+
+Snakemake 는 Jupyter 노트북으로 구현된 코드를 실행 파트로 사용할 수 있다. `notebook` 키워드를 사용해 아래와 같이 기술한다.
+
+```python
+"""개별 단어수 파일을 병합."""
+rule concat:
+    input:
+        expand('temp/wc_{filename}.txt', filename=FILENAMES)
+    output:
+        "temp/wc_all.csv"
+    notebook:
+        "concat.ipynb"
+```
+
+문제점은 노트북에서 개발할 때는 `snakemake` 객체가 없다는 것이다. 개발할 때는 명시적으로 파일명을 이용하고, 빌드할 때는 `snakemake` 를 참조할 수 있겠으나, 아무래도 실수할 여지가 많다. 이에 개발시에만 동작하는 아래와 같은 막업 코드를 이용하도록 한다.
+
+```python
+# snakemake 막업 만들기
+
+class AttrDict(dict):
+    def __getattr__(self, attr):
+        return self[attr]
+    def __setattr__(self, attr, value):
+        self[attr] = value
+
+# Snakemake 로 실행하지 않을 때만 생성
+if 'snakemake' not in globals():
+    snakemake = AttrDict()
+    # 코드 동작을 확인할 수 있는 적당한 입출력
+    snakemake.input = ['temp/wc_A.txt', 'temp/wc_B.txt']
+    snakemake.output = ['temp/wc_all.csv']
+```
+
+`concat` 규칙용 Jupyter 노트북 코드는 아래와 같은 모습이 될 것이다.
+
+![Jupyter 노트북 실행하기](/assets/2020-04-17-11-59-46.png)
+
 ## 기타 소소한 팁들
 
 ### 강제로 모든 규칙 실행하기
@@ -672,34 +787,19 @@ $ snakemake -j -F
 
 ### 빌드 결과물 모두 지우기
 
-예제처럼 하나의 디렉토리에 중간 결과물과 최종 타겟이 모두 저장되는 경우는 디렉토리 자체를 지우면 되나, 산출물 디렉토리를 몇 개로 구분해서 사용하는 경우에는 번거로울 수 있다. 이때는 아래 명령으로 모든 출력을 제거할 수 있다.
+예제처럼 하나의 디렉토리에 중간 결과물과 최종 타겟이 모두 저장되는 경우는 디렉토리 자체를 지우면 되나, 산출물 디렉토리를 몇 개로 구분해서 사용하는 경우에는 번거로울 수 있다. 이때는 아래 명령으로 빌드시 생성된 모든 파일을 제거할 수 있다.
 
 ```
 $ snakemake -j --delete-all-output
 ```
 
-### 입/출력이 많은 경우
+## 마무리
 
-복수의 입출력 파일을 사용하는 경우 리스트 형식으로 나열하고 인덱스로 참조할 수 있으나, 좀 혼란스러울 수 있다. 이때는 `키 = 값` 형태로 입/출력을 기술하면 편하다.
-
-```
-rule RULE_NAME:
-    input:
-        foo_in="foo.txt"
-        boo_in="boo.txt"
-    output:
-        foo_out="wc_foo.txt"
-        boo_out="wc_boo.txt"
-```
-
-스크립트에서 입/출력을 참조할 때는 `snakemake.input.foo_in` 또는 `snakemake.output.foo_out` 처럼 사용한다.
+Snakemake 에는 아직도 설명하지 않은 많은 기능들이 있다. 공식 문서 및 검색을 통해 Snakemake 의 강력한 기능을 잘 활용하도록 하자.
 
 ## TODO
 
-* `params` 설명
-* 빌드 중 로그, 메시지 출력
-* 병렬처리 추가 설명 (`threads`)
-* Jupyter 노트북 실행하기
+* 로그 출력
 * 서브 워크플로우 참조
 * 임시 파일 활용
 * 빌드 과정 모니터링
