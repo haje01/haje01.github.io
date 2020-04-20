@@ -698,7 +698,7 @@ rule plot:
 * 중간 산출물은 로컬의 `temp/` 디렉토리에 출력
 * 최종 타겟은 `s3://my-bucket/result/wc_all.png` 로 저장
 
-이를 위해 Snakemake 에서 제공하는 `S3RemoteProvider` 를 사용하여 다음처럼 수정한다.
+이를 위해 Snakemake 에서 제공하는 `S3RemoteProvider` 를 사용한다. S3 URL 에서 `s3://` 부분을 생략하고 다음처럼 수정한다.
 
 ```python
 from snakemake.remote.S3 import RemoteProvider as S3RemoteProvider
@@ -740,7 +740,17 @@ rule plot:
 * 입력 파일이 S3 에 있는 경우, 먼저 Snakemake 가 동명의 로컬 디렉토리에 내려받은 뒤 스크립트는 그 파일을 이용.
 * 출력 파일이 S3 에 있는 경우, 먼저 스크립트가 동명의 로컬 디렉토리에 출력한 뒤 Snakemake 는 그 파일을 S3 로 업로드 한다.
 
-S3 입출력을 위해 임시로 사용한 로컬 파일은 더 이상 의존하는 규칙이 없으면 Snakemake 에 의해 지워진다. `S3RemoteProvier` 생성시 `keep_local=True` 으로 하면 지워지지 않는다.
+S3 입출력을 위해 임시로 사용한 로컬 파일은 더 이상 의존하는 규칙이 없으면 Snakemake 에 의해 지워진다. `S3RemoteProvier` 생성시 `keep_local=True` 으로 하면 지워지지 않는다. 빌드를 수행 후 현재 디렉토리 아래 `my-bucket` 디렉토리가 만들어진 것을 발견할 수 있다. 그 내용은 다음과 같다.
+
+```
+$ ls my-bucket/
+A.txt	B.txt	C.txt
+
+$ my-bucket/temp/wc_all.png
+wc_all.png
+```
+
+이렇게 로컬 디렉토리를 경유하는 방식으로 각 쉘 명령이나 스크립트가 S3 API 없이 S3 를 이용할 수 있어 편리하다. 다만 큰 용량의 파일인 경우 로컬 디스크의 용량에 주의할 필요가 있겠다.
 
 > 위의 예는 AWS CLI 툴의 설치 및 설정이 된 것을 가정하고 있다. 만약 그렇지 않다면, `S3 = S3RemoteProvider(access_key_id="MYACCESSKEY", secret_access_key="MYSECRET")` 식으로 AWS 계정 정보를 넣어 주어야 한다.
 
