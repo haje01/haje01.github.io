@@ -700,6 +700,8 @@ rule plot:
 
 이를 위해 Snakemake 에서 제공하는 `S3RemoteProvider` 를 사용한다. S3 URL 에서 `s3://` 부분을 생략하고 다음처럼 수정한다.
 
+> 예제의 `my-bucket` 은 실제 자신이 사용할 버킷 이름으로 교체해야 한다.
+
 ```python
 from snakemake.remote.S3 import RemoteProvider as S3RemoteProvider
 S3 = S3RemoteProvider(keep_local=True)
@@ -740,7 +742,7 @@ rule plot:
 * 입력 파일이 S3 에 있는 경우, 먼저 Snakemake 가 동명의 로컬 디렉토리에 내려받은 뒤 스크립트는 그 파일을 이용.
 * 출력 파일이 S3 에 있는 경우, 먼저 스크립트가 동명의 로컬 디렉토리에 출력한 뒤 Snakemake 는 그 파일을 S3 로 업로드 한다.
 
-S3 입출력을 위해 임시로 사용한 로컬 파일은 더 이상 의존하는 규칙이 없으면 Snakemake 에 의해 지워진다. `S3RemoteProvier` 생성시 `keep_local=True` 으로 하면 지워지지 않는다. 빌드를 수행 후 현재 디렉토리 아래 `my-bucket` 디렉토리가 만들어진 것을 발견할 수 있다. 그 내용은 다음과 같다.
+S3 입출력을 위해 임시로 사용한 로컬 파일은 더 이상 의존하는 규칙이 없으면 Snakemake 에 의해 지워진다. `S3RemoteProvier` 생성시 `keep_local=True` 으로 하면 지워지지 않는다. 빌드 수행 후 현재 디렉토리 아래 `my-bucket` 디렉토리가 만들어진 것을 발견할 수 있다. 그 내용은 다음과 같다.
 
 ```
 $ ls my-bucket/
