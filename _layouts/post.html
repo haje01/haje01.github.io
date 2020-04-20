@@ -9,12 +9,13 @@
     <title>haje01의 노트 | haje01.github.io</title>
     <meta name="generator" content="Jekyll v3.8.5" />
     <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}haje01의 노트{% endif %}" />
-    <meta name="twitter:creator" content="@haje01">
+    <meta name="twitter:site" content="@haje01" />
+    <meta name="twitter:creator" content="@haje01" />
     <meta property="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}haje01의 노트{% endif %}" />
     <meta property="og:locale" content="ko_KR" />
     <link rel="canonical" href="https://haje01.github.io/" />
-    <meta property="og:url" content="https://haje01.github.io/" />
-    <meta property="og:site_name" content="haje01.github.io" />
+    <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}" />
+    <meta property="og:site_name" content="{{ site.title }}" />
     <meta property="og:description" content="{% if page.description %} {{ page.description }} {% else %} {{ site.description }} {% endif %}" />
     {% if page.image %}
     <meta property="og:image" content="{{ site.url }}/assets/{{ page.image }}">
