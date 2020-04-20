@@ -745,7 +745,7 @@ S3 입출력을 위해 임시로 사용한 로컬 파일은 더 이상 의존하
 > `S3.remote(expand("my-backet/data/{filename}.txt", filename=FILENAMES))`
 
 
-## Jupyter 노트북 실행하기
+### Jupyter 노트북 실행하기
 
 Snakemake 는 Jupyter 노트북으로 구현된 코드를 실행 파트로 사용할 수 있다. 앞의 `concat` 규칙의 실행 파트를 `notebook` 키워드로 수정한다.
 
