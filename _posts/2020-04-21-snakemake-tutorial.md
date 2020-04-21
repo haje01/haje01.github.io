@@ -472,9 +472,9 @@ $ snakemake -j -R `snakemake --list-code-changes`
 
 워크플로우 내 입력 및 매개변수 변화에 대해서도 위와 같은 방식으로 대응할 수 있다.
 
-### 입출력이 많은 경우
+### 사전형으로 입출력 기술하기
 
-복수의 입출력 파일을 사용하는 경우 리스트 형식으로 나열하고 인덱스로 참조할 수 있으나, 좀 혼란스러울 수 있다. 이때는 `키 = 값` 형태로 입출력을 기술하면 편하다.
+많은 입출력 파일을 사용하는 경우 리스트 형식으로 나열하는 것은 혼란스러울 수 있다. 이때는 `키 = 값` 형태로 입출력을 명시하면 편하다.
 
 ```
 rule RULE_NAME:
@@ -486,7 +486,7 @@ rule RULE_NAME:
         boo_out="temp/wc_boo.txt"
 ```
 
-쉘 명령에서는 `input.foo_in` 또는 `output.foo_out` 처럼, 스크립트에서는 `snakemake.input.foo_in` 또는 `snakemake.output.foo_out` 처럼 입출력을 참조한다.
+쉘 명령에서는 `{input.foo_in}` 또는 `{output.foo_out}` 처럼, 스크립트에서는 `snakemake.input.foo_in` 또는 `snakemake.output.foo_out` 처럼 입출력을 참조한다.
 
 ### 규칙에 매개변수 이용하기
 
