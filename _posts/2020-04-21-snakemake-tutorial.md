@@ -527,6 +527,11 @@ rule count:
         "wc -w {input} > {output} && echo 'Done {params.pair}'"
 ```
 
+다음과 같은 메시지를 출력한다.
+
+```
+Done A - temp/wc_A.txt
+```
 
 ### 스크립트 파일 합치기
 
