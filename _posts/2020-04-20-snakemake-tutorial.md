@@ -2,7 +2,7 @@
 layout: post
 title: 스네이크메이크 (Snakemake) 튜토리얼
 description:
-date: 2020-04-20
+date: 2020-04-21
 tags: [knowhow, draft]
 image: /assets/2020-04-20-18-21-14.png
 ---
