@@ -752,7 +752,7 @@ $ my-bucket/temp/wc_all.png
 wc_all.png
 ```
 
-이렇게 로컬 디렉토리를 경유하는 방식으로 각 쉘 명령이나 스크립트가 S3 API 없이 S3 를 이용할 수 있어 편리하다. 다만 큰 용량의 파일인 경우 로컬 디스크의 용량에 주의할 필요가 있겠다.
+이렇게 로컬 디렉토리를 경유하는 방식은, 각 쉘 명령이나 스크립트가 S3 API 없이 S3 를 이용할 수 있어 편리하다. 다만 크기가 큰 파일의 경우 로컬 디스크의 용량에 주의할 필요가 있겠다.
 
 > 위의 예는 AWS CLI 툴의 설치 및 설정이 된 것을 가정하고 있다. 만약 그렇지 않다면, `S3 = S3RemoteProvider(access_key_id="MYACCESSKEY", secret_access_key="MYSECRET")` 식으로 AWS 계정 정보를 넣어 주어야 한다.
 
@@ -799,7 +799,7 @@ if 'snakemake' not in globals():
 
 ![Jupyter 노트북 실행하기](/assets/2020-04-17-11-59-46.png)
 
-노트북 개발시에는 막업을, Snakemake를 통한 실행시에는 완전한 입출력을 사용하게 된다.
+노트북 개발시에는 막업의 정보를, Snakemake를 통한 실행시에는 완전한 정보를 사용하게 된다.
 
 ## 기타 팁들
 
