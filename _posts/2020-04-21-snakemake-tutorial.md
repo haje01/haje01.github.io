@@ -641,7 +641,7 @@ rule count:
 
 rule concat:
     input:
-        expand('temp/{{year}}{{month}}{{day}}/wc_{filename}.txt', filename=FILENAMES)
+        expand('temp/{%raw%}{{year}}{{month}}{{day}}{%endraw%}/wc_{filename}.txt', filename=FILENAMES)
     output:
         "temp/{year}{month}{day}/wc_all.csv"
     script:
@@ -673,7 +673,7 @@ rule count:
 
 rule concat:
     input:
-        expand('temp/{{year}}{{month}}{{day}}/wc_{filename}.txt', filename=FILENAMES)
+        expand('temp/{%raw%}{{year}}{{month}}{{day}}{%endraw%}/wc_{filename}.txt', filename=FILENAMES)
     output:
         "temp/{year,\d{4}}{month,\d{2}}{day,\d{2}}/wc_all.csv"
     script:
