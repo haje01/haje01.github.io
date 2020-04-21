@@ -512,6 +512,22 @@ rule count:
 Done A
 ```
 
+다음처럼 `lambda` 함수를 이용할 수도 있다.
+
+```python
+rule count:
+    """파일내 단어 수 세기."""
+    input:
+        S3.remote("wzdat-seoul/data/{filename}.txt")
+    params:
+        pair=lambda wildcards, output: "{} - {}".format(wildcards, output)
+    output:
+        "temp/wc_{filename}.txt"
+    shell:
+        "wc -w {input} > {output} && echo 'Done {params.pair}'"
+```
+
+
 ### 스크립트 파일 합치기
 
 앞의 예제에서는 `concat` 과 `plot` 규칙을 위해 각각 파이썬 파일을 하나씩 만들어 주었다. 만약 파이썬 파일이 너무 많아질 것 같아 하나로 통합하고 싶다면 어떻게 할까? 먼저 `Snakefile` 을 아래처럼 수정하고:
