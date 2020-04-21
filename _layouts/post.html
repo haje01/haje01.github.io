@@ -15,7 +15,6 @@
     <meta property="og:site_name" content="{{ site.title }}"/>
     <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}haje01의 노트{% endif %}"/>
     <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}"/>
-    <meta property="og:updated_time" content="2017-12-27T14:46:52+09:00"/>
     {% if page.image %}
     <meta property="og:image" content="{{ site.url | replace:'https','http' }}{{ page.image }}"/>
     <meta property="twitter:card" content="summary_large_image" />

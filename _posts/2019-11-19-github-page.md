@@ -29,26 +29,29 @@ start: true
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <meta charset="UTF-8">`
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <!-- Begin Jekyll SEO tag v2.5.0 -->
-    <title>haje01의 노트 | haje01.github.io</title>
+    <title>{% if page.title %}{{ page.title }}{% else %}haje01의 노트{% endif %}</title>
     <meta name="generator" content="Jekyll v3.8.5" />
-    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}haje01의 노트{% endif %}" />
-    <meta name="twitter:creator" content="@haje01">
-    <meta property="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}haje01의 노트{% endif %}" />
-    <meta property="og:locale" content="ko_KR" />
-    <link rel="canonical" href="https://haje01.github.io/" />
-    <meta property="og:url" content="https://haje01.github.io/" />
-    <meta property="og:site_name" content="haje01.github.io" />
-    <meta property="og:description" content="{% if page.description %} {{ page.description }} {% else %} {{ site.description }} {% endif %}" />
+
+    <meta property="og:description" content="{% if page.description %} {{ page.description }} {% else %} {{ site.description }} {% endif %}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:locale" content="ko_KR"/>
+    <meta property="og:site_name" content="{{ site.title }}"/>
+    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}haje01의 노트{% endif %}"/>
+    <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}"/>
     {% if page.image %}
-    <meta property="og:image" content="{{ site.url }}/assets/{{ page.image }}">
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:image" content="{{ site.url }}/assets/{{ page.image }}">
+    <meta property="og:image" content="{{ site.url | replace:'https','http' }}{{ page.image }}"/>
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:image" content="{{ site.url }}{{ page.image }}" />
     {% endif %}
+    <meta name="twitter:site" content="@haje01" />
+    <meta name="twitter:creator" content="@haje01" />
+    <meta property="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}haje01의 노트{% endif %}" />
+    <link rel="canonical" href="https://haje01.github.io/" />
     <script type="application/ld+json">
     {"@type":"WebSite","url":"https://haje01.github.io/","name":"haje01의 노트","headline":"haje01의 노트","@context":"http://schema.org"}</script>
     <!-- End Jekyll SEO tag -->
