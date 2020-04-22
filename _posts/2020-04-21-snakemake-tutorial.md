@@ -922,4 +922,4 @@ $ snakemake -j --delete-all-output
 
 ## 마무리
 
-Snakemake 에는 여기에 설명하지 않은 많은 기능들이 있다. 특히 [서브 워크플로우](https://snakemake.readthedocs.io/en/stable/snakefiles/modularization.html#sub-workflows) 같은 기능을 잘 활용하면, 다른 사람이 작성한 워크플로우의 산출물을 손쉽게 이용할 수 있어 협업이 용이해진다. 공식 문서 및 검색을 통해 Snakemake 의 강력한 기능을 좀 더 알아보고 활용하도록 하자.
+Snakemake 에는 여기에 설명하지 않은 많은 기능들이 있다. 공식 문서 및 검색을 통해 Snakemake 의 강력한 기능을 좀 더 알아보고 활용하도록 하자.
