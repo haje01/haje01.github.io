@@ -368,7 +368,7 @@ $ snakemake -j --dag | dot -Tpng -o dag.png
 
 `dag.png` 를 보면 다음과 같을 것이다.
 
-![DAG 시각화](assets/2020-04-22-13-36-52.png)
+![DAG 시각화](/assets/2020-04-22-13-36-52.png)
 
 ### DAG 동작 돌아보기
 
