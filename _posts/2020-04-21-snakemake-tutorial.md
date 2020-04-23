@@ -653,7 +653,7 @@ data/
         C.txt
 ```
 
-2020년 4월 3일의 결과물을 `snakemake temp/20200403/wc_all.png -j` 명령으로 얻으려면 `Snakefile` 의 입력은 `year`, `month`, `day` 의 세 가지  와일드카드를 이용해 다음과 같이 기술될 수 있을 것이다.
+특정 날자, 예를 들어 2020년 4월 3일의 결과물을 `snakemake temp/20200403/wc_all.png -j` 형식의 명령으로 얻으려면, `Snakefile` 의 입력은 `year`, `month`, `day` 의 세 가지 와일드카드를 이용해 다음과 같이 기술될 수 있을 것이다.
 
 ```python
 FILENAMES = ['A', 'B', 'C']
