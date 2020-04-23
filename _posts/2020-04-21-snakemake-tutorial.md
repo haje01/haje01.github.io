@@ -304,6 +304,12 @@ $ snakemake temp/wc_all.png -j
 ![단어 그래프](/assets/2020-04-08-14-27-30.png)
 
 
+> 만약 그래프 생성시 `Unable to init server: Could not connect ... assertion 'GDK_IS_DISPLAY (display)' failed` 에러가 발생하면 아래 코드를 `plot.py` 상단에 추가한다.
+> ```python
+> import matplotlib
+> matplotlib.use('Agg')
+> ```
+
 ### 기본 규칙 만들기
 
 Snakemake 를 호출할 때마다 매번 타겟 파일을 지정하는 것은 번거롭다. Snakemake 는 타겟 파일이 없으면 첫 번째 규칙을 실행하는데, 다음의 규칙을 `Snakefile` 의 첫 규칙으로 추가해 기본 규칙으로 동작하게 한다.
@@ -647,7 +653,7 @@ data/
         C.txt
 ```
 
-2020년 4월 3일의 결과물을 `snakemake temp/20200403.png -j` 명령으로 얻으려면 `Snakefile` 의 입력은 `year`, `month`, `day` 의 세 가지  와일드카드를 이용해 다음과 같이 기술될 수 있을 것이다.
+2020년 4월 3일의 결과물을 `snakemake temp/20200403/wc_all.png -j` 명령으로 얻으려면 `Snakefile` 의 입력은 `year`, `month`, `day` 의 세 가지  와일드카드를 이용해 다음과 같이 기술될 수 있을 것이다.
 
 ```python
 FILENAMES = ['A', 'B', 'C']
