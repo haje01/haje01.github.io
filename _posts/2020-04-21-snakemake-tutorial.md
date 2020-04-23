@@ -930,4 +930,4 @@ $ snakemake -j --delete-all-output
 
 ## 마무리
 
-Snakemake 에는 여기에 설명하지 않은 많은 기능들이 있다. 공식 문서 및 검색을 통해 Snakemake 의 강력한 기능을 좀 더 알아보고 활용하도록 하자.
+Snakemake 에는 여기에 설명하지 않은 많은 기능들이 있다. 공식 문서 및 검색을 통해 Snakemake 의 강력한 기능을 파악하고 활용하도록 하자.
