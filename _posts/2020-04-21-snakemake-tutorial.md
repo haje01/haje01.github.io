@@ -513,7 +513,7 @@ rule RULE_NAME:
 rule count:
     """파일내 단어 수 세기."""
     input:
-        S3.remote("wzdat-seoul/data/{filename}.txt")
+        "data/{filename}.txt"
     params:
         fname="{filename}"
     output:
@@ -534,7 +534,7 @@ Done A
 rule count:
     """파일내 단어 수 세기."""
     input:
-        S3.remote("wzdat-seoul/data/{filename}.txt")
+        "data/{filename}.txt"
     params:
         pair=lambda wildcards, output: "{} - {}".format(wildcards, output)
     output:
@@ -660,7 +660,7 @@ rule plot:
 
 각 규칙의 출력에서 정규식으로 와일드카드의 값을 제약하고 있다. 와일드카드의 패턴을 제한하는 것은 출력 즉, `output` 에서만 사용할 수 있는데, 출력 와일드카드가 정해지면 입력은 그것을 그대로 쓰기 때문이다.
 
-### S3에서 파일 입출력
+### S3 에서 파일 입출력
 
 클라우드 스토리지 서비스인 AWS S3 를 입출력 대상으로 이용할 수 있다. 앞의 예제를 S3를 이용하도록 다음처럼 바꾸어 생각해보자.
 
