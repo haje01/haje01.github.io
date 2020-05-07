@@ -123,7 +123,7 @@ $$c_d^{max} = \lceil f^{max} \times r_c \rceil $$
   * 예로, 어떤 이탈자의 이탈시 접속 주기가 f = 2.33 이고 이탈 검증률이 r_t = 6 이면, 이탈 검증 일수 t_d = 14 이다
   * 이 유저의 이탈 후 14일 동안 접속이 있으면 판정 오류, 접속이 없으면 판정이 맞은 것이다.
 
-$$ t_d = \lceil f^{max} \times r_t \rceil $$
+$$ t_d = \lceil f \times r_t \rceil $$
 
 
 ## 피처
