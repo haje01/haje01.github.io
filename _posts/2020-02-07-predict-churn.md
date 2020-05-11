@@ -112,7 +112,7 @@ $$r = max \left( \frac {a} {f}, 0 \right) $$
 * *이탈 판정 일수 (churn_decide_days, c_d)* : 유저의 이탈 판정에 필요한 날자 수. 이탈 결석률 (r_c) 과 접속 주기 (f) 에서 계산
   * 예로, 접속 주기 f = 1.75 인 유저에 대해 이탈 결석률 r_c = 3 으로 하면, 이탈 판정 일수 c_d = 6 로, 마지막 접속일 후 6 일이 지나야 이탈 판정이 가능하다.
 
-$$c_d = \lceil r_c \times f \rceil $$
+$$c_d = \lceil f \times r_c \rceil $$
 
 * *최대 이탈 판정 일수 (max_churn_decide_days, c_d^max)* : 모든 이탈 판정 일수 중 가장 큰 값. 최대 접속 주기 (f^max) 와 이탈 결석률 (r_c) 로 계산
   * 예로 최대 접속 주기 f^max = 2.33 이고 이탈 결석률 r_c = 3 이면 c_d^max = 7 이다.
@@ -126,12 +126,12 @@ $$c_d^{max} = \lceil f^{max} \times r_c \rceil $$
   * 예로, 어떤 이탈자의 이탈 판정시 접속 주기가 f = 2.33 이었고, 이탈 결석률 r_c = 3, 이탈 검증률 r_t = 1 이면, 이탈 검증 일수 t_d = 7 이다
   * 즉, 이 유저의 이탈 판정에서 7일 후, 그간 접속이 있었으면 판정 오류, 접속이 없으면 판정이 맞은 것으로 처리한다.
 
-$$ t_d = \lceil f \times r_c \times r_t \rceil $$
+$$ t_d = \lceil f \times r_c \times r_t \rceil = \lceil c_d \times r_t \rceil$$
 
 * *최대 이탈 검증 일수 (max_churn_test_days, t_d^max)* : 모든 이탈자의 이탈 검증 일수 중 가장 큰 값. 최대 접속 주기 (f^max), 이탈 결석률 (r_c) 및 이탈 검증률 (r_t) 을 곱해 구한다.
   * 이탈 검증을 위해 이 일수 만큼의 데이터를 확보해야 한다.
 
-$$ t_d^{max} = \lceil f^{max} \times r_c \times r_t \rceil $$
+$$ t_d^{max} = \lceil f^{max} \times r_c \times r_t \rceil = \lceil c_d^{max} \times r_t \rceil$$
 
 ## 피처
 
