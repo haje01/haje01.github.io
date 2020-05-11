@@ -128,8 +128,8 @@ $$c_d^{max} = \lceil f^{max} \times r_c \rceil $$
 
 $$ t_d = \lceil f \times r_c \times r_t \rceil $$
 
-* *최대 이탈 검증 일수 (max_churn_test_days, t_d^max)* : 모든 이탈자의 이탈 검증 일수 중 가장 큰 값. 최대 접속 주기 (f^max) 와 이탈 검증률 (r_t) 을 곱해 구한다.
-  * 검증 대상일에서 최대 이탈 검증 일수 이전부터의 데이터에서 이탈 검증을 시작한다.
+* *최대 이탈 검증 일수 (max_churn_test_days, t_d^max)* : 모든 이탈자의 이탈 검증 일수 중 가장 큰 값. 최대 접속 주기 (f^max), 이탈 결석률 (r_c) 및 이탈 검증률 (r_t) 을 곱해 구한다.
+  * 이탈 검증을 위해 이 일수 만큼의 데이터를 확보해야 한다.
 
 $$ t_d^{max} = \lceil f^{max} \times rt \rceil $$
 
