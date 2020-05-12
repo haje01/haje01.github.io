@@ -726,6 +726,8 @@ wc_all.png
 
 이렇게 로컬 디렉토리를 경유하는 방식은, 각 쉘 명령이나 스크립트가 별도의 API 없이 S3 를 이용할 수 있게 해주기에 편리하다. 다만 크기가 큰 파일의 경우 로컬 디스크의 용량에 주의할 필요가 있겠다.
 
+로컬 파일과 마찬가지로, 참조하는 S3 의 파일이 갱신되면 빌드가 무효화 된다 (`keep_local` 여부에 무관) .
+
 > 위 예는 AWS CLI 툴의 설치 및 설정이 된 것을 가정하고 있다. 만약 그렇지 않다면, `S3 = S3RemoteProvider(access_key_id="MYACCESSKEY", secret_access_key="MYSECRET")` 식으로 AWS 계정 정보를 넣어 주어야 한다.
 
 > 다음처럼 `S3RemoteProvider` 를 통해서도 `expand` 를 수행할 수 있다.
