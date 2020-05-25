@@ -317,7 +317,7 @@ $$ w_s = \lceil e_d \times s \rceil ; s \in \mathbb R, 0 \lt s \leq 1 $$
   * 윈도우 크기 w_w = e_d + p_d = 28
   * 그룹 b
 
-![수집 과정](assets/2020-05-22-12-35-09.png)
+![수집 과정](/assets/2020-05-22-12-35-09.png)
 
 ### 초모수의 선택
 
