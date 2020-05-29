@@ -778,25 +778,26 @@ if 'snakemake' not in globals():
 
 ### 외부 워크플로우 파일 이용하기
 
-하나의 `Snakefile` 에서 외부의 `Snakefile` 을 포함 (`include`) 해서 이용하는 것이 가능하다. 이 기능은 빌드를 계층화하거나, 여러 사용자가 협업할 때 유용할 것이다.
+하나의 `Snakefile` 에서 외부의 `Snakefile` 을 서브워크플로우 (`subworkflow`) 로 이용하는 것이 가능하다. 이 기능은 빌드를 계층화하거나, 여러 사용자가 협업할 때 유용할 것이다.
 
 앞의 예를 데이터 엔지니어 (u1) 와 데이터 분석가 (u2) 가 나누어 작업하는 경우로 바꾸어 생각해보자. 엔지니어는 데이터 파일을 읽어 단어 수 파일 (`wc_all.csv`) 을 만들고, 분석가가 이를 이용해 시각화 파일 (`wc_all.png`) 을 만드는 것으로 가정한다. git 등으로 코드 관리에 용이하게 다음처럼 디렉토리를 구성한다.
 
 ```
-data/
-    A.txt
-    B.txt
-    C.txt
-temp/
 u1/
     Snakefile
     concat.py
+    data/
+        A.txt
+        B.txt
+        C.txt
+    temp/
 u2/
     Snakefile
     plot.py
+    temp/
 ```
 
-여기서 `data` 및 `temp` 디렉토리는 공유하는 것으로 한다. 먼저, 데이터 엔지니어 (u1) 의 `Snakefile` 은 다음과 같다.
+데이터 엔지니어 (u1) 의 `Snakefile` 은 다음과 같다.
 
 ```python
 FILENAMES = ['A', 'B', 'C']
@@ -804,50 +805,54 @@ FILENAMES = ['A', 'B', 'C']
 rule u1all:
     """사용자 1 의 기본 규칙."""
     input:
-        "../temp/wc_all.csv"
+        "temp/wc_all.csv"
 
 rule count:
     """파일내 수 세기."""
     input:
-        "../data/{filename}.txt"
+        "data/{filename}.txt"
     output:
-        "../temp/wc_{filename}.txt"
+        "temp/wc_{filename}.txt"
     shell:
         "wc -w {input} > {output}"
 
 rule concat:
     """개별 단어 수 파일을 병합."""
     input:
-        expand('../temp/wc_{filename}.txt', filename=FILENAMES)
+        expand('temp/wc_{filename}.txt', filename=FILENAMES)
     output:
-        "../temp/wc_all.csv"
+        "temp/wc_all.csv"
     script:
         "concat.py"
 ```
 
-앞에서 본 예와 크게 다르지 않으나, `concat` 규칙까지만 구현하고 기본 규칙의 이름을 `u1all` 로 한 것이 눈에 띄인다. 이는 다른 워크플로우 파일을 포함해 사용할 때, 같은 이름의 규칙이 있으면 충돌이 일어나기 때문이다. `data` 및 `temp` 는 상위 경로로 지정하였다.
+앞에서 본 예와 크게 다르지 않으나, `concat` 규칙까지만 구현하고 기본 규칙의 이름을 `u1all` 로 한 것이 눈에 띄인다. 이는 다른 워크플로우 파일에 포함되어 사용할 때, 같은 이름의 규칙이 있으면 충돌이 일어나기 때문이다.
 
 데이터 분석가 (u2) 의 `Snakefile` 은 아래와 같다.
 
 ```python
-include: "../u1/Snakefile"
+subworkflow data:
+    workdir:
+        "../u1"
+    snakefile:
+        "../u1/Snakefile"
 
 rule u2all:
     """사용자 2 의 기본 규칙."""
     input:
-        "../temp/wc_all.png"
+        "temp/wc_all.png"
 
 rule plot:
     """그래프 그리기."""
     input:
-        "../temp/wc_all.csv"
+        data("temp/wc_all.csv")
     output:
-        "../temp/wc_all.png"
+        "temp/wc_all.png"
     script:
         "plot.py"
 ```
 
-데이터 엔지니어 (u1) 의 워크 플로우를 `include` 하고, 그것의 최종 타겟인 `../temp/wc_all.csv` 를 입력으로 하여 `plot` 규칙을 정의하고 있다.
+데이터 엔지니어 (u1) 의 워크플로우를 `subworkflow` 를 이용해 서브워크플로우로 선언하고, 그것의 최종 타겟인 `temp/wc_all.csv` 를 입력으로 하여 `plot` 규칙을 정의하고 있다. 서브워크폴로우의 이름인 `data` 를 함수처럼 사용해 그것의 결과 파일을 불러오는 것에 주의하자.
 
 > 기본 규칙은 include 된 파일의 것은 무시하고, 현재 워크플로우의 첫 규칙인 `u2all` 이 선택된다.
 
@@ -858,7 +863,7 @@ $ cd u2/
 $ snakemake -j
 ```
 
-데이터 엔지니어의 빌드가 먼저 수행되고, 데이터 분석가의 빌드가 이어진다. 이런 식으로 중복 작업없이 다른 사용자와 효과적인 협업이 가능할 것이다.
+데이터 엔지니어의 빌드가 먼저 수행되고 작업 결과는 `u1/temp` 에 저장된다. 이어 데이터 분석가의 빌드가 수행되고 작업 결과는 `u2/temp` 에 저장된다. 이런 식으로 중복 작업없이 다른 사용자와 효과적인 협업이 가능할 것이다.
 
 ### 스크립트 파일 합치기?
 
