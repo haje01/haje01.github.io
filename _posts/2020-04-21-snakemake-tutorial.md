@@ -898,7 +898,7 @@ rule wait:
         "temp/wc_all.png"
     output:
         "temp/wait_done"
-    run:
+    shell:
         """
         sleep 4
         touch temp/wait_done
