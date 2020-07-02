@@ -865,6 +865,136 @@ $ snakemake -j
 
 데이터 엔지니어의 빌드가 먼저 수행되고 작업 결과는 `u1/temp` 에 저장된다. 이어 데이터 분석가의 빌드가 수행되고 작업 결과는 `u2/temp` 에 저장된다. 이런 식으로 중복 작업없이 다른 사용자와 효과적인 협업이 가능할 것이다.
 
+### 설정 파일 이용하기
+
+어떤 상수가 빌드시 자주 변경되거나, 하나 이상의 워크플로우 파일에서 공유될 수 있다면 설정 파일에 기술하는 것이 바람직하다. 예를 들어 두 프로젝트 A, B 의 데이터 처리
+(ETL) 를 위해 다음과 같은 디렉토리 구조로 각각의 워크플로우와 스크립트 파일을 만들어 사용하고 있다고 하자.
+
+```
+projects/
+    A/
+        Snakefile
+        etl.py
+        temp/
+    B/
+        Snakefile
+        etl.py
+        temp/
+```
+
+프로젝트 A 의 Snakefile
+
+```python
+EC2TYPE = 'm5.large'
+
+rule etl:
+    output:
+        "temp/result.csv"
+    params:
+        ec2type=EC2TYPE
+    script:
+        "etl.py"
+```
+
+프로젝트 B 의 Snakefile
+
+```python
+EC2TYPE = 'm5.large'
+
+rule etl:
+    output:
+        "temp/result.csv"
+    params:
+        ec2type=EC2TYPE
+    script:
+        "etl.py"
+```
+
+`etl.py` 에서는 매개변수로 전달된 `ec2type` 에 맞게 클라우드 인스턴스를 띄우고, 처리 작업을 진행하는 코드가 구현되어 있다고 하자.
+
+먼저 보이는 것이 `EC2TYPE` 이 중복되고 있다는 것이다. 이것을 설정 파일 (`config.yaml`) 에 기술하고, 워크플로우 파일에서 `configfile` 으로 선언하고, `config` 를 통해 참조할 수 있다.
+
+```
+projects/
+    config.yaml
+    A/
+        Snakefile
+        etl.py
+        temp/
+    B/
+        Snakefile
+        etl.py
+        temp/
+```
+
+설정 파일 `config.yaml`
+
+```yaml
+ec2type: "m5.large"
+```
+
+프로젝트 A 의 Snakefile
+
+```python
+configfile: "../config.yaml"
+
+rule etl:
+    output:
+        "temp/result.csv"
+    params:
+        ec2type=config['ec2type']
+    script:
+        "etl.py"
+```
+
+프로젝트 B 의 Snakefile
+
+```python
+configfile: "../config.yaml"
+
+rule etl:
+    output:
+        "temp/result.csv"
+    params:
+        ec2type=config['ec2type']
+    script:
+        "etl.py"
+```
+
+이제 중복된 상수를 설정 파일을 통해 공유하게 되었다. 사실 설정 파일을 사용하면 스크립트 코드에서 매개변수를 통하지 않고 `snakemake.config['ec2type']` 처럼 설정값을 바로 참조할 수 있기에 워크플로우 파일은 더 단순해진다.
+
+프로젝트 A 의 Snakefile
+
+```python
+configfile: "../config.yaml"
+
+rule etl:
+    output:
+        "temp/result.csv"
+    script:
+        "etl.py"
+```
+
+프로젝트 B 의 Snakefile
+
+```python
+configfile: "../config.yaml"
+
+rule etl:
+    output:
+        "temp/result.csv"
+    script:
+        "etl.py"
+```
+
+어느날 데이터가 늘어 빌드시 큰 인스턴스를 사용해야 한다면, 다음과 같이 빌드시 설정값을 덮어쓸 수 있다.
+
+```
+$ snakemake -R etl -j --config ec2type=m5.2xlarge
+```
+
+> Snakemake 는 설정값이 바뀌었어도 입력 파일이 바뀌지 않았으면 다시 빌드하지 않는다. 바뀐 설정값을 적용하기 위해 `-R` 을 사용하여 명시적으로 빌드를 하게 하자.
+
 ### 스크립트 파일 합치기?
 
 규칙마다 파이썬 파일을 하나씩 만들어 주는 것은 언듯 귀찮아 보인다. 매번 파일을 만드는 것도 일이지만, 작업을 위한 기본 코드 (Boilerplate) 가 많다면 더 힘들어지기 때문이다. `snakemake.rule` 속성에 현재 실행 규칙의 이름이 오는 것을 용해 여러 규칙의 코드를 하나의 파일에 합치는 것이 가능하기는 하다.
