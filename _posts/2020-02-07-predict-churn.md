@@ -225,7 +225,7 @@ $$ w_s = \lceil e_d \times s \rceil ; s \in \mathbb R, 0 \lt s \leq 1 $$
   * 윈도우 크기 w_w = e_d + c_d = 20
   * 이탈 판정
 
-![수집 과정](assets/churn2.png)
+![수집 과정](/assets/churn2.png)
 
 ### 초모수의 선택
 
