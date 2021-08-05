@@ -1076,6 +1076,51 @@ $ snakemake -R `snakemake --list-input-change` -j
 $ snakemake -j --delete-all-output
 ```
 
+### 메모리 문제 대응
+
+메모리를 많이 사용하는 규칙을 병렬로 실행하면, 시스템 메모리를 금방 소진해 프로세스가 kill 되기 쉽다. 이런 때는 규칙의 `resources` 파트에 규칙이 사용하는 대강의 메모리 정보를 기술하는 것이 도움이 된다. 먼저 메모리를 많이 사용하는 규칙에 대해, 다음처럼 하나의 타겟을 빌드하면서 필요 메모리를 확인한다:
+
+```
+$ /usr/bin/time -v snakemake -f temp/20210307/big_data.parquet -j
+```
+
+위 예는 하루치 `big_data.parquet` 파일을 빌드하는 것인데, 전체 날자를 빌드하기 위한 더미 파일은 `all_big_data` 라고 하겠다. 출력에서 `Maximum resident set size (kbytes)` 을 찾는다. 위 명령에서는 아래와 같았다:
+
+```
+Maximum resident set size (kbytes): 11768224
+```
+
+위의 경우 하루치 데이터에 대해 최대 11.5 GB 정도의 메모리를 사용하고 있다. `Snakefile` 의 규칙에서 다음과 같이 MB 단위로 메모리 사용량을 지정한다.
+
+```
+rule big_data:
+
+..
+
+    resources:
+        mem_mb=11492 # MB 단위
+```
+
+이런 식으로 메모리를 많이 사용하는 규칙에 대해 메모리 사용량을 기입한다. 다음은 시스템의 가용 (free) 메모리를 확인한다:
+
+```
+$ free
+              total        used        free      shared  buff/cache   available
+Mem:       32472084      320252    27017500        9348     5134332    31721596
+Swap:             0           0           0
+```
+
+여기서는 free 메모리가 가 27,017,500 (KB) 이다. 이것을 인자로 하여 Snakemake 를 실행한다. 메모리 사용량이 지정되지 않은 다른 규칙도 있다면, 실제 가용 메모리 보다는 좀 줄여서 MB 단위로 기입한다.
+
+```
+$ snakemake -f temp/all_big_data -j --resources mem_mb=24000
+```
+
+이렇게 하면 Snakemake 가 최대 가용 메모리가 넘지 않도록 작업을 실행하기에, 메모리 에러가 발생하지 않을 것이다 (이 예에서는 아마도 규칙 두 개가 정도가 동시에 실행될 것이다).
+
+> 만약 작업 중 메모리 에러나 프로세스 kill 이 발생하면, -–resources mem_mb 인자의 값을 더 줄여서 다시 시도해보자.
+
+
 ## 마무리
 
 Snakemake 에는 여기에 설명하지 않은 많은 기능이 있다. 공식 문서 및 검색을 통해 Snakemake 의 강력한 기능을 파악하고 활용하도록 하자.
