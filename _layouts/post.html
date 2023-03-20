@@ -97,14 +97,14 @@
           </div>
         {% else %}
           <p>{{ page.title }}</p>
+        {% endif %}
+      </header>
+
 		  <!-- <div style="margin-top: -10px; margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 10px; border-radius: 7px; background-color: #604000;"> -->
 		  <div style="width: 350px; margin: 0 auto; border-radius: 7px; background-color: #e0e0e0;">
             <h2>목차</h2>
             {% include toc.html html=content %}
 		  </div>
-        {% endif %}
-      </header>
-
 
       <section {%if page.tags contains "draft" %} class="draft"{% endif %}>
       {% if page.tags and page.title | split:' ' | first != "Tag:" %}
