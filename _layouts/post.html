@@ -85,8 +85,7 @@
   </head>
   <body>
     <div class="wrapper">
-      <header>
-		<div style="overflow: auto;">
+      <header style="overflow: auto;">
         <h1><a href="https://haje01.github.io/">haje01의 노트</a></h1>
 
         {% if page.start or page.tag %}
@@ -102,7 +101,6 @@
             {% include toc.html html=content %}
           </div>
         {% endif %}
-		</div>
       </header>
 
       <section {%if page.tags contains "draft" %} class="draft"{% endif %}>
