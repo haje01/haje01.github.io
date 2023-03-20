@@ -111,7 +111,7 @@
 
       <section {%if page.tags contains "draft" %} class="draft"{% endif %}>
       {% if page.tags and page.title | split:' ' | first != "Tag:" %}
-        <span style="margin-top: 30px; margin-bottom: 20px; color: purple">[
+        <span style="margin-top: 50px; margin-bottom: 20px; color: purple">[
           {% for tag in page.tags %}
             {% capture tag_name %}{{ tag }}{% endcapture %}
             <a href="/tag/{{ tag_name }}"><nobr>{{ tag_name }}</nobr>&nbsp;</a>
