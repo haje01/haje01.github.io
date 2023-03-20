@@ -86,7 +86,7 @@
   <body>
     <div class="wrapper">
       <header>
-		<div style="width=200">
+		<div style="overflow: auto;">
         <h1><a href="https://haje01.github.io/">haje01의 노트</a></h1>
 
         {% if page.start or page.tag %}
@@ -98,7 +98,7 @@
           </div>
         {% else %}
           <p>{{ page.title }} - 목차</p>
-          <div style="margin-top: -10px; margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 10px; border-radius: 7px; background-color: #604000; overflow: auto;">
+          <div style="margin-top: -10px; margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 10px; border-radius: 7px; background-color: #604000;">
             {% include toc.html html=content %}
           </div>
         {% endif %}
