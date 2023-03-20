@@ -96,13 +96,15 @@
             {% endfor %}
           </div>
         {% else %}
+          <p>{{ page.title }} - 목차</p>
         {% endif %}
       </header>
 
-          <p>{{ page.title }} - 목차</p>
 		  <!-- <div style="margin-top: -10px; margin-bottom: 20px; margin-right-30px; padding: 10px; padding-left: 10px; border-radius: 7px; background-color: #604000;"> -->
+		  <div style="padding: 50px; border-radius: 7px; background-color: #604000;">
+            <h3>목차</h3>
             {% include toc.html html=content %}
-	<!-- </div> -->
+		  </div>
 
       <section {%if page.tags contains "draft" %} class="draft"{% endif %}>
       {% if page.tags and page.title | split:' ' | first != "Tag:" %}
