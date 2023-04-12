@@ -499,6 +499,8 @@ put test.csv
 
 문제없이 진행되면 예제의 경우 S3 `my-bucket` 아래에서- `output/test.parquet` 파일을 확인할 수 있을 것이다. 
 
+![FTP Result](/assets/2023-04-12-19-26-51.png)
+
 ## 기타
 
 ### Skaffold 를 라이브 Setup 에 이용하기
