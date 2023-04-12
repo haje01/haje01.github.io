@@ -3,14 +3,14 @@ layout: post
 title: "Argo 기반 ETL 코드에 Skaffold 적용하기"
 description: 
 date: 2023-03-27
-tags: [draft]
+tags: [k8s,draft]
 ---
 {% raw %}
-이 글은 앞서 소개한 [Argo Events 와 Workflows 를 이용한 ETL]() 의 예제에 Skaffold를 적용한 것에 대해 설명한다. 따라서 그 문서를 꼭 먼저 읽고 이 길을 읽기 바란다.
+이 글은 앞서 소개한 [Argo Events 와 Workflows 를 이용한 ETL](https://haje01.github.io/2023/03/03/argo-etl.html) 의 예제에 Skaffold를 적용한 것에 대해 설명한다. 따라서 그 문서를 꼭 먼저 읽고 이 글을 읽기 바란다.
 
 ## 준비 
 
-이 글은 Linux 환경을 전제로 설명한다.
+이 글은 Linux 환경을 전제로 설명하며, 독자가 쿠버네티스에 대한 기본적인 지식이 있다고 가정한다.
 
 ## Skaffold 설치 
 
