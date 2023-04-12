@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Skaffold 로 쿠버네티스 ETL 프로세스 강화하기
+title: "Argo 기반 ETL 코드에 Skaffold 적용하기"
 description: 
 date: 2023-03-27
 tags: [draft]
