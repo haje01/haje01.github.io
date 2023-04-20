@@ -210,6 +210,7 @@ Skaffold `dev` 명령에서는 **Control + C 키로 명령을 종료하면 설�
 > skaffold delete -p local
 > ```
 
+> Skaffold 는 커스텀 리소스의 삭제에 실패하는 경우가 이따금씩 있다. 이런 경우 직접 kubectl 등을 이용해 지워주어야 한다.
 
 ### MinIO 예제 
 
