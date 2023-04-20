@@ -8,7 +8,7 @@ tags: [k8s,draft]
 {% raw %}
 이 글은 앞서 소개한 [Argo Events 와 Workflows 를 이용한 ETL](https://haje01.github.io/2023/03/03/argo-etl.html) 의 예제에 Skaffold를 적용한 것에 대해 설명한다. 따라서 그 문서를 꼭 먼저 읽고 이 글을 보기 바란다.
 
-이 글의 목표는 Skaffold 를 통해 사용하기 편리한 쿠버네티스 개발 환경을 구축하는 예시를 보여주고자 함이다. 
+이 글은 Skaffold 를 통해 편리한 쿠버네티스 개발 환경을 구축하는 예를 보여주고자 한다.
 
 ## 준비 
 
