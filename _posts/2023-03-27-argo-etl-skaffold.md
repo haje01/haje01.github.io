@@ -201,11 +201,11 @@ skaffold dev -p local --port-forward
 
 Skaffold `dev` 명령에서는 **Control + C 키로 명령을 종료하면 설치된 모든 내용도 함께 삭제** 가 되는 점에 주의하자.
 
-> 만약 배포가 유지되기를 원한다면, 다음처럼 `deploy` 를 이용하자.
+> 만약 배포가 유지되기를 원한다면, 다음처럼 `run` 를 이용하자.
 > ```
-> skaffold deploy -p local
+> skaffold run -p local
 > ```
-> `deploy` 로 생성된 리소스는 `delete` 로 삭제할 수 있다. 이때도 프로파일을 명시해 주어야 한다.
+> `run` 로 생성된 리소스는 `delete` 로 삭제할 수 있다. 이때도 프로파일을 명시해 주어야 한다.
 > ```
 > skaffold delete -p local
 > ```
