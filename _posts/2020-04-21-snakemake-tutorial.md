@@ -55,13 +55,28 @@ Snakemake 는 이름이 `Snakefile` 인 **워크플로우 파일** 에 데이터
 
 ## 빠르게 시작하기
 
-먼저 아래와 같이 Snakemake 를 설치한다.
+먼저 Snakemake 의 설치가 필요한데, 일반적으로 다음처럼 `pip` 를 이용하여 간단히 설치 가능하다.
 
 ```
 $ pip install snakemake
 ```
 
-> Snakemake 는 파이썬 3.5 이상 버전을 필요로 한다. Python2 와 Python3를 함께 사용 중이라면 `pip3` 로 설치해야 할 것이다.
+그렇지만 현재 (2024-02-16 기준) 최신 Snakemake 인 버전 8.x 는 상당히 많은 부분이 바뀌고 아직 성숙되지 않은 듯 하여, 이 글에서는 다음과 같이 설치된 Snakemake 를 기준으로 하여 설명하겠다.
+
+
+```
+pip install PuLP==2.3.0
+pip install snakemake==7.15.2
+```
+
+> `PuLP` 는 Snakemake 에서 사용하는 외부 패키지인데 최신 버전에 버그가 있어, 버그가 없는 버전으로 먼저 설치한 후 Snakemake 를 설치하는 과정이다.
+
+예제를 위해 아래의 패키지도 설치하자.
+
+```
+pip install pandas==1.5.3
+pip install matplotlib==3.7.4
+```
 
 앞으로 설명할 예제는 각 파일에 들어있는 단어의 수를 세고, 최종적으로 파일별 단어 수 그래프를 만드는 것을 목표로 한다.
 
@@ -237,7 +252,6 @@ rule concat:
 
 ```python
 import re
-import pandas as pd
 
 # wc -w 결과 파싱용 정규식
 PTRN = re.compile(r'\s*(\d+)\s[^\s]+([^\s\/]+.txt)')
@@ -382,6 +396,12 @@ rule plot:
 $ snakemake -j --dag | dot -Tpng -o dag.png
 ```
 
+> 위에서 `dot` 명령이 필요한데, 이것은 다음과 같이 설치 가능하다.
+> ```
+> sudo apt-get update
+> sudo apt-get install graphviz
+> ```
+
 `dag.png` 를 열어보면 다음과 같다.
 
 ![DAG 시각화](/assets/2020-04-22-13-36-52.png)
@@ -428,65 +448,48 @@ $ snakemake -j
 
 ![단어 수 그래프 2](/assets/2020-04-09-12-57-20.png)
 
+이렇게 의존성 체크를 통해 재작업이 필요한 부분만 다시 수행할 수 있는 것이 Snakemake 가 유용한 이유중 하나이다.
+
 #### 워크플로우 의존성
 
-워크플로우 의존성은 `Snakefile` 에 기술된 규칙이나, 그것을 처리하는 코드에 변경이 있어 빌드가 무효화되는 것을 말한다. 그런데 Snakemake 는 이런 변화를 자동으로 체크하지 못하기에, 유저가 직접 검사하여 빌드해 주어야 한다. 검사에는 다음과 같은 것들이 있다.
-
-* 규칙의 입력 파트 변경 - `input` 의 내용이 바뀌면 무효화
-  * `snakemake --list-input-changes` 로 영향 받는 출력물을 확인 가능
-* 규칙의 패러미터 파트 변경 - 이후 설명할 `params` 의 내용이 바뀌면 무효화
-  * `snakemake --list-params-change` 로 영향 받는 출력물을 확인 가능
-* 규칙의 실행 파트 변경 - `run`, `shell`, `script` 등의 내용이 바뀌면 무효화
-  * `snakemake --list-code-changes` 로 영향 받는 출력물을 확인 가능
-
-예를 들어 다음처럼 `concat.py` 파일에 주석을 추가하고,
+워크플로우 의존성은 `Snakefile` 에 기술된 규칙이나, 그것을 처리하는 코드에 변경이 있어 빌드가 무효화되는 것을 말한다. 예를 들어 다음처럼 `concat.py` 파일에 주석 `DELETEME!` 을 추가하고,
 
 ```python
 import re
-import pandas as pd
 
+# wc -w 결과 파싱용 정규식
 PTRN = re.compile(r'\s*(\d+)\s[^\s]+([^\s\/]+.txt)')
 
-# 코드 갱신을 위한 주석 추가 <--
+# DELETEME! 
+# 출력용 csv 파일 오픈
 with open(snakemake.output[0], 'wt') as f:
     f.write('fname, count\n')
+    # snakefile에 명시된 모든 입력 파일에 대해서
     for fn in snakemake.input:
+        # 파싱하고 출력
         line = open(fn, 'rt').read()
         cnt, fn = PTRN.search(line).groups()
         f.write('{}, {}\n'.format(fn, cnt))
-
 ```
 
-Snakemake 를 다시 실행해보면, 코드가 바뀌었음에도 빌드할 것이 없다고 나온다.
+Snakemake 를 다시 실행해보면 다음 처럼 코드가 변경되었기에 다시 실행한다고 나온다.
 
 ```
-$ snakemake -j
+[Fri Feb 16 15:51:28 2024]
+rule concat:
+    input: temp/wc_A.txt, temp/wc_B.txt, temp/wc_C.txt
+    output: temp/wc_all.csv
+    jobid: 2
+    reason: Code has changed since last execution
+    resources: tmpdir=/tmp
 
-Building DAG of jobs...
-Nothing to be done.
+[Fri Feb 16 15:51:28 2024]
+Finished job 2.
 ```
 
-이것은 Snakemake 가 코드가 바뀐 것을 인식하지 못하기 때문이다. 다음처럼 코드 변화의 영향을 명시적으로 검사해보자.
+Snakemake 는 `.snakemake` 디렉토리 아래 과거 결과물을 생성하는데 사용된 코드의 체크섬을 가지고 있다. 그것을 현재 코드의 체크섬과 비교하여 코드 변경 여부를 판단 후 재실행한 것이다.
 
-```
-$ snakemake --list-code-changes
-
-Building DAG of jobs...
-temp/wc_all.png
-temp/wc_all.csv
-```
-
-`concat.py` 가 변했으니 그것의 출력인 `temp/wc_all.csv` 와, 이 파일에 의존하는 `temp/wc_all.png` 가 모두 빌드되어야 한다고 알려준다.
-
-코드 변화를 명시적으로 검사하고, 영향받는 타겟만 빌드해 주기 위해서는 아래와 같이 명령하면 된다.
-
-```
-$ snakemake -j -R `snakemake --list-code-changes`
-```
-
-> `-R` 옵션은 `--forcerun` 의 단축형으로, 해당 타겟을 강제적으로 빌드하는 옵션이다.
-
-워크플로우 내 입력 및 매개변수 변화에 대해서도 같은 식으로 대응할 수 있다.
+> 규칙의 내 입력 및 매개변수 변화에 대해서도 같은 식으로 동작할 것이다.
 
 ### 사전형으로 입출력 기술하기
 
@@ -547,6 +550,38 @@ rule count:
 
 ```
 Done A - temp/wc_A.txt
+```
+
+### 코드에서 와일드카드 참조하기
+
+실행할 쉘 스크립트나 파이썬 코드에서 출력에서 얻은 와일드 카드를 매개변수 없이 직접 이용할 수도 있다. 
+
+다음과 같이 count 규칙을 수정후,
+
+```python
+rule count:
+    """파일내 단어 수 세기."""
+    input:
+        "data/{filename}.txt"
+    output:
+        "temp/wc_{filename}.txt"
+    shell:
+        "wc -w {input} > {output} && echo 'Done {wildcards.filename}'"
+```
+
+Snakemake 를 실행하면 
+
+```
+snakemake -j
+```
+
+다음처럼 와일드카드 `{filename}` 에 해당하는 값이 출력되는 것을 확인할 수 있다.
+
+```
+# 동시 수행으로 출력 순서는 임의
+Done B
+Done C
+Done A
 ```
 
 ### 특정 디렉토리내 모든 파일을 입력으로 하기
