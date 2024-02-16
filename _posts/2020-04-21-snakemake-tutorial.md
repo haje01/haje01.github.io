@@ -1080,28 +1080,45 @@ $ snakemake -j -F
 
 ### 고정된 출력 파일의 입력을 함수에서 얻기
 
-입력은 함수에서 현재 날자를 고려해 동적으로 받고, 출력은 고정 파일로 저장되는 아래와 같은 경우를 생각해보자.
+입력은 함수를 통해 동적으로 얻고, 그 결과를 처리하는 경우를 생각해보자. 
+
+아래는 10 분 단위로 입력 파일이 변하는 규칙이다.
 
 ```python
-from datetime import date
+from datetime import datetime 
 
-def get_today_input(wc, today:
+
+def get_input(wc, now):
     # 입력 파일 리스트 만들고 반환
+    return [os.path.join('data', now.strftime('%H%M'))[:-1]]
 
-rule:
+
+rule timed_input:
+    """시간에 따라 입력 파일을 변경."""
     input:
-        lambda wc: get_input(wc, date.today())
-
+        lambda wc: get_input(wc, datetime.now())
     output:
-        "temp/latest.csv"
+        "temp/timed_input.txt"
+    shell:
+        "stat {input} > {output} && echo 'Done'"
 ```
-이런 경우는 `snakemake -j` 매일 실행해도 출력 파일이 갱신되지 않는다. 왜냐하면 앞의 *워크플로우 의존성* 에서 설명한 것처럼 Snakemake 는 규칙의 입력 파트 변경을 인식하지 못하기 때문이다. 출력 파일의 경로상 날자가 있으면 그로 인해 빌드가 갱신되는 효과가 있지만, 위의 예처럼 출력 파일이 고정된 경우는 그런 것도 기대하기 어렵다.
 
-이런 경우 다음처럼 입력 파일 변화를 명시적으로 알려 빌드를 수행해야 한다.
+이 규칙의 실행을 위해서는 `data/` 디렉토리 아래에 10분 단위 숫자로된 더미 입력 파일이 있어야 한다. 예를 들어 현재 16 시 38 분이라면 다음과 같은 파일을 만들어 주자.
 
 ```
-$ snakemake -R `snakemake --list-input-change` -j
+touch data/163
 ```
+
+다음과 같이 실행하면,
+
+```
+snakemake temp/timed_input.txt -j
+```
+
+최초 한 번은 바로 빌드가 되지만, 다음 부터는 최대 10분 간격으로만 실행되는 것을 확인할 수 있다.
+
+이렇게 Snakemake 는 함수를 활용한 동적 입력도 잘 처리한다.
+
 
 ### 빌드 결과물 모두 지우기
 
