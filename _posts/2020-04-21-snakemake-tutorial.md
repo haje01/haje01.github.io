@@ -1127,7 +1127,7 @@ snakemake temp/timed_input.txt -j
 
 ```
 checkpoint generate_file_list:
-	"""파일 목록 생성."""
+    """파일 목록 생성."""
     output:
         "file_list.txt"
     shell:
@@ -1137,17 +1137,17 @@ checkpoint generate_file_list:
         """
 
 rule all:
-	"""파일 목록을 기반으로 후속 작업 병렬 실행."""
+    """파일 목록을 기반으로 후속 작업 병렬 실행."""
     input:
         expand("processed_{file}", file=checkpoint(generate_file_list).get().output)
 
 rule process_file:
-	"""개별 파일 처리."""
+    """개별 파일 처리."""
     output:
         "processed_{file}"
     run:
-	    with open(output[0], "w") as out_f:
-		    out_f.write(f"Processed {file}")
+        with open(output[0], "w") as out_f:
+            out_f.write(f"Processed {file}")
 ```
 
 - `generate_file_list` : 체크포인트 규칙으로 파일 목록을 생성하고 `file_list.txt` 파일에 저장한다. 
