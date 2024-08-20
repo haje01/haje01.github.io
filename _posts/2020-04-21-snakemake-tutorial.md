@@ -1119,6 +1119,44 @@ snakemake temp/timed_input.txt -j
 
 이렇게 Snakemake 는 함수를 활용한 동적 입력도 잘 처리한다.
 
+### 체크포인트 이용하기
+
+만약 어떤 규칙에서 이후 규칙에서 처리해야할 파일 목록이 담긴 출력 파일을 생성하고, 다른 규칙에서 그것을 입력으로 사용하되 병렬처리가 가능해야하는 경우는 어떻게 해야 할까? `expand` 를 이용해야 하겠지만, 처리해야할 파일 리스트가 확정되지 않는 상황이기에 쉽지 않다. 
+
+일반적인 snakemake 워크플로우에서는 모든 규칙과 파일이 사전에 정의되어 있어야 한다. 그러나 일부 워크플로우에서는 위 예처럼 중간 단계에서 생성된 파일이나 결과에 따라 후속 작업이 결정되는 경우가 있다. 이러한 경우 **체크포인트 (checkpoint)** 를 사용하여 동적으로 워크플로우를 정의할 수 있다.
+
+```
+checkpoint generate_file_list:
+	"""파일 목록 생성."""
+    output:
+        "file_list.txt"
+    shell:
+        """
+        echo "file1.txt" > {output}
+        echo "file2.txt" >> {output}
+        """
+
+rule all:
+	"""파일 목록을 기반으로 후속 작업 병렬 실행."""
+    input:
+        expand("processed_{file}", file=checkpoint(generate_file_list).get().output)
+
+rule process_file:
+	"""개별 파일 처리."""
+    output:
+        "processed_{file}"
+    run:
+	    with open(output[0], "w") as out_f:
+		    out_f.write(f"Processed {file}")
+```
+
+- `generate_file_list` : 체크포인트 규칙으로 파일 목록을 생성하고 `file_list.txt` 파일에 저장한다. 
+- `all` : 최종 목표를 정의하는데, `checkpoint(generate_file_list).get().output` 을 사용하여 `generate_file_list` 에서 생성된 파일 목록을 기반으로 후속 작업을 동적으로 실행되게 한다.
+- `process_file` : 개별 파일에 대한 처리
+
+
+이런 방식으로 구현하면 확정된 파일명이 없고, 선행 규칙의 결과로 입력이 얻어지는 상황에서도 의존관계 설정 및 병렬 처리를 구현할 수 있다.
+
 
 ### 빌드 결과물 모두 지우기
 
